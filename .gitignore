@@ -1,0 +1,12 @@
+.DS_Store
+
+config/.config/qtile/icons
+config/.config/fish/functions/__*.fish
+config/.config/fish/functions/_*.fish
+config/.config/fish/functions/fisher.fish
+config/.config/fish/functions/sdk.fish
+config/.config/fish/fish_plugins
+config/.config/fish/fish_variables
+config/.config/fish/conf.d/
+config/.config/fish/completions/
+**/__*cache__/

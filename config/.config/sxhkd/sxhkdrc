@@ -1,0 +1,103 @@
+#
+### -- Application launchers -- ###
+
+# Terminal
+super + Return
+ alacritty -e fish
+
+# Terminal with attached tmux session
+super + shift + Return
+ alacritty -e ta
+
+# Rofi launcher
+super + d
+ rofi_custom_launcher
+
+# Emacs client
+alt + e
+ emacsclient -c -a emacs
+
+# Browser
+super + b
+ firedragon
+
+# File manager
+alt + z
+ nemo
+
+# Alternative browser
+super + shift + b
+ firefox
+
+# Open {config, project, web-search}
+alt + c; {c, s, w}
+ {rofi_project, rofi_project, rofi_project}
+
+
+### -- System -- ###
+
+# Toggle keyboard layout
+super + space
+ toggle_kbd_layout
+
+# sxhkd - reload config
+super + BackSpace
+ pkill -usr1 -x sxhkd
+
+# Hotkeys
+alt + question
+ hkhelper.py -p | rofi -p Hotkeys -i -dmenu -width 50
+
+
+### -- System | Display -- ###
+
+# Screen layout {1,2,3,4}
+alt + shift + s; {1,2,3,4}
+ {screen1, screen2, screen3, screen4}
+
+# Lock screen
+alt + control + l
+ betterlockscreen --lock
+
+
+### -- System | Audio -- ###
+
+# Toggle default sink
+alt + p
+ toggle-default-sink
+
+# Volume control
+alt + v
+ pavucontrol
+
+# Lower volume
+alt + u
+ decrease_volume_pipewire
+
+# Raise volume
+alt + o
+ increase_volume_pipewire
+
+# Lower volume - alternative
+XF86AudioLowerVolume
+ decrease_volume_pipewire
+
+# Raise volume - alternative
+XF86AudioRaiseVolume
+ increase_volume_pipewire
+
+# Audio - play
+XF86AudioPlay
+ playerctl play-pause
+
+# Audio - next
+XF86AudioNext
+ playerctl next
+
+# Audio - previous
+XF86AudioPrev
+ playerctl previous
+
+# Audio - stop
+XF86AudioStop
+ playerctl stop

@@ -1,0 +1,14 @@
+clear lock
+clear control
+add control = Caps_Lock Control_L Control_R
+
+keycode 66 = Control_L NoSymbol NoSymbol NoSymbol
+!keycode 66 = Control_L Caps_Lock NoSymbol NoSymbol
+keycode 134 = ISO_Level3_Shift
+
+
+keycode 31 = i I Up Up
+keycode 43 = h H h H BackSpace BackSpace
+keycode 44 = j J Left Left
+keycode 45 = k K Down Down
+keycode 46 = l L Right Right

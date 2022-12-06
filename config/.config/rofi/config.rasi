@@ -1,0 +1,39 @@
+/*-*- mode: css; -*-*/
+
+@theme "/home/valle/.config/rofi/themes/flat-orange"
+configuration {
+	  modi: "window,drun";
+    font: "Fira Code Nerd Font 14";
+	  location: 0;
+    case-sensitive: false;
+    columns: 3;
+    cycle: true;
+    matching: "fuzzy";
+    show-icons: true;
+    sidebar-mode: true;
+    sort: false;
+    sorting-method: "normal";
+    terminal: "alacritty";
+    width: 60;
+    padding: 18;
+    lines: 12;
+    window-thumbnail: true;
+    max-history-size: 25;
+/*	ssh-client: "ssh";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
+/*	run-command: "{cmd}";*/
+/*	run-list-command: "";*/
+/*	run-shell-command: "{terminal} -e {cmd}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
+/*	disable-history: false;*/
+/*	 ignored-prefixes: "";*/
+/*	window-format: "{w}    {c}   {t}";*/
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
+    filebrowser {
+        directories-first: true;
+        sorting-method:    "name";
+    }
+}

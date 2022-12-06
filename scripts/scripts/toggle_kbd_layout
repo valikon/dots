@@ -1,0 +1,12 @@
+#!/usr/bin/fish
+
+# Check current layout map
+set layout_us (setxkbmap -query | grep "layout:\s\+us" | awk '{print $2}')
+
+if [ -z $layout_us ]
+    setxkbmap us -variant euro;
+    xmodmap $HOME/.Xmodmap
+else
+    setxkbmap se;
+    xmodmap $HOME/.Xmodmap
+end

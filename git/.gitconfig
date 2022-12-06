@@ -1,0 +1,25 @@
+[include]
+  path = ~/themes.gitconfig
+[user]
+	email = valentin.nemirovsky@gmail.com
+	name = Valentin Nemirovsky
+[core]
+  excludesFile=~/.gitignore
+  editor = vim
+[push]
+  default = simple
+[pull]
+  rebase = true
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  features = calochortus-lyallii
+[fetch]
+	prune = true
+[merge]
+    tool = meld
+[init]
+    defaultBranch = master
