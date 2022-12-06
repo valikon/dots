@@ -15,7 +15,7 @@ alias lt2='ls-tree-level 2'
 alias lt3='ls-tree-level 3'
 
 alias D="cd ~/Downloads"
-alias d="cd ~/dot-files"
+alias d="cd ~/dots"
 alias p="cd ~/projects"
 alias tmp="cd /tmp"
 
