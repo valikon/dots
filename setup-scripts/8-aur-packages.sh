@@ -52,7 +52,7 @@ PKGS=(
     'peek'                      # GIF animation screen recorder
 
     # PRODUCTIVITY --------------------------------------------------------
-
+    'nb'                        # Note takings tool
     'sxhkhm-git'                # Fuzzy-find keybinds from sxhkd configuration
     'dropbox'                   # cloud storage
     'slack-desktop'             # office chat
