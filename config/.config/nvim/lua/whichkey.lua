@@ -60,19 +60,22 @@ wk.setup({
 
 wk.register({
 	f = {
-		-- mostly FzfLua bindings
-		name = "Find with FzfLua",
-		f = { "<cmd>FzfLua git_files<cr>", "Find File" },
-		b = { "<cmd>FzfLua buffers<cr>", "Find Buffer" },
-		t = { "<cmd>FzfLua builtin<cr>", "FzfLua builtin" },
-		s = { "<cmd>FzfLua live_grep<cr>", "Search In Files" },
-		r = { "<cmd>FzfLua lsp_references<cr>", "Find References" },
-		d = { "<cmd>FzfLua diagnostics<cr>", "Document Diagnostics" },
-		m = { "<cmd>FzfLua marks<CR>", "Marks" },
-		k = { "<cmd>FzfLua keymaps<CR>", "Key mappings" },
-		M = { "<cmd>FzfLua man_pages<CR>", "Man pages" },
-		a = { "<cmd>FzfLua session-lens search_session<CR>", "Search Sessions" },
-		h = { "<cmd>FzfLua help_tags<CR>", "Search help" },
+		name = "Find",
+		f = { "<cmd>lua require('utils').find_files()<cr>", "Files" },
+		d = { "<cmd>lua require('utils').find_dotfiles()<cr>", "Dotfiles" },
+		b = { "<cmd>lua require('telescope.builtin').buffers()<cr>", "Buffers" },
+		h = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Help" },
+		m = { "<cmd>lua require('telescope.builtin').marks()<cr>", "Marks" },
+		o = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Old Files" },
+		g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
+		c = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
+		r = { "<cmd>lua require'telescope'.extensions.file_browser.file_browser()<cr>", "File Browser" },
+		w = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
+	},
+	p = {
+		name = "Project",
+		p = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "List" },
+		s = { "<cmd>Telescope repo list<cr>", "Search" },
 	},
 	-- h = {
 	--   name = "Git Gutter",

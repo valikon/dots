@@ -12,10 +12,6 @@ local function register_mappings(mappings, default_options)
 	end
 end
 
-local function fzf_lua_find_files()
-	require("fzf-lua").files()
-end
-
 local border_options = { float = { border = "rounded" } }
 
 local mappings = {
@@ -50,8 +46,6 @@ local mappings = {
 		-- moving text
 		{ "<C-j>", "<esc><cmd>m .+1<cr>==" },
 		{ "<C-k>", "<esc><cmd>m .-2<cr>==" },
-		-- Fuzzy files
-		{ "<C-p>", fzf_lua_find_files },
 		-- escape clears highlighting
 		{ "<esc>", "<cmd>noh<cr><esc>" },
 		-- hop words

@@ -22,6 +22,7 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	-- Vim training mode
 	use("ThePrimeagen/vim-be-good")
 
 	-- lsp
@@ -149,13 +150,35 @@ return require("packer").startup(function(use)
 	--  use("vim-python/python-syntax")
 
 	-- fzf --
-	use("junegunn/fzf")
-	use("junegunn/fzf.vim")
+	-- use("junegunn/fzf")
+	-- use("junegunn/fzf.vim")
+	-- use({
+	-- 	"ibhagwan/fzf-lua",
+	-- 	-- optional for icon support
+	-- 	branch = "main",
+	-- 	requires = { "nvim-tree/nvim-web-devicons" },
+	-- })
+
+	-- Telescope
 	use({
-		"ibhagwan/fzf-lua",
-		-- optional for icon support
-		branch = "main",
-		requires = { "nvim-tree/nvim-web-devicons" },
+		"nvim-telescope/telescope.nvim",
+		config = function()
+			require("config.telescope").setup()
+		end,
+		requires = {
+			"nvim-lua/popup.nvim",
+			"nvim-lua/plenary.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+			"nvim-telescope/telescope-project.nvim",
+			"cljoly/telescope-repo.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			{
+				"ahmedkhalf/project.nvim",
+				config = function()
+					require("project_nvim").setup({})
+				end,
+			},
+		},
 	})
 
 	use({
