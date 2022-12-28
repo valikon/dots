@@ -76,7 +76,6 @@ local mappings = {
 		},
 		{ "gD", vim.lsp.buf.declaration },
 		{ "gd", vim.lsp.buf.definition },
-		{ "<leader>r", vim.lsp.buf.references },
 		{ "gi", vim.lsp.buf.implementation },
 		-- bufferline
 		{ "H", "<cmd>BufferLineCyclePrev<cr>" },

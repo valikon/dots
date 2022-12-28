@@ -15,6 +15,10 @@ o.termguicolors = true
 -- Do not save when switching buffers
 o.hidden = true
 
+-- disable netrw because of nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
 -- Decrease update time
 o.timeoutlen = 500
 o.updatetime = 200

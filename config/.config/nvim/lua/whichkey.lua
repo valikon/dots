@@ -119,8 +119,7 @@ wk.register({
 		name = "LSP",
 		f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format File" },
 		d = { "<cmd>lua vim.diagnostic.open_float({ border = 'rounded' })<CR>", "Line Diagnostics" },
-		r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-		R = { "<cmd> lua vim.lsp.buf.references()<CR>", "List references" },
+		r = { "<cmd> lua vim.lsp.buf.references()<CR>", "List references" },
 		c = { "<cmd>CodeActionMenu<CR>", "Code actions" },
 	},
 	-- a = {
@@ -138,5 +137,5 @@ wk.register({
 	name = "Go to",
 	d = "Definition",
 	D = "Declaration",
-	r = "References",
+	R = "References",
 }, { prefix = "g" })
