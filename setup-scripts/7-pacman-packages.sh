@@ -67,7 +67,10 @@ PKGS=(
     'hwinfo'                # hardware detection
     'neovim'                # vim improved
     'git-delta'             # syntax highlighting for git and diff output
+    'difftastic'            # Diff tool that compares files based on their syntax
     'zoxide'                # directory jump with z
+    'eva'                   # simple calculator REPL, similar to bc
+    'procs'                 # ps replacement
 
     # DISK UTILITIES ------------------------------------------------------
 
@@ -75,6 +78,7 @@ PKGS=(
     'gparted'               # Disk utility
     'parted'                # Disk utility
     'dust'                  # Filespace usage
+    'lfs'                   # Info on mounted filesystems
 
     # GENERAL UTILITIES ---------------------------------------------------
 
@@ -138,6 +142,7 @@ PKGS=(
 
     'traceroute'            # track packet route over IP network
     'nmap'                  # network discovery and security auditing
+    'dog'                   # Command-line DNS client like dig
 
     # WEB TOOLS -----------------------------------------------------------
 
