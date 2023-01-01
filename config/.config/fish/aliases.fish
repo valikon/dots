@@ -22,6 +22,7 @@ alias tmp="cd /tmp"
 ################################
 ###  System & config
 ################################
+alias diff=difft
 alias i=pac-install
 alias py=python
 alias e=nvim
