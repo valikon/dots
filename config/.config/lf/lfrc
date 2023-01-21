@@ -1,5 +1,6 @@
 # Basic settings
-set previewer ~/scripts/preview
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
 set preview true
 set hidden true
 set drawbox true
@@ -66,6 +67,7 @@ cmd unarchive ${{
 }}
 
 cmd zip %zip -r "$f" "$f"
+map C clear
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
