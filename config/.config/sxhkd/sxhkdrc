@@ -33,6 +33,9 @@ super + shift + b
 alt + c; {c, s, w}
  {rofi_project, rofi_project, rofi_project}
 
+# Take a screenshot
+alt + control + s
+ flameshot gui
 
 ### -- System -- ###
 
@@ -57,6 +60,9 @@ alt + shift + s; {1,2,3,4}
 
 # Lock screen
 alt + control + l
+ betterlockscreen --lock
+
+alt + shift + z
  betterlockscreen --lock
 
 
