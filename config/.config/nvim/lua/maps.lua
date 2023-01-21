@@ -33,6 +33,13 @@ local mappings = {
 	},
 	n = {
 		-- Normal mode
+		{ "j", "gj" },
+		{ "k", "gk" },
+		{ "Q", "gq" },
+		{ "<C-d>", "<C-d>zz" },
+		{ "<C-u>", "<C-u>zz" },
+		{ "n", "nzzzv" },
+		{ "N", "Nzzzv" },
 		-- Better window movement
 		{ "<C-h>", "<C-w>h", { silent = true } },
 		{ "<C-j>", "<C-w>j", { silent = true } },
@@ -49,10 +56,10 @@ local mappings = {
 		-- escape clears highlighting
 		{ "<esc>", "<cmd>noh<cr><esc>" },
 		-- hop words
-		{ "f", "<cmd>HopWord<cr>" },
-		{ "F", "<cmd>HopLine<cr>" },
+		-- { "f", "<cmd>HopWord<cr>" },
+		-- { "F", "<cmd>HopLine<cr>" },
 		-- yank to end of line on Y
-		{ "Y", "y$" },
+		-- { "Y", "y$" },
 		-- lsp mappings
 		{ "K", vim.lsp.buf.hover },
 		{ "<C-h>", vim.lsp.buf.signature_help },

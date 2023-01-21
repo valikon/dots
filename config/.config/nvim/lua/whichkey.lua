@@ -72,6 +72,7 @@ wk.register({
 		r = { "<cmd>lua require'telescope'.extensions.file_browser.file_browser()<cr>", "File Browser" },
 		w = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
 	},
+	P = { '"_dP', "Primagean paste tip" },
 	p = {
 		name = "Project",
 		p = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "List" },
@@ -141,4 +142,5 @@ wk.register({
 	d = "Definition",
 	D = "Declaration",
 	R = "References",
+	-- x = { '<Cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<CR>', "Open URL" },
 }, { prefix = "g" })
