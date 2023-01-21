@@ -36,6 +36,7 @@ function emc -d "Emacs client" ; emacsclient -a "" -c $argv &                   
 function ls-tree-level -d "Exa --tree to $arg level ignoring .git/ and .gitignore files"
     exa -aT --icons --color=always --group-directories-first --ignore-glob=".git" --git-ignore --level $argv
 end
+function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
 
 function screen1 -d "Screen - Only the one screen"    ; bash ~/.screenlayout/my-layout.sh    ; end
 function screen2 -d "Screen - Home screen"            ; bash ~/.screenlayout/my-layout2.sh   ; end

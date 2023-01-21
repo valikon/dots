@@ -30,3 +30,5 @@ if status --is-interactive
 end
 
 zoxide init fish | source
+
+fnm env --use-on-cd | source
