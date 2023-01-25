@@ -15,6 +15,7 @@ PKGS=(
     # RICE ----------------------------------------------------------------
 
     'sddm-sugar-dark'           # sddm theme
+    'shell-color-scripts'       # DTs colorscripts
 
     # SYSTEM UTILITIES ----------------------------------------------------
 
