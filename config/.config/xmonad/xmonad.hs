@@ -112,15 +112,11 @@ myNormColor   = colorBack   -- This variable is imported from Colors.THEME
 myFocusColor :: String      -- Border color of focused windows
 myFocusColor  = color15     -- This variable is imported from Colors.THEME
 
-mySoundPlayer :: String
-mySoundPlayer = "ffplay -nodisp -autoexit " -- The program that will play system sounds
-
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myStartupHook :: X ()
 myStartupHook = do
-  -- spawnOnce (mySoundPlayer ++ startupSound)
   spawn "killall conky"   -- kill current conky on each restart
   spawn "killall trayer"  -- kill current trayer on each restart
 
@@ -464,7 +460,6 @@ myKeys c =
   , ("M-S-q", addName "Kill all windows on WS" $ killAll)
   -- , ("M-S-c", addName "Kill focused window"    $ kill1)
   -- , ("M-S-a", addName "Kill all windows on WS" $ killAll)
-  -- , ("M-S-<Return>", addName "Run prompt"      $ sequence_ [spawn (mySoundPlayer ++ dmenuSound), spawn "~/.local/bin/dm-run"])
   , ("M-S-b", addName "Toggle bar show/hide"   $ sendMessage ToggleStruts)]
 
   ^++^ subKeys "Switch to workspace"
@@ -637,6 +632,7 @@ main = do
     , borderWidth        = myBorderWidth
     , normalBorderColor  = myNormColor
     , focusedBorderColor = myFocusColor
+    , focusFollowsMouse  = False
     , logHook = dynamicLogWithPP $  filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x   -- xmobar on monitor 1
                         -- >> hPutStrLn xmproc1 x   -- xmobar on monitor 2
