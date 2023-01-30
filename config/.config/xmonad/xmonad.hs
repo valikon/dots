@@ -212,11 +212,10 @@ gsCategories =
   ]
 
 gsInternet =
-  [ ("Brave", "brave")
+  [ ("Firedragon", "firedragon")
   , ("Discord", "discord")
   , ("Firefox", "firefox")
   , ("Thunderbird", "thunderbird")
-  , ("Firedragon", "firedragon")
   , ("QBitTorrent", "qbittorrent")
   , ("Teams", "teams-for-linux")
   -- , ("Nextcloud", "nextcloud")
@@ -425,9 +424,9 @@ myManageHook = composeAll
   , className =? "Yad"             --> doCenterFloat
   , title =? "Oracle VM VirtualBox Manager"   --> doFloat
   , title =? "Order Chain - Market Snapshots" --> doFloat
-  , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
-  , className =? "Brave-browser"   --> doShift ( myWorkspaces !! 1 )
-  , className =? "mpv"             --> doShift ( myWorkspaces !! 7 )
+  -- , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
+  -- , className =? "Brave-browser"   --> doShift ( myWorkspaces !! 1 )
+  , className =? "spotify"             --> doShift ( myWorkspaces !! 7 )
   , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
   , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
   , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
@@ -618,7 +617,7 @@ main :: IO ()
 main = do
   -- Launching three instances of xmobar on their monitors.
   xmproc0 <- spawnPipe ("xmobar -x 0 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
-  -- xmproc1 <- spawnPipe ("xmobar -x 1 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
+  xmproc1 <- spawnPipe ("xmobar -x 1 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   -- xmproc2 <- spawnPipe ("xmobar -x 2 $HOME/.config/xmobar/" ++ colorScheme ++ "-xmobarrc")
   -- the xmonad, ya know...what the WM is named after!
   xmonad $ addDescrKeys' ((mod4Mask, xK_F1), showKeybindings) myKeys $ ewmh $ docks $ def
