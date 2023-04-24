@@ -11,4 +11,5 @@ config/.config/fish/fish_plugins
 config/.config/fish/fish_variables
 config/.config/fish/conf.d/
 config/.config/fish/completions/
+config/.config/nvim/plugin/packer_compiled.lua
 **/__*cache__/

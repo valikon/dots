@@ -5,7 +5,7 @@ function M.setup()
 	local telescope = require("telescope")
 
 	telescope.setup({
-		defaults({
+		defaults = {
 			mappings = {
 				i = {
 					["<C-j>"] = actions.move_selection_next,
@@ -14,7 +14,7 @@ function M.setup()
 					["<C-p>"] = actions.cycle_history_prev,
 				},
 			},
-		}),
+		},
 	})
 
 	telescope.load_extension("fzf")
