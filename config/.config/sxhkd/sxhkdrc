@@ -2,8 +2,8 @@
 ### -- Application launchers -- ###
 
 # Terminal
-super + Return
- alacritty -e fish
+# super + Return
+#  alacritty -e fish
 
 # Terminal with attached tmux session
 super + shift + Return
@@ -18,8 +18,8 @@ alt + e
  emacsclient -c -a emacs
 
 # Browser
-super + b
- firedragon
+# super + b
+#  firedragon
 
 # File manager
 alt + z

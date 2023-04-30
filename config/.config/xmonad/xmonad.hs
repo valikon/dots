@@ -123,6 +123,7 @@ myStartupHook = do
   spawnOnce "lxsession"
   spawnOnce "nm-applet"
   spawnOnce "blueman-applet"
+  spawnOnce "clipit"
   spawnOnce "flameshot"
   spawnOnce "dunst"
   spawnOnce "volumeicon"
@@ -133,13 +134,14 @@ myStartupHook = do
   spawn "/usr/bin/emacs --daemon" -- emacs daemon for the emacsclient
   -- spawnOnce "wal -R &"
   -- spawnOnce "notify-log $HOME/.log/notify.log"
+  
+  spawnOnce "eval (ssh-agent -c)"
+  spawnOnce "ssh-add ~/.ssh/github_id"
 
   spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
   spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
   spawnOnce "variety" -- wallpaper application
-  -- spawnOnce "xargs xwallpaper --stretch < ~/.cache/wall"
-  -- spawnOnce "nitrogen --restore &"
   setWMName "LG3D"
 
 myNavigation :: TwoD a (Maybe a)
@@ -243,7 +245,7 @@ gsOffice =
 
 gsSettings =
   [ ("ARandR", "arandr")
-  , ("Customize Look and Feel", "lxappearance")
+  -- , ("Customize Look and Feel", "lxappearance")
   , ("Firewall Configuration", "sudo gufw")
   -- , ("ArchLinux Tweak Tool", "archlinux-tweak-tool")
   ]
@@ -426,9 +428,9 @@ myManageHook = composeAll
   , title =? "Order Chain - Market Snapshots" --> doFloat
   -- , title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 )
   -- , className =? "Brave-browser"   --> doShift ( myWorkspaces !! 1 )
-  , className =? "spotify"             --> doShift ( myWorkspaces !! 7 )
-  , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
-  , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
+  , className =? "spotify"             --> doShift ( myWorkspaces !! 6 )
+  , className =? "Gimp"            --> doShift ( myWorkspaces !! 7 )
+  , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 7 )
   , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
   , isFullscreen -->  doFullFloat
   ] <+> namedScratchpadManageHook myScratchPads
@@ -454,12 +456,9 @@ myKeys c =
   subKeys "Xmonad Essentials"
   [ ("M-C-r", addName "Recompile XMonad"       $ spawn "xmonad --recompile")
   , ("M-S-r", addName "Restart XMonad"         $ spawn "xmonad --restart")
-  , ("M-S-q", addName "Quit XMonad"            $ io exitSuccess)
+  -- , ("M-S-q", addName "Quit XMonad"            $ io exitSuccess)
   , ("M-q", addName "Kill focused window"    $ kill1)
-  , ("M-S-q", addName "Kill all windows on WS" $ killAll)
-  -- , ("M-S-c", addName "Kill focused window"    $ kill1)
-  -- , ("M-S-a", addName "Kill all windows on WS" $ killAll)
-  , ("M-S-b", addName "Toggle bar show/hide"   $ sendMessage ToggleStruts)]
+  , ("M-S-q", addName "Kill all windows on WS" $ killAll)]
 
   ^++^ subKeys "Switch to workspace"
   [ ("M-1", addName "Switch to workspace 1"    $ (windows $ W.greedyView $ myWorkspaces !! 0))
@@ -490,11 +489,11 @@ myKeys c =
   ^++^ subKeys "Window navigation"
   [ ("M-j", addName "Move focus to next window"                $ windows W.focusDown)
   , ("M-k", addName "Move focus to prev window"                $ windows W.focusUp)
-  -- , ("M-m", addName "Move focus to master window"              $ windows W.focusMaster)
+  , ("M-m", addName "Move focus to master window"              $ windows W.focusMaster)
   , ("M-S-j", addName "Swap focused window with next window"   $ windows W.swapDown)
   , ("M-S-k", addName "Swap focused window with prev window"   $ windows W.swapUp)
-  -- , ("M-S-m", addName "Swap focused window with master window" $ windows W.swapMaster)
-  , ("M-<Backspace>", addName "Move focused window to master"  $ promote)
+  , ("M-S-m", addName "Swap focused window with master window" $ windows W.swapMaster)
+  , ("M-S-<Backspace>", addName "Move focused window to master"  $ promote)
   , ("M-S-,", addName "Rotate all windows except master"       $ rotSlavesDown)
   , ("M-S-.", addName "Rotate all windows current stack"       $ rotAllDown)]
 
@@ -519,39 +518,39 @@ myKeys c =
   -- , ("M-p s", addName "Search various engines" $ spawn "dm-websearch")
   -- , ("M-p t", addName "Translate text"         $ spawn "dm-translate")]
 
-  -- ^++^ subKeys "Favorite programs"
-  -- [ ("M-<Return>", addName "Launch terminal"   $ spawn (myTerminal))
-  -- , ("M-b", addName "Launch web browser"       $ spawn (myBrowser))
+  ^++^ subKeys "Favorite programs"
+  [ ("M-<Return>", addName "Launch terminal"   $ spawn (myTerminal))
+  , ("M-b", addName "Launch web browser"       $ spawn (myBrowser))]
   -- , ("M-M1-h", addName "Launch htop"           $ spawn (myTerminal ++ " -e htop"))]
 
-  ^++^ subKeys "Monitors"
-  [ ("M-.", addName "Switch focus to next monitor" $ nextScreen)
-  , ("M-,", addName "Switch focus to prev monitor" $ prevScreen)]
+  -- ^++^ subKeys "Monitors"
+  -- [ ("M-.", addName "Switch focus to next monitor" $ nextScreen)
+  -- , ("M-,", addName "Switch focus to prev monitor" $ prevScreen)]
 
   -- Switch layouts
   ^++^ subKeys "Switch layouts"
   [ ("M-<Tab>", addName "Switch to next layout"   $ sendMessage NextLayout)
-  , ("M-S-<Space>", addName "Toggle noborders/full" $ sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)]
+  , ("M-f", addName "Toggle noborders/full" $ sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)]
 
   -- Window resizing
   ^++^ subKeys "Window resizing"
   [ ("M-h", addName "Shrink window"               $ sendMessage Shrink)
   , ("M-l", addName "Expand window"               $ sendMessage Expand)
-  , ("M-M1-j", addName "Shrink window vertically" $ sendMessage MirrorShrink)
-  , ("M-M1-k", addName "Expand window vertically" $ sendMessage MirrorExpand)]
+  , ("M-C-j", addName "Shrink window vertically" $ sendMessage MirrorShrink)
+  , ("M-C-k", addName "Expand window vertically" $ sendMessage MirrorExpand)]
 
   -- Floating windows
   ^++^ subKeys "Floating windows"
-  [ ("M-f", addName "Toggle float layout"        $ sendMessage (T.Toggle "floats"))
+  [ ("M-S-f", addName "Toggle float layout"        $ sendMessage (T.Toggle "floats"))
   , ("M-t", addName "Sink a floating window"     $ withFocused $ windows . W.sink)
   , ("M-S-t", addName "Sink all floated windows" $ sinkAll)]
 
   -- Increase/decrease spacing (gaps)
-  ^++^ subKeys "Window spacing (gaps)"
-  [ ("C-M1-j", addName "Decrease window spacing" $ decWindowSpacing 4)
-  , ("C-M1-k", addName "Increase window spacing" $ incWindowSpacing 4)
-  , ("C-M1-h", addName "Decrease screen spacing" $ decScreenSpacing 4)
-  , ("C-M1-l", addName "Increase screen spacing" $ incScreenSpacing 4)]
+  -- ^++^ subKeys "Window spacing (gaps)"
+  -- [ ("C-M1-j", addName "Decrease window spacing" $ decWindowSpacing 4)
+  -- , ("C-M1-k", addName "Increase window spacing" $ incWindowSpacing 4)
+  -- , ("C-M1-h", addName "Decrease screen spacing" $ decScreenSpacing 4)
+  -- , ("C-M1-l", addName "Increase screen spacing" $ incScreenSpacing 4)]
 
   -- Increase/decrease windows in the master pane or the stack
   ^++^ subKeys "Increase/decrease windows in master pane or the stack"
@@ -562,16 +561,16 @@ myKeys c =
 
   -- Sublayouts
   -- This is used to push windows to tabbed sublayouts, or pull them out of it.
-  ^++^ subKeys "Sublayouts"
-  [ ("M-C-h", addName "pullGroup L"           $ sendMessage $ pullGroup L)
-  , ("M-C-l", addName "pullGroup R"           $ sendMessage $ pullGroup R)
-  , ("M-C-k", addName "pullGroup U"           $ sendMessage $ pullGroup U)
-  , ("M-C-j", addName "pullGroup D"           $ sendMessage $ pullGroup D)
-  , ("M-C-m", addName "MergeAll"              $ withFocused (sendMessage . MergeAll))
-  -- , ("M-C-u", addName "UnMerge"               $ withFocused (sendMessage . UnMerge))
-  , ("M-C-/", addName "UnMergeAll"            $  withFocused (sendMessage . UnMergeAll))
-  , ("M-C-.", addName "Switch focus next tab" $  onGroup W.focusUp')
-  , ("M-C-,", addName "Switch focus prev tab" $  onGroup W.focusDown')]
+  -- ^++^ subKeys "Sublayouts"
+  -- [ ("M-C-h", addName "pullGroup L"           $ sendMessage $ pullGroup L)
+  -- , ("M-C-l", addName "pullGroup R"           $ sendMessage $ pullGroup R)
+  -- , ("M-C-k", addName "pullGroup U"           $ sendMessage $ pullGroup U)
+  -- , ("M-C-j", addName "pullGroup D"           $ sendMessage $ pullGroup D)
+  -- , ("M-C-m", addName "MergeAll"              $ withFocused (sendMessage . MergeAll))
+  -- -- , ("M-C-u", addName "UnMerge"               $ withFocused (sendMessage . UnMerge))
+  -- , ("M-C-/", addName "UnMergeAll"            $  withFocused (sendMessage . UnMergeAll))
+  -- , ("M-C-.", addName "Switch focus next tab" $  onGroup W.focusUp')
+  -- , ("M-C-,", addName "Switch focus prev tab" $  onGroup W.focusDown')]
 
   -- Scratchpads
   -- Toggle show/hide these programs. They run on a hidden workspace.
