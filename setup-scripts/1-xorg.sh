@@ -4,18 +4,22 @@ echo "INSTALLING XORG"
 echo
 
 PKGS=(
-        'xorg-server'           # XOrg server
-        'xorg-apps'             # XOrg apps group
-        'xorg-xinit'            # XOrg init
-        'xf86-video-intel'      # 2D/3D video driver
-        'mesa'                  # Open source version of OpenGL
+    'xorg-server'           # XOrg server
+    'xorg-apps'             # XOrg apps group
+    'xorg-xinit'            # XOrg init
+    'xdotool'               # cli X11 automation tool
+	'libx11'                # X11 client-side lib
+	'libxft'                # font drawing lib for X
+	'libxinerama'           # Xinerama extension lib
+	'libxrandr'             # X11 RandR extension lib
+	'libxss'                # X11 Screen Save extension lib
+	'pkgconf'               # Package compile and linker metadata toolkit
+#        'xf86-video-intel'      # 2D/3D video driver
+#        'mesa'                  # Open source version of OpenGL
         'xf86-input-libinput'   # Trackpad driver for Dell XPS
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+sudo pacman -S "${PKGS[@]}" --noconfirm --needed
 
 echo
 echo "Done!"

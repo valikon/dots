@@ -7,16 +7,13 @@ echo
 PKGS=(
         'bluez'                 # Daemons for the bluetooth protocol stack
         'bluez-utils'           # Bluetooth development and debugging utilities
-        'bluez-libs'            # possibly not needed anymore?
-        'blueberry'             # Bluetooth configuration tool
+#        'bluez-libs'            # possibly not needed anymore?
+#        'blueberry'             # Bluetooth configuration tool
         'blueman'               # Bluetooth manager
 # aur package       'bluez-firmware'        # Firmwares for Broadcom BCM203x and STLC2300 Bluetooth chips
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+sudo pacman -S "${PKGS[@]}" --noconfirm --needed
 
 echo
 echo "Done!"

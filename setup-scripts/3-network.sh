@@ -15,10 +15,7 @@ PKGS=(
         'libsecret'                 # Library for storing passwords
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+sudo pacman -S "${PKGS[@]}" --noconfirm --needed
 
 echo
 echo "Done!"

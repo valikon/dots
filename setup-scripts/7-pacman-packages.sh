@@ -27,23 +27,21 @@ PKGS=(
     'exa'                   # ls replacement
     'fd'                    # faster alternative to find
     'fish'                  # Friendly Interactive Shell
-    'powershell'            # windows powershell in linux
-    'nushell'               # columnar data shell
+ #   'powershell'            # windows powershell in linux
+ #   'nushell'               # columnar data shell
     'fzf'                   # fuzzy finder
     'skim'                  # fuzzy finder in rust
-    'fzy'                   # fzf alternative
-    'gtop'                  # System monitoring via terminal
-    'gufw'                  # Firewall manager
+#    'fzy'                   # fzf alternative
     'htop'                  # Process viewer
     'neofetch'              # Shows system info when you launch terminal
     'ntp'                   # Network Time Protocol to set time via network.
-    'numlockx'              # Turns on numlock in X11
+ #   'numlockx'              # Turns on numlock in X11
     'openssh'               # SSH connectivity tools
     'ranger'                # vim-like file manager
     'lf'                    # ranger inspired file manager
     'rsync'                 # Remote file sync utility
     'ripgrep'               # better grep
-    'the_silver_searcher'   # rg alternative
+ #   'the_silver_searcher'   # rg alternative
     'sd'                    # find and replace
     'speedtest-cli'         # Internet speed via terminal
     'stow'                  # config management
@@ -53,14 +51,12 @@ PKGS=(
     'unrar'                 # RAR compression program
     'unzip'                 # Zip compression program
     'wget'                  # Remote content retrieval
-    'terminator'            # Terminal emulator
     'tldr'                  # community man pages
-    'yay'                   # yoghurt
-    'z'                     # most frequent directories
-    'zenity'                # Display graphical dialog boxes via shell scripts
+#    'z'                     # most frequent directories
+ #   'zenity'                # Display graphical dialog boxes via shell scripts
     'zip'                   # Zip compression program
-    'zsh'                   # ZSH shell
-    'zsh-completions'       # Tab completion for ZSH
+ #   'zsh'                   # ZSH shell
+ #   'zsh-completions'       # Tab completion for ZSH
     'lolcat'                # rainbows!!
     'pwgen'                 # passwd generator
     'unison'                # file sync tool
@@ -74,9 +70,9 @@ PKGS=(
 
     # DISK UTILITIES ------------------------------------------------------
 
-    'exfat-utils'           # Mount exFat drives
+#    'exfat-utils'           # Mount exFat drives
     'gparted'               # Disk utility
-    'parted'                # Disk utility
+#    'parted'                # Disk utility
     'dust'                  # Filespace usage
     'lfs'                   # Info on mounted filesystems
 
@@ -93,15 +89,22 @@ PKGS=(
     'clipit'                # Lightweight GTK+ clipboard manager
     'arandr'                # gui for xrandr
     'qbittorrent'           # torrent client
-    'qutebrowser'           # vim-like browser
-    'brave-browser'         # chromium based browser
+#    'qutebrowser'           # vim-like browser
     'okular'                # pdf viewer
     'meld'                  # file diffs
-    'python-pywal'          # generate and install color schemes
     'pdftk'                 # pdf tool
-    'nomacs'                # image viewer
-    'doublecmd-qt5'         # twin-panel file manager
+#    'nomacs'                # image viewer
+#    'doublecmd-qt5'         # twin-panel file manager
     'fortune-mod'           # fortune application
+     
+
+    # CHAOTIC AUR
+    'dropbox'               # dropbox (chaotic aur)
+    'teams-for-linux'       # teams (chaotic aur)
+    'spotify'               # spotify (chaotic aur)
+    'betterlockscreen'
+    'i3lock-color'
+    'find-the-command'
 
     # PROGRAMMING LANGUAGE  -----------------------------------------------
 
@@ -114,29 +117,27 @@ PKGS=(
     # DEVELOPMENT ---------------------------------------------------------
 
     'jq'                    # json processor
-    #'hub'                   # github cli
-    'helm'                  # kubernetes package manager
+    'jless'                 # json exploration utility
+ #   'hub'                   # github cli
+ #   'helm'                  # kubernetes package manager
     'code'                  # Text editor
     'emacs'                 # So much more than just a text editor
-    'helix'                 # vim inspired editor written in rust
-    'kate'                  # Text editor
-    'cmake'                 # Cross-platform open-source make system
-    'electron'              # Cross-platform development using Javascript
     'git'                   # Version control system
     'lazygit'               # tui git tool
     'gcc'                   # C/C++ compiler
     'glibc'                 # C libraries
-    'meld'                  # File/directory comparison
+    'fnm'                   # node.js version manager (chaotic aur)
     'npm'                   # Node package manager
-    'qtcreator'             # C++ cross platform IDE
-    'qt5-examples'          # Project demos for Qt
     'yarn'                  # Dependency management (Hyper needs this)
     'tokei'                 # count lines of code (LOC)
-    'ghcup'                 # haskell toolchain utility
+#    'ghcup'                 # haskell toolchain utility
     'python-pipenv'         # pipfile, pip & virtualenv
     'mkcert'                # make locally-trusted dev certs
     'ctags'                 # indexer for source files, used by plugins
     'prettier'              # code formatter for JS
+
+    # LANGUAGE SERVERS
+    'lua-language-server'   # LUA
 
     # NETWORK -------------------------------------------------------------
 
@@ -154,14 +155,14 @@ PKGS=(
 
     # MEDIA ---------------------------------------------------------------
 
-    'obs-studio'            # Record your screen
+ #   'obs-studio'            # Record your screen
     'vlc'                   # Video player
     'feh'                   # Fast and light image viewer
     'freeoffice'            # office suite
 
     # GRAPHICS AND DESIGN -------------------------------------------------
 
-    'gcolor2'               # Colorpicker
+#    'gcolor2'               # Colorpicker
     'gimp'                  # GNU Image Manipulation Program
 
     # VIRTUALIZATION ------------------------------------------------------
@@ -169,10 +170,7 @@ PKGS=(
     'virtualbox'            # VMs
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+sudo pacman -S "${PKGS[@]}" --noconfirm --needed
 
 echo
 echo "Done!"

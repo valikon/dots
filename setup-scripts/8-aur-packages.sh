@@ -4,12 +4,6 @@ echo
 echo "INSTALLING ESSENTIAL AUR PACKAGES"
 echo
 
-#cd "${HOME}"
-#
-#echo "CLONING: PARU"
-#git clone "https://aur.archlinux.org/paru.git"
-
-
 PKGS=(
 
     # RICE ----------------------------------------------------------------
@@ -19,71 +13,58 @@ PKGS=(
 
     # SYSTEM UTILITIES ----------------------------------------------------
 
-    'gtkhash'                   # Checksum verifier
+#    'gtkhash'                   # Checksum verifier
 
     # TERMINAL UTILITIES --------------------------------------------------
 
-    'bitwarden-cli'              # Password manager CLI client
-    'aura-bin'                   # AUR package manager
-    'aws-cli-v2-bin'             # cli v2 for AWS
+#    'bitwarden-cli'              # Password manager CLI client
+#    'aura-bin'                   # AUR package manager
+    'aws-cli-v2'             # cli v2 for AWS
     'skroll'                     # text scroller
-    'lsdesktopf'                 # list available .desktop files and search content
-    'find-the-command-git'       # command not found hook
 
     # GENERAL UTILITIES ---------------------------------------------------
 
     'bitwarden'                  # Password manager
-    'samba'                      # Samba File Sharing
-    'autofs'                     # Auto-mounter
-    'i3lock-color'               # lockscreen, required by betterlockscreen
-    'betterlockscreen'           # lockscreen
-    'todoist'                    # todoist cli client
+    'yad'                        # graphical dialogs from shell scripts or cli
+#    'samba'                      # Samba File Sharing
+#    'autofs'                     # Auto-mounter
+#    'todoist'                    # to#doist cli client
 
     # DEVELOPMENT ---------------------------------------------------------
 
-    'coursier-native'            # Pure Scala artifact fetching
-    'jetbrains-toolbox'          # IDEA manager
-    'lens-bin'                   # k8s overview
-    'fnm-bin'                    # node version manager
+#    'jetbrains-toolbox'          # IDEA manager
+#    'lens-bin'                   # k8s overview
+#    'fnm-bin'                    # node version manager
 
     # MEDIA ---------------------------------------------------------------
 
-    'screenkey'                 # Screencast your keypresses
+#    'screenkey'                 # Screencast your keypresses
     'spotify'                   # music streaming
-    'peek'                      # GIF animation screen recorder
+#    'peek'                      # GIF animation screen recorder
 
     # PRODUCTIVITY --------------------------------------------------------
     'nb'                        # Note takings tool
-    'sxhkhm-git'                # Fuzzy-find keybinds from sxhkd configuration
-    'dropbox'                   # cloud storage
-    'slack-desktop'             # office chat
-    'teams-for-linux'           # video conference
+#    'sxhkhm-git'                # Fuzzy-find keybinds from sxhkd configuration
 
     # NETWORK --------------------------------------------------------------
 
-    'nordvpn-bin'               # nordvpn cli
+#    'nordvpn-bin'               # nordvpn cli
 
     # FONTS ---------------------------------------------------------------
 
-    'nerd-fonts-complete-starship'       # nerd fonts
-    'nerd-fonts-complete'                # complete nerd fonts
+   'nerd-fonts-complete-starship'       # nerd fonts
+    # 'nerd-fonts-complete'                # complete nerd fonts
 
     # KEYBOARD -------------------------------------------------------------
-    'qmk-git'                   # firmware flashing for keyboards
+   # 'qmk-git'                   # firmware flashing for keyboards
 )
 
-
-#cd ${HOME}/paru
-#makepkg -si
-
 # download dropbox public key
-wget https://linux.dropbox.com/fedora/rpm-public-key.asc
-gpg --import rpm-public-key.asc
-rm rpm-public-key.asc
+#wget https://linux.dropbox.com/fedora/rpm-public-key.asc
+#gpg --import rpm-public-key.asc
+#rm rpm-public-key.asc
 
-for PKG in "${PKGS[@]}"; do
-    paru -S --noconfirm $PKG
-done
+sudo aura -A --noconfirm ${PKGS[@]}
 
 echo
 echo "Done!"
