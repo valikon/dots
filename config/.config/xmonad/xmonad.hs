@@ -135,9 +135,6 @@ myStartupHook = do
   -- spawnOnce "wal -R &"
   -- spawnOnce "notify-log $HOME/.log/notify.log"
   
-  spawnOnce "eval (ssh-agent -c)"
-  spawnOnce "ssh-add ~/.ssh/github_id"
-
   spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
   spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
