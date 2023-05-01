@@ -8,6 +8,7 @@ PKGS=(
     'xorg-apps'             # XOrg apps group
     'xorg-xinit'            # XOrg init
     'xdotool'               # cli X11 automation tool
+    'xclip'                 # cli interface to the x11 clipboard
 	'libx11'                # X11 client-side lib
 	'libxft'                # font drawing lib for X
 	'libxinerama'           # Xinerama extension lib
