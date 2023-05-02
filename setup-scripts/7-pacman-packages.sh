@@ -13,6 +13,7 @@ PKGS=(
     'docker-compose'         # composer for docker
     'arch-wiki-docs'         # arch wiki docs
     'sddm'                   # login manager of choice
+    'keychain'               # ssh-agent frontend for long running process
 
     # TERMINAL UTILITIES --------------------------------------------------
 
