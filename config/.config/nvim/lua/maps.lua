@@ -40,6 +40,7 @@ local mappings = {
 		{ "<C-u>", "<C-u>zz" },
 		{ "n", "nzzzv" },
 		{ "N", "Nzzzv" },
+        { "<Enter>", "i<Enter><Esc>k$" },
 		-- Better window movement
 		{ "<C-h>", "<C-w>h", { silent = true } },
 		{ "<C-j>", "<C-w>j", { silent = true } },
