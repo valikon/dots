@@ -60,7 +60,7 @@ function gco -w "git checkout" -d "Git - checkout"                             ;
 function gcm -d "Git - checkout master"                                        ; git checkout master         ; end
 function gcmsg -w "git commit -m" -d "Git - commit with message"               ; g commit -m            $argv; end
 function gcp -w "git cherry-pick" -d "Git - cherrypick"                        ; git cherry-pick        $argv; end
-function gd -w "git diff" -d "Git - diff"                                      ; git diff               $argv; end
+function gd -w "batdiff" -d "Git - diff"                                       ; batdiff --color --delta $argv; end
 function gds -w "git diff --staged" -d "Git - diff staged"                     ; git diff --staged      $argv; end
 function gl -w "git pull" -d "Git - pull"                                      ; git pull               $argv; end
 function gls -w "git ls-files" -d "Git - list files"                           ; git ls-files           $argv; end
@@ -146,9 +146,14 @@ function ghcu                                   ; ghc-pkg unregister         $ar
 alias thm-vpn-connect='sudo openvpn /etc/openvpn/valikon.ovpn &'
 
 ################################
-###  OTHER
+###  BAT with extras
 ################################
 alias cat='bat --style header --style rule --style snip --style changes --theme 1337'
+function rgb -w "batgrep" ; batgrep -i --color --hidden $argv; end
+
+################################
+###  OTHER
+################################
 alias ip="ip -color"
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
@@ -170,7 +175,7 @@ alias jctl="journalctl -p 3 -xb" # Get the error messages from journalctl
 ################################
 ###  System Package Management
 ################################
-alias rmpkg='pacman -Rns'       ### Remove package with dependencies
+alias pkg-rm='pacman -Rns'       ### Remove package with dependencies
 alias pkg-info='aura -Qi'        ### Display information on PACKAGE
 alias pkg-orphans='aura -Qdt'    ### List orphaned packages
 alias pkg-ls='pacman -Ql'        ### List all files owned by PACKAGE

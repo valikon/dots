@@ -20,6 +20,7 @@ PKGS=(
     'alacritty'             # Terminal emulator
     'bandwhich'             # Terminal bandwidth utilization tool
     'bat'                   # Cat clone with syntax highlighting and git integration
+    'bat-extras'            # Bash scripts extending bat
     'bash-completion'       # Tab completion for Bash
     'bleachbit'             # File deletion utility
     'cronie'                # cron jobs
