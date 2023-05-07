@@ -40,7 +40,9 @@ local mappings = {
 		{ "<C-u>", "<C-u>zz" },
 		{ "n", "nzzzv" },
 		{ "N", "Nzzzv" },
-        { "<Enter>", "i<Enter><Esc>k$" },
+    { "<Enter>", "i<Enter><Esc>k$" },
+    -- { "<S-Enter>", "A<Enter><Esc>k$"},
+    { "<C-A>", "ggVGy" },
 		-- Better window movement
 		{ "<C-h>", "<C-w>h", { silent = true } },
 		{ "<C-j>", "<C-w>j", { silent = true } },
@@ -112,7 +114,7 @@ local mappings = {
 	},
 	x = {
 		-- remap p to always paste from last yank
-		{ "<leader>p", '"_dP' },
+		{ "<leader>P", '"_dP' },
 	},
 }
 
