@@ -517,7 +517,8 @@ myKeys c =
 
   ^++^ subKeys "Favorite programs"
   [ ("M-<Return>", addName "Launch terminal"   $ spawn (myTerminal))
-  , ("M-b", addName "Launch web browser"       $ spawn (myBrowser))]
+  , ("M-b", addName "Launch web browser"       $ spawn (myBrowser))
+  , ("M-<Space>", addName "Toggle keyboard"    $ spawn ("toggle_kbd_layout"))]
   -- , ("M-M1-h", addName "Launch htop"           $ spawn (myTerminal ++ " -e htop"))]
 
   -- ^++^ subKeys "Monitors"
