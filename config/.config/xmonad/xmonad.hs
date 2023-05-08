@@ -316,15 +316,15 @@ monocle  = renamed [Replace "monocle"]
 floats   = renamed [Replace "floats"]
            $ smartBorders
            $ simplestFloat
-grid     = renamed [Replace "grid"]
-           $ limitWindows 9
-           $ smartBorders
-           $ windowNavigation
-           $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
-           $ mySpacing 8
-           $ mkToggle (single MIRROR)
-           $ Grid (16/10)
+-- grid     = renamed [Replace "grid"]
+--            $ limitWindows 9
+--            $ smartBorders
+--            $ windowNavigation
+--            $ addTabs shrinkText myTabTheme
+--            $ subLayout [] (smartBorders Simplest)
+--            $ mySpacing 8
+--            $ mkToggle (single MIRROR)
+--            $ Grid (16/10)
 spirals  = renamed [Replace "spirals"]
            $ limitWindows 9
            $ smartBorders
@@ -340,22 +340,22 @@ threeCol = renamed [Replace "threeCol"]
            $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ ThreeCol 1 (3/100) (1/2)
-threeRow = renamed [Replace "threeRow"]
-           $ limitWindows 7
-           $ smartBorders
-           $ windowNavigation
-           $ addTabs shrinkText myTabTheme
-           $ subLayout [] (smartBorders Simplest)
-           -- Mirror takes a layout and rotates it by 90 degrees.
-           -- So we are applying Mirror to the ThreeCol layout.
-           $ Mirror
-           $ ThreeCol 1 (3/100) (1/2)
+-- threeRow = renamed [Replace "threeRow"]
+--            $ limitWindows 7
+--            $ smartBorders
+--            $ windowNavigation
+--            $ addTabs shrinkText myTabTheme
+--            $ subLayout [] (smartBorders Simplest)
+--            -- Mirror takes a layout and rotates it by 90 degrees.
+--            -- So we are applying Mirror to the ThreeCol layout.
+--            $ Mirror
+--            $ ThreeCol 1 (3/100) (1/2)
 tabs     = renamed [Replace "tabs"]
            -- I cannot add spacing to this layout because it will
            -- add spacing between window and tabs which looks bad.
            $ tabbed shrinkText myTabTheme
-tallAccordion  = renamed [Replace "tallAccordion"]
-           $ Accordion
+-- tallAccordion  = renamed [Replace "tallAccordion"]
+--            $ Accordion
 wideAccordion  = renamed [Replace "wideAccordion"]
            $ Mirror Accordion
 
@@ -389,12 +389,12 @@ myLayoutHook = avoidStruts
                                            ||| noBorders monocle
                                            ||| floats
                                            ||| noBorders tabs
-                                           ||| grid
                                            ||| spirals
                                            ||| threeCol
-                                           ||| threeRow
-                                           ||| tallAccordion
                                            ||| wideAccordion
+                                           -- ||| grid
+                                           -- ||| threeRow
+                                           -- ||| tallAccordion
 
 
 -- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 "]
@@ -527,7 +527,7 @@ myKeys c =
 
   -- Switch layouts
   ^++^ subKeys "Switch layouts"
-  [ ("M-<Tab>", addName "Switch to next layout"   $ sendMessage NextLayout)
+  [ ("M-S-<Tab>", addName "Switch to next layout"   $ sendMessage NextLayout)
   , ("M-f", addName "Toggle noborders/full" $ sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)]
 
   -- Window resizing
