@@ -22,6 +22,7 @@ alias tmp="cd /tmp"
 ################################
 ###  System & config
 ################################
+alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
 alias diff=difft
 alias i=pac-install
 alias py=python
