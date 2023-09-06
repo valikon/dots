@@ -28,7 +28,6 @@ PKGS=(
     'yad'                        # graphical dialogs from shell scripts or cli
 #    'samba'                      # Samba File Sharing
 #    'autofs'                     # Auto-mounter
-#    'todoist'                    # to#doist cli client
 
     # DEVELOPMENT ---------------------------------------------------------
 
@@ -43,7 +42,9 @@ PKGS=(
 #    'peek'                      # GIF animation screen recorder
 
     # PRODUCTIVITY --------------------------------------------------------
-    'nb'                        # Note takings tool
+    'nb'                         # Note takings tool
+    'todoist'                    # to#doist cli client
+    'joplin-desktop'             # Note taking with synchronization
 #    'sxhkhm-git'                # Fuzzy-find keybinds from sxhkd configuration
 
     # NETWORK --------------------------------------------------------------
