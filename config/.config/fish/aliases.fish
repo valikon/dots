@@ -16,12 +16,13 @@ alias lt3='ls-tree-level 3'
 
 alias D="cd ~/Downloads"
 alias d="cd ~/dots"
-alias p="cd ~/.Private"
+alias p="cd ~/projects"
 alias tmp="cd /tmp"
 
 ################################
 ###  System & config
 ################################
+alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
 alias diff=difft
 alias i=pac-install
@@ -105,6 +106,7 @@ function drmi -w "docker rmi"        ; docker rmi $argv     ; end
 ################################
 ###  TMUX
 ################################
+alias tmux="tmux -2"
 function tls -d "Tmux - list sessions"      ; tmux ls                      ; end
 function td  -d "Tmux - detach"             ; tmux detach $argv            ; end
 function tks -d "Tmux - kill session"     ; for s in (tmux list-sessions | awk '{print $1}' | rg ':' -r '' | fzf-tmux); tmux kill-session -t $s; end; end
