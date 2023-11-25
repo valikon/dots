@@ -1,12 +1,13 @@
 [username]
-format = '[$user]($style) '
+#format = '[$user]($style) '
+format = '[]($style) '
 show_always = true
 disabled = false
 style_root = "red bold"
 style_user = "bold 99"
 
 [hostname]
-disabled = false
+disabled = true
 format = '>>= [$hostname](bold 195) '
 ssh_only = false
 trim_at = "."
