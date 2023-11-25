@@ -1,11 +1,11 @@
 [include]
   path = ~/themes.gitconfig
 [user]
-	email = valentin.nemirovsky@gmail.com
-	name = Valentin Nemirovsky
+  email = valentin@nemirovsky.se
+  name = Valentin Nemirovsky
 [core]
-  excludesFile=~/.gitignore
-  editor = vim
+  excludesfile = /Users/spacemonkey/.gitignore
+  editor = nvim
 [push]
   default = simple
 [pull]
