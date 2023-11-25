@@ -1,83 +1,98 @@
 local M = {}
 
-function M.check_lsp_client_active(name)
-	local clients = vim.lsp.get_active_clients()
-	for _, client in pairs(clients) do
-		if client.name == name then
-			return true
-		end
-	end
-	return false
+M.termcodes = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-function M.define_augroups(definitions) -- {{{1
-	-- Create autocommand groups based on the passed definitions
-	--
-	-- The key will be the name of the group, and each definition
-	-- within the group should have:
-	--    1. Trigger
-	--    2. Pattern
-	--    3. Text
-	-- just like how they would normally be defined from Vim itself
-	for group_name, definition in pairs(definitions) do
-		vim.cmd("augroup " .. group_name)
-		vim.cmd("autocmd!")
 
-		for _, def in pairs(definition) do
-			local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
-			vim.cmd(command)
-		end
-
-		vim.cmd("augroup END")
-	end
+M.map = function(modes, lhs, rhs, opts)
+  if type(opts) == 'string' then
+    opts = { desc = opts }
+  end
+  local options = vim.tbl_extend('keep', opts or {}, { silent = true })
+  vim.keymap.set(modes, lhs, rhs, options)
 end
 
--- misc
-function M.file_exists(name)
-	local f = io.open(name, "r")
-	if f ~= nil then
-		io.close(f)
-		return true
-	else
-		return false
-	end
+M.feedkeys = function(keys, mode)
+  if mode == nil then mode = 'in' end
+  return vim.api.nvim_feedkeys(M.termcodes(keys), mode, true)
 end
 
--- Find a file either using git files or search the filesystem.
-function M.find_files()
-	local opts = {}
-	local telescope = require("telescope.builtin")
-
-	local ok = pcall(telescope.git_files, opts)
-	if not ok then
-		telescope.find_files(opts)
-	end
+M.feedkeys_count = function(keys, mode)
+  return M.feedkeys(vim.v.count1 .. keys, mode)
 end
 
-function M.find_buffers()
-	local results = {}
-	local buffers = vim.api.nvim_list_bufs()
-
-	for _, buffer in ipairs(buffers) do
-		if vim.api.nvim_buf_is_loaded(buffer) then
-			local filename = vim.api.nvim_buf_get_name(buffer)
-			table.insert(results, filename)
-		end
-	end
-
-	vim.ui.select(results, { prompt = "Find buffer:" }, function(selected)
-		if selected then
-			vim.api.nvim_command("buffer " .. selected)
-		end
-	end)
+M.error = function(message)
+  vim.api.nvim_echo({{ message, 'Error' }}, false, {})
 end
 
--- find dotfiles
-function M.find_dotfiles()
-	require("telescope.builtin").find_files({
-		prompt_title = "<Dotfiles>",
-		cwd = "$HOME/dots",
-	})
+--- Returns a new table with `element` appended to `tbl`
+M.append = function(tbl, element)
+  local new_table = vim.deepcopy(tbl)
+  table.insert(new_table, element)
+  return new_table
+end
+
+--- Gets the buffer number of every visible buffer
+--- @return integer[]
+M.visible_buffers = function()
+  return vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
+end
+
+local function lsp_server_has_references()
+  vim.tbl_contains(vim.lsp.get_clients(), function(client)
+    return client.server_capabilities
+  end, { predicate = true })
+end
+
+--- Clear all highlighted LSP references in all windows
+M.clear_lsp_references = function()
+  vim.cmd.nohlsearch()
+  if lsp_server_has_references() then
+    vim.lsp.buf.clear_references()
+    for _, buffer in pairs(M.visible_buffers()) do
+      vim.lsp.util.buf_clear_references(buffer)
+    end
+  end
+end
+
+--- Close every floating window
+M.close_floating_windows = function()
+  for _, win in pairs(vim.api.nvim_list_wins()) do
+    -- Sometimes the window doesn't exist anymore for some reason
+    local success, win_config = pcall(vim.api.nvim_win_get_config, win)
+    if success and vim.tbl_contains({'win', 'editor'}, win_config.relative) then
+      vim.api.nvim_win_close(win, false)
+    end
+  end
+end
+
+--- Get Mason package install path
+--  M.get_install_path = function(package)
+--   return require('mason-registry').get_package(package):get_install_path()
+-- end
+
+
+--- Import plugin config from external module in `lua/configs/`
+M.use = function(module)
+  local ok, m = pcall(require, string.format('configs.%s', module))
+  if ok then
+    return m
+  else
+    vim.notify(string.format('Failed to import Lazy config module %s: %s', module, m))
+    return {}
+  end
+end
+
+M.noice_is_loaded = function()
+  local success, _ = pcall(require, 'noice.config')
+  return success and require('noice.config')._running
+end
+
+M.plugin_is_loaded = function(plugin)
+  -- Checking with `require` and `pcall` will cause Lazy to load the plugin
+  local plugins = require('lazy.core.config').plugins
+  return not not plugins[plugin] and plugins[plugin]._.loaded
 end
 
 return M
