@@ -93,7 +93,7 @@ function glog; g log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Cre
 ################################
 ###  DOCKER
 ################################
-alias dkc=docker-compose
+alias dc=docker-compose
 function drun -w "docker run -d"     ; docker run -d $argv  ; end
 function dstr -w "docker start"      ; docker start $argv   ; end
 function dstp -w "docker stop"       ; docker stop $argv    ; end

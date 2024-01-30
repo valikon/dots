@@ -44,10 +44,18 @@ starship init fish | source
 
 set -g fish_greeting
 
-#zoxide init fish | source
+zoxide init fish | source
 
 fnm env --use-on-cd | source
 
 #pyenv init -
 
 #set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/valle/.ghcup/bin # ghcup-env
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /opt/homebrew/anaconda3/bin/conda
+    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
