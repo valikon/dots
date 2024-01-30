@@ -10,17 +10,24 @@ require('utils.lazy')
 
 local plugins = {
   'folke/lazy.nvim',
+  use 'tokyonight',
   use 'indent-blankline',
   use 'comment',
   use 'gitsigns',
-  use 'onedark',
+  use 'nvim-surround',
+  use 'nvim-tree',
   -- use 'mason',
-  use 'lualine',                                -- TODO: install and configure feline
-  -- use 'telescope',
+  use 'lualine',                                -- TODO install and configure feline
+  use 'telescope',                              -- TODO do some more config, plain vanilla now
+
+  'nvim-lua/plenary.nvim',
+  'christoomey/vim-tmux-navigator',
+  'szw/vim-maximizer',
+  'vim-scripts/ReplaceWithRegister',
 
   { 'folke/which-key.nvim', opts = {} },
 
-  { 'tpope/vim-fugitive',                       -- :Git commands
+  { 'tpope/vim-fugitive',                       -- Git commands
     dependencies = 'tpope/vim-dispatch',        -- Asynchronous `:Gpush`, etc.
     cmd = { 'G', 'Git', 'Gvdiffsplit' },
   },

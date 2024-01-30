@@ -74,3 +74,5 @@ opt.fillchars = {
   diff = ' ', -- Cleaner deleted lines in diff
   eob = ' ',  -- Don't show `~` at end of buffer
 }
+
+--vim.cmd[[colorscheme tokyonight-storm]]
