@@ -11,6 +11,7 @@ require('utils.lazy')
 local plugins = {
   'folke/lazy.nvim',
   use 'tokyonight',
+  use 'comment',
   use 'indent-blankline',
   use 'comment',
   use 'gitsigns',
@@ -36,15 +37,12 @@ local plugins = {
 
 require('lazy').setup({
   spec = plugins,
-  -- concurrency = 30, -- GitHub seems to not allow too many concurrent fetches
-  -- install = {
-  --   colorscheme = { 'onedark' },
-  -- },
-  -- performance = {
-  --   rtp = {
-  --     disabled_plugins = { 'netrwPlugin', 'tutor' },
-  --   },
-  -- },
+  concurrency = 30, -- GitHub seems to not allow too many concurrent fetches
+  performance = {
+    rtp = {
+      disabled_plugins = { 'netrwPlugin', 'tutor' },
+    },
+  },
 })
 
 -- require('lazy').setup({
@@ -55,13 +53,7 @@ require('lazy').setup({
 --   'tpope/vim-rhubarb',
 --
 --
---   {
---     'numToStr/Comment.nvim',
---     opts = {
---         -- add any options here
---     },
---     lazy = false,
---   },
+--   
 --
 --   {
 --     -- Autocompletion
