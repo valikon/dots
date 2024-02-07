@@ -68,9 +68,9 @@ M.close_floating_windows = function()
 end
 
 --- Get Mason package install path
---  M.get_install_path = function(package)
---   return require('mason-registry').get_package(package):get_install_path()
--- end
+M.get_install_path = function(package)
+  return require('mason-registry').get_package(package):get_install_path()
+end
 
 
 --- Import plugin config from external module in `lua/configs/`

@@ -13,14 +13,17 @@ local plugins = {
   use 'tokyonight',
   use 'comment',
   use 'cmp',
+  use 'null-ls',
   use 'indent-blankline',
   use 'comment',
   use 'gitsigns',
   use 'nvim-surround',
   use 'nvim-tree',
-  -- use 'mason',
-  use 'lualine',                                -- TODO install and configure feline
-  use 'telescope',                              -- TODO do some more config, plain vanilla now
+  use 'mason',
+  use 'lsp',
+  use 'lsp-inlay-hints',
+  use 'lualine',   -- TODO install and configure feline
+  use 'telescope', -- TODO do some more config, plain vanilla now
 
   'nvim-lua/plenary.nvim',
   'christoomey/vim-tmux-navigator',
@@ -29,8 +32,9 @@ local plugins = {
 
   { 'folke/which-key.nvim', opts = {} },
 
-  { 'tpope/vim-fugitive',                       -- Git commands
-    dependencies = 'tpope/vim-dispatch',        -- Asynchronous `:Gpush`, etc.
+  {
+    'tpope/vim-fugitive',                -- Git commands
+    dependencies = 'tpope/vim-dispatch', -- Asynchronous `:Gpush`, etc.
     cmd = { 'G', 'Git', 'Gvdiffsplit' },
   },
 
@@ -53,77 +57,77 @@ require('lazy').setup({
 --   'tpope/vim-fugitive',
 --   'tpope/vim-rhubarb',
 --
-  -- Useful plugin to show you pending keybinds.
-  -- {
-  --   -- Adds git related signs to the gutter, as well as utilities for managing changes
-  --   'lewis6991/gitsigns.nvim',
-  --   opts = {
-  --     -- See `:help gitsigns.txt`
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-  --     on_attach = function(bufnr)
-  --       vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-  --
-  --       -- don't override the built-in and fugitive keymaps
-  --       local gs = package.loaded.gitsigns
-  --       vim.keymap.set({ 'n', 'v' }, ']c', function()
-  --         if vim.wo.diff then
-  --           return ']c'
-  --         end
-  --         vim.schedule(function()
-  --           gs.next_hunk()
-  --         end)
-  --         return '<Ignore>'
-  --       end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-  --       vim.keymap.set({ 'n', 'v' }, '[c', function()
-  --         if vim.wo.diff then
-  --           return '[c'
-  --         end
-  --         vim.schedule(function()
-  --           gs.prev_hunk()
-  --         end)
-  --         return '<Ignore>'
-  --       end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-  --     end,
-  --   },
-  -- },
+-- Useful plugin to show you pending keybinds.
+-- {
+--   -- Adds git related signs to the gutter, as well as utilities for managing changes
+--   'lewis6991/gitsigns.nvim',
+--   opts = {
+--     -- See `:help gitsigns.txt`
+--     signs = {
+--       add = { text = '+' },
+--       change = { text = '~' },
+--       delete = { text = '_' },
+--       topdelete = { text = '‾' },
+--       changedelete = { text = '~' },
+--     },
+--     on_attach = function(bufnr)
+--       vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+--
+--       -- don't override the built-in and fugitive keymaps
+--       local gs = package.loaded.gitsigns
+--       vim.keymap.set({ 'n', 'v' }, ']c', function()
+--         if vim.wo.diff then
+--           return ']c'
+--         end
+--         vim.schedule(function()
+--           gs.next_hunk()
+--         end)
+--         return '<Ignore>'
+--       end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+--       vim.keymap.set({ 'n', 'v' }, '[c', function()
+--         if vim.wo.diff then
+--           return '[c'
+--         end
+--         vim.schedule(function()
+--           gs.prev_hunk()
+--         end)
+--         return '<Ignore>'
+--       end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+--     end,
+--   },
+-- },
 
-  -- {
-  --   -- Add indentation guides even on blank lines
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   -- Enable `lukas-reineke/indent-blankline.nvim`
-  --   -- See `:help ibl`
-  --   main = 'ibl',
-  --   opts = {},
-  -- },
+-- {
+--   -- Add indentation guides even on blank lines
+--   'lukas-reineke/indent-blankline.nvim',
+--   -- Enable `lukas-reineke/indent-blankline.nvim`
+--   -- See `:help ibl`
+--   main = 'ibl',
+--   opts = {},
+-- },
 
-  -- {
-  --   -- Highlight, edit, and navigate code
-  --   'nvim-treesitter/nvim-treesitter',
-  --   dependencies = {
-  --     'nvim-treesitter/nvim-treesitter-textobjects',
-  --   },
-  --   build = ':TSUpdate',
-  -- },
+-- {
+--   -- Highlight, edit, and navigate code
+--   'nvim-treesitter/nvim-treesitter',
+--   dependencies = {
+--     'nvim-treesitter/nvim-treesitter-textobjects',
+--   },
+--   build = ':TSUpdate',
+-- },
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-  --       These are some example plugins that I've included in the kickstart repository.
-  --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+--       These are some example plugins that I've included in the kickstart repository.
+--       Uncomment any of the lines below to enable them.
+-- require 'kickstart.plugins.autoformat',
+-- require 'kickstart.plugins.debug',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-  --    up-to-date with whatever is in the kickstart repo.
-  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --
-  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+--    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+--    up-to-date with whatever is in the kickstart repo.
+--    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+--
+--    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+-- { import = 'custom.plugins' },
 -- }, {})
 
 -- [[ Configure Telescope ]]
@@ -229,4 +233,3 @@ require('lazy').setup({
 --     },
 --   }
 -- end, 0)
-
