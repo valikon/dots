@@ -3,25 +3,35 @@ local use = require('utils').use
 -- General configs
 require('configs.options')
 require('configs.keymaps')
+require('configs.autocmds')
 require('configs.commands')
+require('configs.diagnostics')
 
 -- Lazy
 require('utils.lazy')
 
 local plugins = {
   'folke/lazy.nvim',
+  use 'barbar',
   use 'tokyonight',
   use 'comment',
   use 'cmp',
-  use 'null-ls',
+  use 'dap',
+  use 'dap-ui',
+  use 'dap-python',
+  use 'treesitter',
+  use 'treesitter.context-commentstring',
+  use 'none-ls',
   use 'indent-blankline',
   use 'comment',
+  use 'obsidian',
   use 'gitsigns',
   use 'nvim-surround',
   use 'nvim-tree',
   use 'mason',
   use 'lsp',
   use 'lsp-inlay-hints',
+  use 'nvim-web-devicons',
   use 'lualine',   -- TODO install and configure feline
   use 'telescope', -- TODO do some more config, plain vanilla now
 

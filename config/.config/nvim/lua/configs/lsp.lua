@@ -15,16 +15,18 @@ return {
     { 'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim' },
   },
   event = { 'VeryLazy', 'BufWrite' },
+  opts = {
+    servers = { pyright = {} },
+  },
   config = function()
-    print("hello world")
     local api, lsp, diagnostic = vim.api, vim.lsp, vim.diagnostic
-    local lspconfig = require('lspconfig')
-    local telescope = require('telescope.builtin')
-    local mason_path = require('mason-core.path')
-    local typescript = require('typescript')
-    local get_install_path  = require('utils').get_install_path
+    local lspconfig            = require('lspconfig')
+    local telescope            = require('telescope.builtin')
+    local mason_path           = require('mason-core.path')
+    local typescript           = require('typescript')
+    local get_install_path     = require('utils').get_install_path
 
-    local map = function(modes, lhs, rhs, opts)
+    local map                  = function(modes, lhs, rhs, opts)
       if type(opts) == 'string' then
         opts = { desc = opts }
       elseif not opts then
@@ -37,8 +39,8 @@ return {
     local function typescript_organize_imports()
       local params = {
         command = "_typescript.organizeImports",
-        arguments = {vim.api.nvim_buf_get_name(0)},
-        title = "Organize imports"
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = "Organize imports",
       }
       vim.lsp.buf.execute_command(params)
     end
@@ -74,18 +76,18 @@ return {
         map('n', '<leader>lc', function() require('tsc').run() end, 'Type check project')
         map('n', '<leader>ls', spread('{'), {
           remap = true,
-          desc = 'Spread object under cursor'
+          desc = 'Spread object under cursor',
         })
         map('n', '<leader>lS', spread('['), {
           remap = true,
-          desc = 'Spread array under cursor'
+          desc = 'Spread array under cursor',
         })
       end,
       commands = {
         TypescriptOrganizeAndFixImports = {
           typescript_organize_imports,
           description = "Organize imports",
-        }
+        },
       },
       settings = {
         typescript = {
@@ -100,7 +102,7 @@ return {
             includeInlayVariableTypeHints = false,
             includeInlayVariableTypeHintsWhenTypeMatchesName = false,
             includeInlayFunctionLikeReturnTypeHints = false,
-          }
+          },
         },
       },
       handlers = {
@@ -178,7 +180,7 @@ return {
                 telemetry = {
                   enable = false,
                 },
-              }
+              },
             }
           )
 
@@ -190,7 +192,7 @@ return {
         end,
         on_attach = function()
           map('n', '<leader>lt', '<Plug>PlenaryTestFile', "Run file's plenary tests")
-        end
+        end,
       },
       -- YAML --
       yamlls = {
@@ -198,16 +200,16 @@ return {
           yaml = {
             schemaStore = {
               url = 'https://www.schemastore.org/api/json/catalog.json',
-              enable = true
+              enable = true,
             },
             customTags = {
               -- AWS CloudFormation tags
               '!Equals sequence', '!FindInMap sequence', '!GetAtt', '!GetAZs',
               '!ImportValue', '!Join sequence', '!Ref', '!Select sequence',
-              '!Split sequence', '!Sub', '!Or sequence'
+              '!Split sequence', '!Sub', '!Or sequence',
             },
-          }
-        }
+          },
+        },
       },
       -- Eslint --
       eslint = {
@@ -220,7 +222,7 @@ return {
       },
       -- Bash/Zsh --
       bashls = {
-        filetypes = {'sh', 'zsh'}
+        filetypes = { 'sh', 'zsh' },
       },
       -- Json --
       jsonls = {
@@ -231,37 +233,19 @@ return {
           },
         },
       },
-      -- Bicep --
-      bicep = {
-        cmd = {
-          mason_path.concat({ get_install_path('bicep-lsp'), 'bicep-lsp' })
-        }
-      },
-      -- LTeX --
-      ltex = {
+      -- Python
+      pyright = {
         settings = {
-          ltex = {
-            language = 'auto',
-            diagnosticSeverity = 'hint',
-            sentenceCacheSize = 2000,
-            additionalRules = {
-              motherTongue = 'sv',
+          pyright = { autoImportCompletion = true },
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = 'openFilesOnly',
+              useLibraryCodeForTypes = true,
+              typeCheckingMode = 'off',
             },
           },
         },
-        on_attach = function(_, buf)
-          -- Temporary fix until https://github.com/jhofscheier/ltex-utils.nvim/issues/8 gets merged
-          if not vim.env.LTEX_GLOBAL_STORAGE_PATH then
-            vim.env.LTEX_GLOBAL_STORAGE_PATH = vim.fn.stdpath('data') .. '/ltex/'
-          end
-
-          require('ltex-utils').on_attach(buf)
-        end
-      },
-      typst_lsp = {
-        on_attach = function()
-          map('n', '<leader>lw', '<cmd>TypstWatch<CR>', 'Watch file')
-        end,
       },
       typos_lsp = {
         on_attach = function(client, _)
@@ -273,9 +257,9 @@ return {
           end
         end,
         init_options = {
-          diagnosticSeverity = 'hint'
-        }
-      }
+          diagnosticSeverity = 'hint',
+        },
+      },
     }
 
     local disable = function() end
@@ -285,9 +269,9 @@ return {
       tsserver = function()
         return typescript.setup({ server = tsserver_config })
       end,
-      zk = disable, -- Disabled because zk-nvim already sets it up
+      zk = disable,            -- Disabled because zk-nvim already sets it up
       rust_analyzer = disable, -- Set up in rustaceanvim
-      jdtls = disable, -- Set up in in java.lua
+      jdtls = disable,         -- Set up in in java.lua
     }
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -319,9 +303,9 @@ return {
       handlers = { setup },
       ensure_installed = vim.list_extend(ensure_installed, {
         'vimls',
-        'pylsp',
         'lemminx',
-      })
+        'pyright',
+      }),
     })
 
     ---------------------
@@ -374,34 +358,35 @@ return {
     local function attach_keymaps()
       local nx = { 'n', 'x' }
 
-      map('n', 'gd',         telescope.lsp_definitions,               'LSP definitions')
-      map('n', 'gD',         telescope.lsp_type_definitions,          'LSP type definitions')
-      map('n', 'gi',         telescope.lsp_implementations,           'LSP implementations')
-      map('n', '<leader>ts', telescope.lsp_document_symbols,          'LSP document symbols')
-      map('n', '<leader>tS', telescope.lsp_workspace_symbols,         'LSP workspace symbols')
+      map('n', 'gd', telescope.lsp_definitions, 'LSP definitions')
+      map('n', 'gD', telescope.lsp_type_definitions, 'LSP type definitions')
+      map('n', 'gi', telescope.lsp_implementations, 'LSP implementations')
+      map('n', '<leader>ts', telescope.lsp_document_symbols, 'LSP document symbols')
+      map('n', '<leader>tS', telescope.lsp_workspace_symbols, 'LSP workspace symbols')
       map('n', '<leader>tw', telescope.lsp_dynamic_workspace_symbols, 'LSP dynamic workspace symbols')
-      map('n', 'gr',         lsp_references,                          'LSP references')
+      map('n', 'gr', lsp_references, 'LSP references')
 
-      map('n',        'gh',        lsp.buf.hover,          'LSP hover')
-      map('n',        'gs',        lsp.buf.signature_help, 'LSP signature help')
-      map({'i', 's'}, '<M-s>',     lsp.buf.signature_help, 'LSP signature help')
-      map(nx,         '<leader>r', lsp.buf.rename,         'LSP rename')
-      map(nx,         '<leader>A', lsp.codelens.run,       'LSP code lens')
+      map('n', 'gh', lsp.buf.hover, 'LSP hover')
+      map('n', 'gs', lsp.buf.signature_help, 'LSP signature help')
+      map({ 'i', 's' }, '<M-s>', lsp.buf.signature_help, 'LSP signature help')
+      map(nx, '<leader>r', lsp.buf.rename, 'LSP rename')
+      map(nx, '<leader>A', lsp.codelens.run, 'LSP code lens')
 
-      map(nx,  ']e',        diagnostic_goto('next', error_opts), 'Go to next error')
-      map(nx,  '[e',        diagnostic_goto('prev', error_opts), 'Go to previous error')
-      map(nx,  '[h',        diagnostic_goto('prev', info_opts), 'Go to previous info')
-      map(nx,  ']h',        diagnostic_goto('next', info_opts), 'Go to next info')
-      map(nx,  ']d',        diagnostic_goto('next', with_border), 'Go to next diagnostic')
-      map(nx,  '[d',        diagnostic_goto('prev', with_border), 'Go to previous diagnostic')
-      map('n', '<leader>e', function() diagnostic.open_float({ border = 'single' }) end, 'Diagnostic open float')
+      map(nx, ']e', diagnostic_goto('next', error_opts), 'Go to next error')
+      map(nx, '[e', diagnostic_goto('prev', error_opts), 'Go to previous error')
+      map(nx, '[h', diagnostic_goto('prev', info_opts), 'Go to previous info')
+      map(nx, ']h', diagnostic_goto('next', info_opts), 'Go to next info')
+      map(nx, ']d', diagnostic_goto('next', with_border), 'Go to next diagnostic')
+      map(nx, '[d', diagnostic_goto('prev', with_border), 'Go to previous diagnostic')
+      map('n', '<leader>e', function() diagnostic.open_float({ border = 'single' }) end,
+        'Diagnostic open float')
 
-      map('n', '<C-w>gd', '<C-w>vgd', { desc = 'LSP definition in window split',      remap = true })
-      map('n', '<C-w>gi', '<C-w>vgi', { desc = 'LSP implementation in window split',  remap = true })
+      map('n', '<C-w>gd', '<C-w>vgd', { desc = 'LSP definition in window split', remap = true })
+      map('n', '<C-w>gi', '<C-w>vgi', { desc = 'LSP implementation in window split', remap = true })
       map('n', '<C-w>gD', '<C-w>vgD', { desc = 'LSP type definition in window split', remap = true })
 
       map('n', '<leader>ls', '<cmd>LspStart<CR>', { desc = 'Start LSP server' })
-      map('n', '<leader>lq', '<cmd>LspStop<CR>',  { desc = 'Stop LSP server' })
+      map('n', '<leader>lq', '<cmd>LspStop<CR>', { desc = 'Stop LSP server' })
 
       -- print('keymaps attached')
     end
@@ -444,7 +429,7 @@ return {
 
           map('n', '<leader>lh', inlay_hints.toggle, 'Toggle LSP inlay hints')
         end
-      end
+      end,
     })
-  end
+  end,
 }

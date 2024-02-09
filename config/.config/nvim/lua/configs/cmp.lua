@@ -8,7 +8,7 @@ return {
   'hrsh7th/nvim-cmp',
   dependencies = {
     'L3MON4D3/LuaSnip',                    -- Snippets TODO: fix snippets loading
-    'saadparwaiz1/cmp_luasnip' ,           -- Snippets
+    'saadparwaiz1/cmp_luasnip',            -- Snippets
     'rafamadriz/friendly-snippets',        -- Snippets
     'onsails/lspkind-nvim',                -- Completion menu icons
     'hrsh7th/cmp-nvim-lsp',                -- LSP completion
@@ -33,9 +33,12 @@ return {
 
     local function cmp_map(rhs, modes)
       if (modes == nil) then
-        modes = {'i', 'c'}
-      else if (type(modes) ~= 'table')
-        then modes = {modes} end
+        modes = { 'i', 'c' }
+      else
+        if (type(modes) ~= 'table')
+        then
+          modes = { modes }
+        end
       end
       return cmp.mapping(rhs, modes)
     end
@@ -52,7 +55,7 @@ return {
 
     local function complete()
       if cmp.visible() then
-        cmp.mapping.confirm({select = true})()
+        cmp.mapping.confirm({ select = true })()
       elseif luasnip.expandable() then
         luasnip.expand()
       else
@@ -62,7 +65,7 @@ return {
 
     local function cmdline_complete()
       if cmp.visible() then
-        cmp.mapping.confirm({select = true})()
+        cmp.mapping.confirm({ select = true })()
       else
         cmp.complete()
       end
@@ -72,14 +75,15 @@ return {
       { name = 'nvim_lsp' },
       { name = 'luasnip', max_item_count = 5 },
       { name = 'nvim_lua' },
-      { name = 'path', option = { trailing_slash = true } },
-      { name = 'buffer',
+      { name = 'path',    option = { trailing_slash = true } },
+      {
+        name = 'buffer',
         max_item_count = 3,
         keyword_length = 2,
         option = {
           get_bufnrs = visible_buffers, -- Suggest words from all visible buffers
         },
-      }
+      },
     }
     if not noice_is_loaded() then
       -- Noice has its own signature help
@@ -88,7 +92,7 @@ return {
 
     -- LSPKind
     lspkind.init({
-      symbol_map = require('utils.icons').icons
+      symbol_map = require('utils.icons').icons,
     })
 
     -- Places icon to the left, with margin
@@ -118,7 +122,7 @@ return {
         ['<C-k>'] = cmp_map(cmp.mapping.select_prev_item(cmp_insert)),
         ['<C-b>'] = cmp_map(cmp.mapping.scroll_docs(-4)),
         ['<C-f>'] = cmp_map(cmp.mapping.scroll_docs(4)),
-        ['<C-Space>'] = cmp_map(toggle_complete(), {'i', 'c', 's'}),
+        ['<C-Space>'] = cmp_map(toggle_complete(), { 'i', 'c', 's' }),
         ['<Tab>'] = cmp.mapping({
           i = complete,
           c = cmdline_complete,
@@ -130,7 +134,7 @@ return {
       sources = cmp.config.sources(sources),
       window = {
         completion = {
-          col_offset = -2, -- To fit lspkind icon
+          col_offset = -2,  -- To fit lspkind icon
           side_padding = 1, -- One character margin
         },
       },
@@ -140,31 +144,31 @@ return {
       },
       completion = {
         completeopt = 'menu,menuone,noinsert',
-      }
+      },
     })
 
     -- Use buffer source for `/` (searching)
     cmp.setup.cmdline('/', {
       sources = {
-        { name = 'buffer' }
-      }
+        { name = 'buffer' },
+      },
     })
 
     -- Use cmdline & path source for `:`
     cmp.setup.cmdline(':', {
       sources = cmp.config.sources(
         {
-          { name = 'path' }
+          { name = 'path' },
         },
         {
           {
             name = 'cmdline',
             option = {
-              ignore_cmds = { 'Man', '!' }
+              ignore_cmds = { 'Man', '!' },
             },
           },
         }
-      )
+      ),
     })
-  end
+  end,
 }

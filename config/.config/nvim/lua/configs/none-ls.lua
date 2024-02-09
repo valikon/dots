@@ -2,7 +2,7 @@
 -- null-ls --
 -------------
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  "nvimtools/none-ls.nvim",
   dependencies = { 'nvim-lua/plenary.nvim', 'davidmh/cspell.nvim' },
   event = 'VeryLazy',
   config = function()
@@ -11,12 +11,13 @@ return {
     local null_ls, builtins = require('null-ls'), require('null-ls').builtins
 
     local sources = {
-      builtins.formatting.autopep8,
+      builtins.formatting.black,
       builtins.formatting.prettier,
-      builtins.formatting.latexindent,
       builtins.hover.dictionary,
+      builtins.diagnostics.mypy,
+      builtins.diagnostics.ruff,
       builtins.formatting.shfmt.with({
-        args = { '-sr' } -- Space after redirects
+        args = { '-sr' }, -- Space after redirects
       }),
     }
 
