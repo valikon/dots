@@ -104,8 +104,8 @@ symbol = "🔴"
 [aws]
 format = '[$symbol($profile)(\($region\))]($style) '
 style = "bold orange"
-symbol = "📡 "
-#symbol = " "
+#symbol = "📡 "
+symbol = "☁️ "
 disabled = false
 
 [docker_context]

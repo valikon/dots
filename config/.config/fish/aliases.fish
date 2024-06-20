@@ -46,6 +46,15 @@ function screen3 -d "Screen - Office screen"          ; bash ~/.screenlayout/my-
 function screen4 -d "Screen - Uppsala office screen"  ; bash ~/.screenlayout/my-layout4.sh   ; end
 
 ################################
+### Cloud
+################################
+alias tf=terraform
+alias tg=terragrunt
+
+alias cantrill-prod="aws_sso_login cantrill-prod"
+alias cantrill-dev="aws_sso_login cantrill-dev"
+
+################################
 ###  GIT
 ################################
 function g -w git -d "Git"                                                     ; git	                  $argv; end

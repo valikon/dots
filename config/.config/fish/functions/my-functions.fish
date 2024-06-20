@@ -82,7 +82,9 @@ function wttr -a city -d "Weather forecast"
 end
 
 # -- AWS -- #
-function set-aws-profile -d "Change AWS profile"; set -gx AWS_PROFILE $argv; end
+function aws_sso_login -d "Login to AWS using SSO"
+  aws sso login --profile $argv[1] && set -gx AWS_PROFILE $argv[1]
+end
 #function export-aws-access-keys -d "" # TODO: write a decent function here to read and then export the keys to ENV variables
 
 ### -- PDF UTILS -- ##

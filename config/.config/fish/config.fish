@@ -22,9 +22,10 @@ set -gx VIMDATA $HOME/.local/share/vim
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 #set -gx BROWSER qutebrowser
 
-source ~/.config/fish/aliases.fish
-source ~/.config/fish/nmap_aliases.fish
 source ~/.config/fish/functions/my-functions.fish
+source ~/.config/fish/nmap_aliases.fish
+source ~/.config/fish/aliases.fish
+source ~/.current_assignment.fish
 
 set VIRTUAL_ENV_DISABLE_PROMPT "1"
 
@@ -59,3 +60,5 @@ if test -f /opt/homebrew/anaconda3/bin/conda
 end
 # <<< conda initialize <<<
 
+
+alias assume="source (brew --prefix)/bin/assume.fish"
