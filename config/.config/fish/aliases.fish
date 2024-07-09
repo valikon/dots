@@ -24,7 +24,6 @@ alias tmp="cd /tmp"
 ################################
 alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
-alias diff=difft
 alias i=pac-install
 alias py=python
 alias e=nvim
@@ -43,16 +42,22 @@ function jpg_convert           ; magick $arg -quality 100% $arg.jpg             
 function screen1 -d "Screen - Only the one screen"    ; bash ~/.screenlayout/my-layout.sh    ; end
 function screen2 -d "Screen - Home screen"            ; bash ~/.screenlayout/my-layout2.sh   ; end
 function screen3 -d "Screen - Office screen"          ; bash ~/.screenlayout/my-layout3.sh   ; end
-function screen4 -d "Screen - Uppsala office screen"  ; bash ~/.screenlayout/my-layout4.sh   ; end
 
 ################################
 ### Cloud
 ################################
 alias tf=terraform
 alias tg=terragrunt
+function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
 
-alias cantrill-prod="aws_sso_login cantrill-prod"
-alias cantrill-dev="aws_sso_login cantrill-dev"
+alias cantrill-prod="assume cantrill-prod"
+alias cantrill-dev="assume cantrill-dev"
+
+################################
+### K8s
+################################
+
+alias k=kubectl
 
 ################################
 ###  GIT
