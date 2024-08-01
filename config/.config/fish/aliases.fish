@@ -56,8 +56,43 @@ alias cantrill-dev="assume cantrill-dev"
 ################################
 ### K8s
 ################################
-
+alias kubectl=kubecolor
 alias k=kubectl
+alias keti='k exec -ti'
+alias kg='k get'
+alias kl='k logs'
+alias kd='k describe'
+alias kdel='k delete'
+
+# context
+alias kcx='kubectx'
+alias kccc='k config current-context'
+alias kcgc='k config get-contexts'
+
+# pods
+alias kgp='kg pod'
+alias kdp='kd pod'
+alias kgpl='kgp -l' # get pods by label
+alias kgpn='kgp -n' # get pods by namespace
+alias kgpw='kgp --watch' # after listing, watch for changes
+alias kgpwide='kgp -o wide' # plain-text with additional information
+
+# deployment
+alias kdd='kd deployment'
+alias kgd='kg deployment'
+
+# node
+alias kdn='kd node'
+alias kgn='k get nodes -L karpenter.sh/nodepool -L node.kubernetes.io/instance-type -L topology.kubernetes.io/zone'
+
+# service
+alias kgs='kg svc' # list services in ps output format
+alias kds='kd svc'
+alias kgsw='kgs --watch' 
+alias kgswide='kgs -o wide'
+alias kdsa='kd sa' # describe a service account in details
+
+alias kns='kubens'
 
 ################################
 ###  GIT

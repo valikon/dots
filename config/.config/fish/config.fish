@@ -17,6 +17,7 @@ set -gx GOPATH $HOME/go
 ## System stuff
 set -gx PROJECT_PATHS $HOME/projects # pj variable
 set -gx EDITOR nvim
+set -gx KUBE_EDITOR nvim
 set -gx VIMCONFIG $HOME/.config/nvim
 set -gx VIMDATA $HOME/.local/share/vim
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
