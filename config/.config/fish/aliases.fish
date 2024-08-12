@@ -7,10 +7,10 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
-alias l.="exa -a | egrep '^\.'"                                     # show only dotfiles
-alias ls='exa -la --color=always --group-directories-first --icons' # preferred listing
-alias la='exa -a --color=always --group-directories-first --icons'  # all files and dirs
-alias lt='exa -aT --color=always --group-directories-first --icons' # tree listing
+alias l="eza -a | egrep '^\.'"                                     # show only dotfiles
+alias ls='eza -la --color=always --group-directories-first --icons' # preferred listing
+alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
+alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias lt2='ls-tree-level 2'
 alias lt3='ls-tree-level 3'
 
@@ -63,6 +63,7 @@ alias kg='k get'
 alias kl='k logs'
 alias kd='k describe'
 alias kdel='k delete'
+alias kt='k top'
 
 # context
 alias kcx='kubectx'
