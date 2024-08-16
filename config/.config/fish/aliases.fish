@@ -50,6 +50,9 @@ alias tf=terraform
 alias tg=terragrunt
 function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
 
+alias sp='steampipe'
+alias pipe='powerpipe'
+
 alias cantrill-prod="assume cantrill-prod"
 alias cantrill-dev="assume cantrill-dev"
 
@@ -109,7 +112,7 @@ function gc -w "git commit" -d "Git - commit"                                  ;
 function gcl -w "git clone" -d "Git - clone"                                   ; git clone              $argv; end
 function gcb -w "git checkout -b" -d "Git - checkout branch "                  ; git checkout -b        $argv; end
 function gco -w "git checkout" -d "Git - checkout"                             ; git checkout           $argv; end
-function gcm -d "Git - checkout master"                                        ; git checkout master         ; end
+function gcm -d "Git - checkout main"                                          ; git checkout main           ; end
 function gcmsg -w "git commit -m" -d "Git - commit with message"               ; g commit -m            $argv; end
 function gcp -w "git cherry-pick" -d "Git - cherrypick"                        ; git cherry-pick        $argv; end
 function gd -w "batdiff" -d "Git - diff"                                       ; batdiff --color --delta $argv; end
@@ -182,16 +185,16 @@ function npmt -d "NPM - test"               ; npm run-script test      $argv ; e
 ################################
 ###  HASKELL
 ################################
-function st -w stack                            ; stack                      $argv; end
-function stp -w "stack build --fast --pedantic" ; st build --fast --pedantic $argv; end
-function stb -w "stack build"                   ; st build                   $argv; end
-function stf -w "stack build --fast"            ; st build --fast            $argv; end
-function sti -w "stack install"                 ; st install                 $argv; end
-function str -w "stack ghci"                    ; st ghci                    $argv; end
-function std                                    ; st build                   $argv --dry-run; end
-function stn                                    ; st ghci                    $argv --no-build; end
-function ghcl                                   ; ghc-pkg list               $argv; end
-function ghcu                                   ; ghc-pkg unregister         $argv; end
+# function st -w stack                            ; stack                      $argv; end
+# function stp -w "stack build --fast --pedantic" ; st build --fast --pedantic $argv; end
+# function stb -w "stack build"                   ; st build                   $argv; end
+# function stf -w "stack build --fast"            ; st build --fast            $argv; end
+# function sti -w "stack install"                 ; st install                 $argv; end
+# function str -w "stack ghci"                    ; st ghci                    $argv; end
+# function std                                    ; st build                   $argv --dry-run; end
+# function stn                                    ; st ghci                    $argv --no-build; end
+# function ghcl                                   ; ghc-pkg list               $argv; end
+# function ghcu                                   ; ghc-pkg unregister         $argv; end
 
 ################################
 ###  OpenVPN
