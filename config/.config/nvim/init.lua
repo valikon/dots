@@ -17,7 +17,7 @@ local plugins = {
   use 'comment',
   use 'cmp',
   use 'dap',
-  use 'dap-ui',
+  -- use 'dap-ui',
   use 'dap-python',
   use 'treesitter',
   use 'treesitter.context-commentstring',
