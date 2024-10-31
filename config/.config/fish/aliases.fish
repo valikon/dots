@@ -29,6 +29,7 @@ alias py=python
 alias e=nvim
 alias weather=wttr
 alias lg=lazygit
+alias top=bpytop
 
 function psgrep                ; ps aux | rg $argv                                      ; end
 function reload                ; source ~/.config/fish/config.fish                      ; end # reload config
