@@ -26,6 +26,7 @@ set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 source ~/.config/fish/functions/my-functions.fish
 source ~/.config/fish/nmap_aliases.fish
 source ~/.config/fish/aliases.fish
+source ~/.config/fish/key_bindings.fish
 source ~/.current_assignment.fish
 
 set VIRTUAL_ENV_DISABLE_PROMPT "1"

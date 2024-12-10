@@ -1,0 +1,21 @@
+
+[[Snippets]]
+  Description = "Extract certificate private key from PFX file"
+  Filename = "/Users/spacemonkey/.config/pet/snippet.toml"
+  Output = ""
+  Tag = []
+  command = "openssl pkcs12 -in <pfx-file> -nocerts -out <privatekey=privatekey.pem> -nodes"
+
+[[Snippets]]
+  Description = "Extract PEM certificate file from PFX file."
+  Filename = "/Users/spacemonkey/.config/pet/snippet.toml"
+  Output = ""
+  Tag = []
+  command = "openssl pkcs12 -in <pfx-file> -clcerts -nokeys -out <certificate-file=certificate.pem>"
+
+[[Snippets]]
+  Description = "Extract CA certificates from PFX file."
+  Filename = "/Users/spacemonkey/.config/pet/snippet.toml"
+  Output = ""
+  Tag = []
+  command = "openssl pkcs12 -in <pfx-file> -cacerts -nokeys -out ca-certs.pem"
