@@ -13,6 +13,7 @@ set -gx PATH $HOME/scripts $PATH
 set -gx PATH ./bin $PATH
 set -gx PATH /opt/homebrew/opt/python@3.11/libexec/bin $PATH
 set -gx GOPATH $HOME/go
+set -gx GOROOT (brew --prefix go)/libexec
 
 ## System stuff
 set -gx PROJECT_PATHS $HOME/projects # pj variable
