@@ -4,7 +4,7 @@
 local opt, o, exists = vim.opt, vim.o, vim.fn.exists
 
 -- General --
-o.mouse              = ''    -- No mouse
+-- o.mouse              = ''    -- No mouse
 o.showmode           = false -- Don't write out `--INSERT--`, etc.
 o.linebreak          = true  -- Don't break lines in the middle of a word
 opt.shortmess:append('A')    -- Ignores swapfiles when opening file
