@@ -32,8 +32,10 @@ local plugins = {
   use 'lsp',
   use 'lsp-inlay-hints',
   use 'nvim-web-devicons',
-  use 'lualine',   -- TODO install and configure feline
-  use 'telescope', -- TODO do some more config, plain vanilla now
+  use 'lualine',    -- TODO install and configure feline
+  use 'telescope',  -- TODO do some more config, plain vanilla now
+  use 'typescript', -- TypeScript LSP client wrapper
+  use 'go',         -- gopls client
 
   'nvim-lua/plenary.nvim',
   'christoomey/vim-tmux-navigator',

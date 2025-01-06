@@ -7,138 +7,20 @@ return {
     'williamboman/mason.nvim',               -- For installing LSP servers
     'williamboman/mason-lspconfig.nvim',     -- Integration with nvim-lspconfig
     'b0o/schemastore.nvim',                  -- YAML/JSON schemas
-    'jose-elias-alvarez/typescript.nvim',    -- TypeScript utilities
-    'folke/neodev.nvim',                     -- Lua signature help and completion
     'davidosomething/format-ts-errors.nvim', -- Prettier TypeScript errors
     'hrsh7th/cmp-nvim-lsp',                  -- Improved LSP capabilities
     'lvimuser/lsp-inlayhints.nvim',          -- Inlay hints
     { 'nvim-telescope/telescope.nvim', dependencies = 'nvim-lua/plenary.nvim' },
   },
   event = { 'VeryLazy', 'BufWrite' },
-  opts = {
-    servers = { pyright = {} },
-  },
   config = function()
-    local api, lsp, diagnostic = vim.api, vim.lsp, vim.diagnostic
-    local lspconfig            = require('lspconfig')
-    local telescope            = require('telescope.builtin')
-    local mason_path           = require('mason-core.path')
-    local typescript           = require('typescript')
-    local get_install_path     = require('utils').get_install_path
+    local api, lsp = vim.api, vim.lsp
+    local lspconfig = require('lspconfig')
+    local telescope = require('telescope.builtin')
+    local mason_path = require('mason-core.path')
+    local get_install_path = require('utils').get_install_path
 
-    local map                  = function(modes, lhs, rhs, opts)
-      if type(opts) == 'string' then
-        opts = { desc = opts }
-      elseif not opts then
-        opts = {}
-      end
-      opts = vim.tbl_extend('keep', opts, { buffer = true })
-      return require('utils').map(modes, lhs, rhs, opts)
-    end
-
-    local function typescript_organize_imports()
-      local params = {
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-        title = "Organize imports",
-      }
-      vim.lsp.buf.execute_command(params)
-    end
-
-    -- TypeScript --
-    local tsserver_config = {
-      on_attach = function()
-        local actions = typescript.actions
-
-        local function spread(char)
-          return function()
-            require('utils').feedkeys('siw' .. char .. 'a...<Esc>2%i, ', 'm')
-          end
-        end
-
-        local function rename_file()
-          local workspace_path = lsp.buf.list_workspace_folders()[1]
-          local file_path = vim.fn.expand('%:' .. workspace_path .. ':.')
-          vim.ui.input({ prompt = 'Rename file', default = file_path },
-            function(target)
-              if target ~= nil then
-                typescript.renameFile(file_path, target)
-              end
-            end
-          )
-        end
-
-        map('n', '<leader>lo', '<cmd>TypescriptOrganizeAndFixImports<CR>', 'LSP Organize imports')
-        map('n', '<leader>li', actions.addMissingImports, 'LSP add missing imports')
-        map('n', '<leader>lf', actions.fixAll, 'LSP fix all errors')
-        map('n', '<leader>lu', actions.removeUnused, 'LSP remove unused')
-        map('n', '<leader>lr', rename_file, 'LSP rename file')
-        map('n', '<leader>lc', function() require('tsc').run() end, 'Type check project')
-        map('n', '<leader>ls', spread('{'), {
-          remap = true,
-          desc = 'Spread object under cursor',
-        })
-        map('n', '<leader>lS', spread('['), {
-          remap = true,
-          desc = 'Spread array under cursor',
-        })
-      end,
-      commands = {
-        TypescriptOrganizeAndFixImports = {
-          typescript_organize_imports,
-          description = "Organize imports",
-        },
-      },
-      settings = {
-        typescript = {
-          inlayHints = {
-            -- Enabled
-            includeInlayParameterNameHints = 'all',
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-            -- Disabled
-            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-            includeInlayFunctionParameterTypeHints = false,
-            includeInlayVariableTypeHints = false,
-            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-            includeInlayFunctionLikeReturnTypeHints = false,
-          },
-        },
-      },
-      handlers = {
-        ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
-          if result.diagnostics == nil then
-            return
-          end
-
-          -- Ignore some tsserver diagnostics
-          local idx = 1
-          -- TODO: change to using `map()` instead of `while`
-          while idx <= #result.diagnostics do
-            local entry = result.diagnostics[idx]
-
-            local formatter = require('format-ts-errors')[entry.code]
-            entry.message = formatter and formatter(entry.message) or entry.message
-
-            if entry.code == 80001 then
-              table.remove(result.diagnostics, idx)
-            else
-              idx = idx + 1
-            end
-          end
-
-          lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-        end,
-      },
-    }
-
-    -- Neovim Lua API completions/documentation
-    require('neodev').setup({
-      override = function(_, library)
-        library.enabled = true
-        library.plugins = true
-      end,
-    })
+    local map = require('utils').local_map(0)
 
     ---------------------------
     -- Server configurations --
@@ -146,53 +28,40 @@ return {
     local server_configs = {
       -- Lua --
       lua_ls = {
-        on_init = function(client)
-          local path = client.workspace_folders and client.workspace_folders[1].name
-          -- if not has_file(path, { '.luarc.json', '.luarc.jsonc' }) then
-          client.config.settings = vim.tbl_deep_extend(
-            'force',
-            client.config.settings,
-            {
-              Lua = {
-                completion = {
-                  callSnippet = 'Replace',
-                  autoRequire = true,
-                },
-                format = {
-                  enable = true,
-                  defaultConfig = {
-                    indent_style = 'space',
-                    indent_size = '2',
-                    max_line_length = '100',
-                    trailing_table_separator = 'smart',
-                  },
-                },
-                diagnostics = {
-                  globals = { 'vim', 'it', 'describe', 'before_each', 'are' },
-                },
-                hint = {
-                  enable = true,
-                  arrayIndex = 'Disable',
-                },
-                workspace = {
-                  checkThirdParty = false,
-                },
-                telemetry = {
-                  enable = false,
-                },
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
+              autoRequire = true,
+            },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = 'space',
+                indent_size = '2',
+                max_line_length = '100',
+                trailing_table_separator = 'smart',
               },
-            }
-          )
-
-          client.notify('workspace/didChangeConfiguration', {
-            settings = client.config.settings,
-          })
-          -- end
-          return true
-        end,
+            },
+            diagnostics = {
+              globals = { 'vim', 'it', 'describe', 'before_each', 'are' },
+            },
+            hint = {
+              enable = true,
+              arrayIndex = 'Disable',
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = { vim.env.VIMRUNTIME }, -- Fixes issue with `vim` global missing?
+            },
+            telemetry = {
+              enable = false,
+            },
+          }
+        },
         on_attach = function()
           map('n', '<leader>lt', '<Plug>PlenaryTestFile', "Run file's plenary tests")
-        end,
+        end
       },
       -- YAML --
       yamlls = {
@@ -200,16 +69,26 @@ return {
           yaml = {
             schemaStore = {
               url = 'https://www.schemastore.org/api/json/catalog.json',
-              enable = true,
+              enable = true
             },
             customTags = {
               -- AWS CloudFormation tags
               '!Equals sequence', '!FindInMap sequence', '!GetAtt', '!GetAZs',
               '!ImportValue', '!Join sequence', '!Ref', '!Select sequence',
-              '!Split sequence', '!Sub', '!Or sequence',
+              '!Split sequence', '!Sub', '!Or sequence'
             },
-          },
+          }
         },
+        -- Don't attach to Azure Pipeline files (azure_pipelines_ls does that)
+        on_attach = function(client, bufnr)
+          local path = vim.api.nvim_buf_get_name(bufnr)
+          local filename = vim.fn.fnamemodify(path, ':t')
+          local is_pipeline_file = #vim.fn.glob('azure-pipeline*.y*ml', true, filename) > 0
+
+          if is_pipeline_file then
+            lsp.stop_client(client)
+          end
+        end
       },
       -- Eslint --
       eslint = {
@@ -223,6 +102,13 @@ return {
       -- Bash/Zsh --
       bashls = {
         filetypes = { 'sh', 'zsh' },
+        settings = {
+          bashIde = {
+            shfmt = {
+              spaceRedirects = true, -- Allow space after `>` symbols
+            },
+          },
+        },
       },
       -- Json --
       jsonls = {
@@ -233,24 +119,22 @@ return {
           },
         },
       },
-      -- Python
-      pyright = {
-        settings = {
-          pyright = { autoImportCompletion = true },
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              diagnosticMode = 'openFilesOnly',
-              useLibraryCodeForTypes = true,
-              typeCheckingMode = 'off',
-            },
-          },
-        },
+      -- Bicep --
+      bicep = {
+        cmd = {
+          mason_path.concat({ get_install_path('bicep-lsp'), 'bicep-lsp' })
+        }
       },
+      tinymist = {
+        on_attach = function()
+          map('n', '<leader>lw', '<cmd>TypstWatch<CR>', 'Watch file')
+        end,
+      },
+      -- Typos --
       typos_lsp = {
         on_attach = function(client, _)
-          -- Disable for markdown, use ltex instead
-          local disabled_filetypes = vim.iter({ 'markdown', 'NvimTree' })
+          -- Disabled for Markdown, use LTeX instead
+          local disabled_filetypes = vim.iter({ 'markdown', 'NvimTree', 'help' })
           if disabled_filetypes:find(vim.bo.filetype) ~= nil then
             -- Force-shutdown seems to be necessary for some reason
             vim.lsp.stop_client(client.id, true)
@@ -258,6 +142,33 @@ return {
         end,
         init_options = {
           diagnosticSeverity = 'hint',
+          -- Fixes issue where config is ignored when opening a file with
+          -- Telescope from some other directory
+          config = vim.env.HOME .. '/.typos.toml',
+        }
+      },
+      -- Python --
+      pylsp = {
+        settings = {
+          pylsp = {
+            plugins = {
+              -- Disable formatting diagnostics (that's what formatters are for)
+              pylint = { enabled = false },
+              pycodestyle = { enabled = false },
+            }
+          }
+        },
+      },
+      -- Azure pipelines --
+      azure_pipelines_ls = {
+        root_dir = require('lspconfig.util').root_pattern('azure-pipeline*.y*ml'),
+        settings = {
+          yaml = {
+            schemas = {
+              ['https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json']
+              = 'azure-pipeline*.y*ml',
+            },
+          },
         },
       },
     }
@@ -266,15 +177,14 @@ return {
 
     -- Special server configurations
     local special_server_configs = {
-      tsserver = function()
-        return typescript.setup({ server = tsserver_config })
-      end,
-      zk = disable,            -- Disabled because zk-nvim already sets it up
-      rust_analyzer = disable, -- Set up in rustaceanvim
-      jdtls = disable,         -- Set up in in java.lua
+      ts_ls = disable,         -- Setup in typescript.lua
+      zk = disable,            -- Setup in zk.lua
+      rust_analyzer = disable, -- Setup in rustaceanvim.lua
+      jdtls = disable,         -- Setup in in java.lua
+      ltex = disable,          -- Setup in ltex.lua
+      gopls = disable,         -- Setup in go.lua
+      elixirls = disable,      -- Setup in elixir.lua
     }
-
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
     --------------------
     -- Set up servers --
@@ -287,10 +197,9 @@ return {
       end
 
       local opts = server_configs[server_name] or {}
-      local opts_with_capabilities = vim.tbl_deep_extend('force', opts, {
-        capabilities = capabilities,
-      })
-      lspconfig[server_name].setup(opts_with_capabilities)
+      opts.capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      lspconfig[server_name].setup(opts)
     end
 
     -- Ensure that servers mentioned above get installed
@@ -301,11 +210,7 @@ return {
 
     require('mason-lspconfig').setup({
       handlers = { setup },
-      ensure_installed = vim.list_extend(ensure_installed, {
-        'vimls',
-        'lemminx',
-        'pyright',
-      }),
+      ensure_installed = ensure_installed
     })
 
     ---------------------
@@ -315,7 +220,12 @@ return {
       -- Add borders to hover/signature windows (noice.nvim has its own)
       lsp.handlers['textDocument/hover'] = lsp.with(
         lsp.handlers.hover,
-        { border = 'single' }
+        {
+          border = 'single',
+          -- Disable "no information available" popup which is really annoying
+          -- when using multiple servers
+          silent = true,
+        }
       )
 
       lsp.handlers['textDocument/signatureHelp'] = lsp.with(
@@ -327,32 +237,32 @@ return {
     -------------
     -- Keymaps --
     -------------
-    local ERROR = diagnostic.severity.ERROR
-    local INFO = diagnostic.severity.INFO
-
-    local error_opts = { severity = { min = ERROR }, float = { border = 'single' } }
-    local info_opts = { severity = { max = INFO }, float = { border = 'single' } }
-    local with_border = { float = { border = 'single' } }
-
-    local function diagnostic_goto(direction, opts)
-      return function()
-        diagnostic['goto_' .. direction](opts)
-      end
-    end
-
     local function lsp_references()
       require('utils').clear_lsp_references()
-      lsp.buf.document_highlight()
+
+      local method = 'textDocument/documentHighlight'
+      if #vim.lsp.get_clients({ method = method }) > 0 then
+        lsp.buf.document_highlight()
+      end
+
       telescope.lsp_references({ include_declaration = false })
     end
 
     local function attach_codelens(bufnr)
-      api.nvim_create_augroup('Lsp', {})
-      api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-        group = 'Lsp',
+      local augroup = api.nvim_create_augroup('Lsp', {})
+      api.nvim_create_autocmd({ 'BufReadPost', 'CursorHold', 'InsertLeave' }, {
+        group = augroup,
         buffer = bufnr,
-        callback = lsp.codelens.refresh,
+        callback = function()
+          lsp.codelens.refresh({ bufnr = bufnr })
+        end,
       })
+    end
+
+    local function map_vsplit(lhs, fn, description)
+      vim.keymap.set('n', lhs, function()
+        require('telescope.builtin')[fn]({ jump_type = 'vsplit' })
+      end, { desc = description })
     end
 
     local function attach_keymaps()
@@ -372,23 +282,13 @@ return {
       map(nx, '<leader>r', lsp.buf.rename, 'LSP rename')
       map(nx, '<leader>A', lsp.codelens.run, 'LSP code lens')
 
-      map(nx, ']e', diagnostic_goto('next', error_opts), 'Go to next error')
-      map(nx, '[e', diagnostic_goto('prev', error_opts), 'Go to previous error')
-      map(nx, '[h', diagnostic_goto('prev', info_opts), 'Go to previous info')
-      map(nx, ']h', diagnostic_goto('next', info_opts), 'Go to next info')
-      map(nx, ']d', diagnostic_goto('next', with_border), 'Go to next diagnostic')
-      map(nx, '[d', diagnostic_goto('prev', with_border), 'Go to previous diagnostic')
-      map('n', '<leader>e', function() diagnostic.open_float({ border = 'single' }) end,
-        'Diagnostic open float')
+      map('n', '<leader>e', function() vim.diagnostic.open_float({ border = 'single' }) end, 'Diagnostic open float')
 
-      map('n', '<C-w>gd', '<C-w>vgd', { desc = 'LSP definition in window split', remap = true })
-      map('n', '<C-w>gi', '<C-w>vgi', { desc = 'LSP implementation in window split', remap = true })
-      map('n', '<C-w>gD', '<C-w>vgD', { desc = 'LSP type definition in window split', remap = true })
+      map_vsplit('<C-w>gd', 'lsp_definitions')
+      map_vsplit('<C-w>gi', 'lsp_implementations')
+      map_vsplit('<C-w>gD', 'lsp_type_definitions')
 
-      map('n', '<leader>ls', '<cmd>LspStart<CR>', { desc = 'Start LSP server' })
       map('n', '<leader>lq', '<cmd>LspStop<CR>', { desc = 'Stop LSP server' })
-
-      -- print('keymaps attached')
     end
 
     -- File types to not format on write
@@ -429,7 +329,20 @@ return {
 
           map('n', '<leader>lh', inlay_hints.toggle, 'Toggle LSP inlay hints')
         end
-      end,
+
+        -- This has to be called from LspAttach event for some reason, not sure why
+        -- vim.diagnostic.config({
+        --   signs = false,
+        --   virtual_text = {
+        --     spacing = 4,
+        --     prefix = function(diagnostic, _, _)
+        --       local icon = require('configs.diagnostics').get_icon(diagnostic.severity)
+        --       return ' ' .. icon
+        --     end,
+        --   }
+        -- })
+      end
     })
-  end,
+  end
 }
+
