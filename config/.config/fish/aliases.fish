@@ -26,7 +26,8 @@ alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
 alias i=pac-install
 alias py=python
-alias e=nvim
+alias n=nvim
+alias nb='nvim -u ~/.config/nvim-bare/init.lua'
 alias weather=wttr
 alias lg=lazygit
 alias top=bpytop
@@ -64,6 +65,7 @@ alias kubectl=kubecolor
 alias k=kubectl
 alias keti='k exec -ti'
 alias kg='k get'
+alias kga='k get all'
 alias kl='k logs'
 alias kd='k describe'
 alias kdel='k delete'
@@ -98,6 +100,9 @@ alias kgswide='kgs -o wide'
 alias kdsa='kd sa' # describe a service account in details
 
 alias kns='kubens'
+
+# minikube
+alias mk='minikube'
 
 ################################
 ###  GIT
