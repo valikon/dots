@@ -1,21 +1,21 @@
 local M = {}
 
 function M.map(modes, lhs, rhs, opts)
-  if type(opts) == 'string' then
-    opts = { desc = opts }
-  end
-  local options = vim.tbl_extend('keep', opts or {}, { silent = true })
+  -- if type(opts) == 'string' then
+  --   opts = { desc = opts }
+  -- end
+  -- local options = vim.tbl_extend('keep', opts or {}, { silent = true })
   vim.keymap.set(modes, lhs, rhs, options)
 end
 
-function M.local_map(buffer)
-  return function(modes, lhs, rhs, opts)
-    if type(opts) == 'string' then
-      opts = { desc = opts, buffer = buffer }
-    end
-    local options = vim.tbl_extend('keep', opts or {}, { silent = true })
-
-    vim.keymap.set(modes, lhs, rhs, options)
+--- Import plugin config from external module in `lua/configs/`
+function M.use(module)
+  local ok, m = pcall(require, string.format('configs.%s', module))
+  if ok then
+    return m
+  else
+    vim.notify(string.format('Failed to import Lazy config module %s: %s', module, m))
+    return {}
   end
 end
 

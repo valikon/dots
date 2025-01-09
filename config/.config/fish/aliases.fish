@@ -26,12 +26,12 @@ alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
 alias i=pac-install
 alias py=python
-alias e=nvim
-alias eb='nvim -u ~/.config/nvim-bare/init.lua'
 alias weather=wttr
 alias lg=lazygit
 alias top=bpytop
 
+function e ; set -gx NVIM_APPNAME nvim; nvim $argv ; end
+function eb ; set -gx NVIM_APPNAME nvim-bare; nvim -u ~/.config/nvim-bare/init.lua $argv ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
 function reload                ; source ~/.config/fish/config.fish                      ; end # reload config
 function sconf                 ; bat ~/.config/fish/aliases.fish | rg $argv             ; end # search aliases.config
@@ -121,7 +121,7 @@ function gco -w "git checkout" -d "Git - checkout"                             ;
 function gcm -d "Git - checkout main"                                          ; git checkout main           ; end
 function gcmsg -w "git commit -m" -d "Git - commit with message"               ; g commit -m            $argv; end
 function gcp -w "git cherry-pick" -d "Git - cherrypick"                        ; git cherry-pick        $argv; end
-function gd -w "batdiff" -d "Git - diff"                                       ; batdiff --color --delta $argv; end
+function gd -w "batdiff" -d "Git - diff"                                       ; git diff               $argv; end
 function gds -w "git diff --staged" -d "Git - diff staged"                     ; git diff --staged      $argv; end
 function gl -w "git pull" -d "Git - pull"                                      ; git pull               $argv; end
 function gls -w "git ls-files" -d "Git - list files"                           ; git ls-files           $argv; end
