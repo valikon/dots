@@ -1,7 +1,7 @@
 -------------
 -- Options --
 -------------
-local opt, o, exists = vim.opt, vim.o, vim.fn.exists
+local opt, o = vim.opt, vim.o
 
 -- General --
 -- o.mouse              = ''    -- No mouse

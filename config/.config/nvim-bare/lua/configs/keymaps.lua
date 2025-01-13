@@ -13,15 +13,34 @@ map('n', '<S-Space>', '<Space>')
 map('i', 'kk', "<ESC>")
 map('i', 'jj', "<ESC>")
 map('i', 'jk', "<ESC>")
-map('i', "<C-E>", "<ESC>A")          -- mimic shell movements
-map('i', "<C-A>", "<ESC>I")          -- mimic shell movements
+map('i', "<C-E>", "<ESC>A") -- mimic shell movements
+map('i', "<C-A>", "<ESC>I") -- mimic shell movements
 
-map("n", "<leader><leader>x", "<cmd>source %<CR>")  -- source current file
-map("n", "<leader>x", ":.lua<CR>")                  -- execute lua code on the line
-map("v", "<leader>x", ":lua<CR>")                   -- execute selected lua code
+-- lua dev
+map("n", "<leader><leader>x", "<cmd>source %<CR>") -- source current file
+map("n", "<leader>x", ":.lua<CR>")                 -- execute lua code on the line
+map("v", "<leader>x", ":lua<CR>")                  -- execute selected lua code
 
+-- quality of life stuff
 map('n', "<leader>w", "<ESC>:w<CR>") -- write buffer
 map('n', "<leader>nh", ":nohl<CR>")  -- clear search highlight
 map('n', "x", '"_x')                 -- delete char without clipping
 
--- map('n', "<leader>ff", ":Telescope find_files<CR>")
+-- Files & Directories
+map('n', '-', '<cmd>Oil<CR>') -- open file/directory editor
+
+-- quickfix lists
+map('n', '<C-M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
+map('n', '<C-M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
+
+-- code
+map('n', 'gr', vim.lsp.buf.references)
+map('n', 'gd', vim.lsp.buf.definition)
+
+--terminal
+map('n', '<leader>st', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 10)
+end)

@@ -19,6 +19,15 @@ function M.use(module)
   end
 end
 
+function M.termcodes(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+function M.feedkeys(keys, mode)
+  if mode == nil then mode = 'in' end
+  return vim.api.nvim_feedkeys(M.termcodes(keys), mode, true)
+end
+
 function M.error(message)
   vim.api.nvim_echo({ { message, 'Error' } }, false, {})
 end
