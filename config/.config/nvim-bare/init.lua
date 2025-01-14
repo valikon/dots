@@ -9,14 +9,15 @@ require('utils.lazy')
 
 local plugins = {
   'folke/lazy.nvim',
-  use 'tokyonight',
-  use 'comment',
-  use 'mini',
-  use 'treesitter',
-  use 'lsp',
-  use 'oil',
-  use 'telescope',
   use 'blink',
+  use 'comment',
+  use 'lsp',
+  use 'mini',
+  use 'oil',
+  use 'gitsigns',
+  use 'telescope',
+  use 'tokyonight',
+  use 'treesitter',
   { 'folke/which-key.nvim', opts = {} },
 }
 

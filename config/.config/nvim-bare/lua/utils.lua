@@ -1,10 +1,10 @@
 local M = {}
 
 function M.map(modes, lhs, rhs, opts)
-  -- if type(opts) == 'string' then
-  --   opts = { desc = opts }
-  -- end
-  -- local options = vim.tbl_extend('keep', opts or {}, { silent = true })
+  if type(opts) == 'string' then
+    opts = { desc = opts }
+  end
+  local options = vim.tbl_extend('keep', opts or {}, { silent = true })
   vim.keymap.set(modes, lhs, rhs, options)
 end
 
