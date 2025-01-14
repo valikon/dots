@@ -30,14 +30,15 @@ map('n', "x", '"_x')                 -- delete char without clipping
 map('n', '-', '<cmd>Oil<CR>') -- open file/directory editor
 
 -- quickfix lists
-map('n', '<C-M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
-map('n', '<C-M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
+map('n', '<M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
+map('n', '<M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
 
 -- code
 map('n', 'gr', vim.lsp.buf.references)
 map('n', 'gd', vim.lsp.buf.definition)
 
 --terminal
+map('t', '<esc><esc>', '<c-\\><c-n>')
 map('n', '<leader>st', function()
   vim.cmd.vnew()
   vim.cmd.term()
