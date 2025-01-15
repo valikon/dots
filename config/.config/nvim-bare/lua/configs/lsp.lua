@@ -72,8 +72,6 @@ return {
       map({ 'i', 's' }, '<M-s>', lsp.buf.signature_help, 'LSP signature help')
       map(nx, '<leader>r', lsp.buf.rename, 'LSP rename')
 
-      map('n', '<leader>e', function() vim.diagnostic.open_float({ border = 'single' }) end, 'Diagnostic open float')
-
       map_vsplit('<C-w>gd', 'lsp_definitions')
       map_vsplit('<C-w>gi', 'lsp_implementations')
       map_vsplit('<C-w>gD', 'lsp_type_definitions')
@@ -101,18 +99,6 @@ return {
 
           require("lsp-inlayhints").on_attach(client, args.buf, false)
           map('n', '<leader>lh', inlay_hints.toggle, 'Toggle LSP inlay hints')
-        end
-
-        -- Format buffer on write
-        if client.supports_method('textDocument/formatting') then
-          -- Format the CURRENT buffer on save
-          api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
-            callback = function()
-              -- 4 + 5
-              vim.lsp.buf.format { async = false, id = args.data.client_id }
-            end,
-          })
         end
       end
     })
