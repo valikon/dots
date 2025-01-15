@@ -30,8 +30,7 @@ alias weather=wttr
 alias lg=lazygit
 alias top=bpytop
 
-function e ; set -gx NVIM_APPNAME nvim; nvim $argv ; end
-function eb ; set -gx NVIM_APPNAME nvim-bare; nvim -u ~/.config/nvim-bare/init.lua $argv ; end
+function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
 function reload                ; source ~/.config/fish/config.fish                      ; end # reload config
 function sconf                 ; bat ~/.config/fish/aliases.fish | rg $argv             ; end # search aliases.config
