@@ -14,6 +14,7 @@ local plugins = {
   use 'comment',
   use 'gitsigns',
   use 'lsp',
+  use 'lsp-inlayhints',
   use 'mini',
   use 'oil',
   use 'telescope',

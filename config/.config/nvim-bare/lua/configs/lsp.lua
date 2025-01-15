@@ -6,6 +6,7 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     'saghen/blink.cmp',
+    'lvimuser/lsp-inlayhints.nvim',
     {
       "folke/lazydev.nvim",
       ft = "lua",
