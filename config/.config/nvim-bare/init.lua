@@ -12,21 +12,19 @@ local plugins = {
   use 'barbar',
   use 'blink',
   use 'comment',
+  use 'conform',
   use 'gitsigns',
   use 'lsp',
   use 'lsp-inlayhints',
+  -- use 'mason',
   use 'mini',
+  use 'noice',
+  -- use 'nvim-surround',
   use 'oil',
   use 'telescope',
   use 'tokyonight',
   use 'treesitter',
-  use 'noice',
-  use 'conform',
-  -- use 'none-ls',
-  -- use 'nvim-surround',
-  -- use 'typescript',
-
-
+  use 'typescript',
   { 'folke/which-key.nvim', opts = {} },
 }
 

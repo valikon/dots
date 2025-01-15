@@ -20,7 +20,7 @@ return {
         javascriptreact = javascript,
       }
     })
-    vim.keymap.set('n', '<leader>lf', function()
+    vim.keymap.set('n', '<leader>lF', function()
       b.format_on_write = (not b.format_on_write and b.format_on_write ~= nil)
       local state = b.format_on_write and 'enabled' or 'disabled'
       vim.notify('Format on write ' .. state)
