@@ -34,10 +34,6 @@ map('n', '<leader>a', 'ggVG', "Select all")
 map('n', '<M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
 map('n', '<M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
 
--- code
-map('n', 'gr', vim.lsp.buf.references)
-map('n', 'gd', vim.lsp.buf.definition)
-
 --terminal
 map('t', '<esc><esc>', '<c-\\><c-n>')
 map('n', '<leader>st', function()
