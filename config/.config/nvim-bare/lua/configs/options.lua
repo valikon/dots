@@ -5,8 +5,8 @@ local opt, o = vim.opt, vim.o
 
 -- General --
 -- o.mouse              = ''    -- No mouse
-o.showmode           = false -- Don't write out `--INSERT--`, etc.
-o.linebreak          = true  -- Don't break lines in the middle of a word
+o.showmode   = false         -- Don't write out `--INSERT--`, etc.
+o.linebreak  = true          -- Don't break lines in the middle of a word
 opt.shortmess:append('A')    -- Ignores swapfiles when opening file
 opt.shortmess:append('s')    -- Disable 'Search hit BOTTOM, continuing at TOP'
 opt.shortmess:append('cS')   -- Disable "[1/5]", "Pattern not found", etc.
@@ -75,12 +75,3 @@ opt.fillchars = {
   diff = ' ', -- Cleaner deleted lines in diff
   eob = ' ',  -- Don't show `~` at end of buffer
 }
-
--- Highlight on yank
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
