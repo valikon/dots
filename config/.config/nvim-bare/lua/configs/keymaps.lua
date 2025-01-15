@@ -17,17 +17,18 @@ map('i', "<C-E>", "<ESC>A") -- mimic shell movements
 map('i', "<C-A>", "<ESC>I") -- mimic shell movements
 
 -- lua dev
-map("n", "<leader><leader>x", "<cmd>source %<CR>") -- source current file
-map("n", "<leader>x", ":.lua<CR>")                 -- execute lua code on the line
-map("v", "<leader>x", ":lua<CR>")                  -- execute selected lua code
+map("n", "<leader><leader>x", "<cmd>source %<CR>", "Source current file")
+map("n", "<leader>x", ":.lua<CR>", "Execute lua")
+map("v", "<leader>x", ":lua<CR>", "Execute lua")
 
 -- quality of life stuff
-map('n', "<leader>w", "<ESC>:w<CR>") -- write buffer
-map('n', "<leader>nh", ":nohl<CR>")  -- clear search highlight
-map('n', "x", '"_x')                 -- delete char without clipping
+map('n', "<leader>w", "<ESC>:w<CR>", "Write buffer")
+map('n', "<leader>nh", ":nohl<CR>", "Reset highlight")
+map('n', "x", '"_x') -- delete char without clipping
 
 -- Files & Directories
-map('n', '-', '<cmd>Oil<CR>') -- open file/directory editor
+map('n', '-', '<cmd>Oil<CR>', "Edit directory") -- open file/directory editor
+map('n', '<leader>a', 'ggVG', "Select all")
 
 -- quickfix lists
 map('n', '<M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
@@ -44,4 +45,4 @@ map('n', '<leader>st', function()
   vim.cmd.term()
   vim.cmd.wincmd("J")
   vim.api.nvim_win_set_height(0, 10)
-end)
+end, "Simple terminal")

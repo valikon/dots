@@ -9,12 +9,13 @@ require('utils.lazy')
 
 local plugins = {
   'folke/lazy.nvim',
+  use 'barbar',
   use 'blink',
   use 'comment',
+  use 'gitsigns',
   use 'lsp',
   use 'mini',
   use 'oil',
-  use 'gitsigns',
   use 'telescope',
   use 'tokyonight',
   use 'treesitter',
