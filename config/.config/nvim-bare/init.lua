@@ -20,6 +20,14 @@ local plugins = {
   use 'telescope',
   use 'tokyonight',
   use 'treesitter',
+  use 'noice',
+  -- use 'go',
+  -- use 'mason',
+  -- use 'none-ls',
+  -- use 'nvim-surround',
+  -- use 'typescript',
+
+
   { 'folke/which-key.nvim', opts = {} },
 }
 
