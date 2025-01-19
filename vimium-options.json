@@ -10,6 +10,30 @@
     },
     {
       "passKeys": "",
+      "pattern": "https://en.key-test.ru/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https://config.qmk.fm/*"
+    },
+    {
+      "passKeys": "?",
+      "pattern": "https://explore.skillbuilder.aws/"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https://*.squarespace.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.edclub.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.typelit.io/*"
+    },
+    {
+      "passKeys": "",
       "pattern": "https?://timestripe.com/*"
     },
     {
