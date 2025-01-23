@@ -4,9 +4,16 @@
 
 return {
   'echasnovski/mini.nvim',
-  -- enabled = false,
+  version = '*',
   config = function()
     local statusline = require 'mini.statusline'
     statusline.setup { use_icons = true }
+
+    -- extend and create a/i textobjects
+    local ai = require 'mini.ai'
+    ai.setup { silent = true }
+
+    local surround = require 'mini.surround'
+    surround.setup { silent = true }
   end
 }
