@@ -13,7 +13,7 @@ return {
   opts = {
     keymap = {
       preset = 'default',
-      cmdline = { preset = 'enter' },
+      -- cmdline = { preset = 'enter' },
     },
 
     appearance = {

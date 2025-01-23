@@ -16,6 +16,10 @@ map('i', 'jj', "<ESC>")
 map('i', 'jk', "<ESC>")
 map('i', "<C-E>", "<ESC>A") -- mimic shell movements
 map('i', "<C-A>", "<ESC>I") -- mimic shell movements
+map('i', "<C-j>", "<ESC>ja")
+map('i', "<C-k>", "<ESC>ka")
+map('i', "<C-l>", "<ESC>la")
+map('s', '<C-h>', '<BS>i')
 
 -- dev
 map("n", "<leader><leader>x", "<cmd>source %<CR>", "Source current file")
@@ -41,7 +45,6 @@ map('n', '<leader>i', ':source ~/.config/nvim/init.lua<CR>')
 map('n', '<leader>I', ':edit   ~/.config/nvim/init.lua<CR>')
 map('n', '<leader>F', ':edit   ~/.config/fish<CR>')
 map('s', '<BS>', '<BS>i') -- By default <BS> puts you in normal mode
-map('s', '<C-h>', '<BS>i')
 map({ 'n', 'i', 'v', 's', 'o', 't' }, '<C-m>', '<CR>', { remap = true })
 map({ 'i', 'c' }, '<C-i>', '<Tab>', { remap = true })
 map('n', 'g<C-a>', 'v<C-a>', 'Increment number under cursor')

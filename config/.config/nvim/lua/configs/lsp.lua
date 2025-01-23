@@ -20,6 +20,7 @@ return {
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     require("lspconfig").lua_ls.setup { capabilities = capabilities }
+    require('lspconfig').terraformls.setup { capabilities = capabilities }
 
     local telescope = require('telescope.builtin')
     local api, lsp = vim.api, vim.lsp
