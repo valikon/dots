@@ -115,6 +115,7 @@ function gba -d "Git - show all branches"                                      ;
 function gbd -w "git branch -D" -d "Git - delete branch"                       ; git branch -D          $argv; end
 function gc -w "git commit" -d "Git - commit"                                  ; git commit             $argv; end
 function gcl -w "git clone" -d "Git - clone"                                   ; git clone              $argv; end
+function gclean -d "Git - clean up merged branches"                            ; git-clean-branches          ; end
 function gcb -w "git checkout -b" -d "Git - checkout branch "                  ; git checkout -b        $argv; end
 function gco -w "git checkout" -d "Git - checkout"                             ; git checkout           $argv; end
 function gcm -d "Git - checkout main"                                          ; git checkout main           ; end
@@ -127,6 +128,7 @@ function gls -w "git ls-files" -d "Git - list files"                           ;
 function glg -d "Git - grep from listed files"                                 ; git ls-files | rg      $argv; end
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
 function gp -w "git push" -d "Git - push"                                      ; git push               $argv; end
+function gprune -d "Prune remote-tracking branches no longer on remote"        ; g fetch --prune        $argv; end
 function grb -w "git rebase" -d "Git - rebase"                                 ; git rebase             $argv; end
 function grbc -w "git rebase --continue" -d "Git - continue rebase"            ; git rebase --continue  $argv; end
 function gr -w "git restore" -d "Git - restore"                                ; git restore            $argv; end

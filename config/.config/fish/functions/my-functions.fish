@@ -48,6 +48,56 @@ function copy -d "Copy directories"
     end
 end
 
+## -- Development -- ##
+function git-delete-merged-branches -d "Git - delete merged branches"
+    set primary (git branch --list 'master' 'main' | string match -r '^\*?\s*(master|main)$' | string replace -r '^\* ' '' | string trim | head -n1)
+
+    if test -n "$primary"
+      set merged_branches (git branch --merged=$primary | grep -v $primary | string trim)
+      if test -n "$merged_branches"
+        git branch --merged=$primary | grep -v $primary | xargs git branch -d
+        echo "Deleted merged branches."
+      else
+        echo "No merged branches found to delete."
+      end
+    end
+end
+
+function git-delete-gone-branches -d "Git - delete [gone] branches"
+    set gone_branches (git branch -v | string match -r '.*\[gone\].*' | string replace -r '^\s*(\S+).*$' '$1')
+
+    if test -n "$gone_branches"
+        echo "Found the following [gone] branches:"
+        printf "%s\n" $gone_branches
+
+        echo -e "\nDo you want to delete these branches? [y/N]"
+        read -l confirm
+
+        if test "$confirm" = "y" -o "$confirm" = "Y"
+            for branch in $gone_branches
+                echo "Deleting branch: $branch"
+                # Use -d for safe delete (only merged branches)
+                # Use -D for force delete (regardless of merge status)
+                git branch -D $branch
+            end
+        else
+            echo "Operation cancelled"
+            return 1
+        end
+    else
+        echo "No [gone] branches found"
+        return 0
+    end
+end
+
+function git-clean-branches -d "Git - clean up branches"
+  git-delete-merged-branches
+  git-delete-gone-branches
+ 
+  git fetch --prune
+  echo "Pruned remote branches"
+end
+
 ## -- Network -- ##
 function localip -d "Get my local ip"
     ip -json route get 8.8.8.8 | jq -r '.[].prefsrc'
