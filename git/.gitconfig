@@ -1,8 +1,8 @@
 [include]
   path = ~/themes.gitconfig
-[user]
-  email = valentin@nemirovsky.se
-  name = Valentin Nemirovsky
+  path = ~/.gitconfig.personal
+[includeIf "gitdir:**/work/**/.git"]
+  path = ~/projects/work/.gitconfig
 [core]
   excludesfile = /Users/spacemonkey/.gitignore
   editor = nvim
@@ -19,7 +19,5 @@
   features = calochortus-lyallii
 [fetch]
 	prune = true
-[merge]
-    tool = meld
 [init]
-    defaultBranch = master
+  defaultBranch = main
