@@ -123,7 +123,7 @@ function gcmsg -w "git commit -m" -d "Git - commit with message"               ;
 function gcp -w "git cherry-pick" -d "Git - cherrypick"                        ; git cherry-pick        $argv; end
 function gd -w "batdiff" -d "Git - diff"                                       ; git diff               $argv; end
 function gds -w "git diff --staged" -d "Git - diff staged"                     ; git diff --staged      $argv; end
-function gl -w "git pull" -d "Git - pull"                                      ; git pull               $argv; end
+function gl -w "git pull" -d "Git - pull"                                      ; git pull --rebase      $argv; end
 function gls -w "git ls-files" -d "Git - list files"                           ; git ls-files           $argv; end
 function glg -d "Git - grep from listed files"                                 ; git ls-files | rg      $argv; end
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
@@ -217,7 +217,7 @@ function rgb -w "batgrep" ; batgrep -i --color --hidden $argv; end
 ################################
 ###  OTHER
 ################################
-alias ip="ip -color"
+# alias ip="ip -color"
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias tarnow='tar -Acf '

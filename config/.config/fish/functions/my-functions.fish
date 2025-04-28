@@ -104,7 +104,8 @@ function localip -d "Get my local ip"
 end
 
 function myip -d "Check my external IP"
-    echo (curl -s checkip.dyndns.org | awk '{print $6}' | cut -d '<' -f1)
+    curl ifconfig.me
+    # echo (curl -s checkip.dyndns.org | awk '{print $6}' | cut -d '<' -f1)
 end
 
 ## -- Package management -- ##
