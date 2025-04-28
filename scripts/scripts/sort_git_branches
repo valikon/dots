@@ -1,0 +1,25 @@
+#!/usr/bin/env fish
+
+# Get all branches (local and remote)
+set branches (git branch --all --format='%(refname:short)')
+
+# Initialize an empty list to store branch-date pairs
+set branch_dates ""
+
+for branch in $branches
+  # Get the latest commit date for the branch
+  set latest_date (git log -1 --format='%ci' $branch 2>/dev/null)
+
+  # Add the branch and its date to the list (newline-separated)
+  if test -n "$latest_date"
+    set branch_dates "$branch_dates\n$latest_date $branch"
+  end
+end
+
+# Sort the branch-date pairs by date
+set sorted_branches (echo -e $branch_dates | sort)
+
+# Print the sorted branches, one per line
+for entry in $sorted_branches
+  echo "$entry"
+end
