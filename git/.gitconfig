@@ -1,9 +1,7 @@
 [include]
   path = ~/themes.gitconfig
   path = ~/.gitconfig.personal
-[includeIf "gitdir:**/work/**/.git"]
-  path = ~/work/.gitconfig.work
-[includeIf "gitdir:**/work/**/**/.git"]
+[includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig.work
 [core]
   excludesfile = /Users/spacemonkey/.gitignore
