@@ -22,8 +22,7 @@ if test -d ~/.local/bin
 end
 
 ## SSH
-ssh-add ~/.ssh/github_id
-ssh-add ~/.ssh/gitlab_id
+ssh-add -q ~/.ssh/github_id ~/.ssh/gitlab_id
 
 ## System stuff
 set -gx EDITOR nvim
