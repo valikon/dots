@@ -47,6 +47,7 @@ function screen3 -d "Screen - Office screen"          ; bash ~/.screenlayout/my-
 ################################
 ### Cloud
 ################################
+alias assume="source (brew --prefix)/bin/assume.fish"
 alias tf=terraform
 alias tg=terragrunt
 function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
