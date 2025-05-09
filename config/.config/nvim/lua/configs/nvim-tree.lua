@@ -14,8 +14,8 @@ return {
   dependencies = 'nvim-tree/nvim-web-devicons',
   lazy = vim.fn.argc() == 0,
   keys = {
-    { '<leader>`', toggle,    mode = 'n', desc = 'Toggle file tree' },
-    { '<leader>~', find_file, mode = 'n', desc = 'Show current file in file tree', },
+    { '<leader><leader>', toggle,    mode = 'n', desc = 'Toggle file tree' },
+    { '<leader>ft',       find_file, mode = 'n', desc = 'Show current file in file tree', },
   },
   config = function()
     local nvim_tree, api = require('nvim-tree'), require('nvim-tree.api')

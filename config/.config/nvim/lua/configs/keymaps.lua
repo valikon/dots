@@ -87,8 +87,6 @@ end, { silent = true, desc = "Dismiss all notifications on screen" })
 
 
 -- Files & Directories
-map('n', '<leader><leader>', '<cmd>NvimTreeToggle<CR>', 'NvimTree')
-map('n', '<leader>ft', '<cmd>NvimTreeFocus<CR>', 'Focus Nvim Tree')
 map('n', '-', '<cmd>Oil<CR>', "Edit directory") -- open file/directory editor
 
 -- quickfix lists
