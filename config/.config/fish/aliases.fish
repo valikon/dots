@@ -251,4 +251,4 @@ alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/p
 alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
-function update -d "Upgade pacman and AUR packages"; sudo aura -Syu --noconfirm; and sudo aura -Au --noconfirm; end
+# function update -d "Upgade pacman and AUR packages"; sudo aura -Syu --noconfirm; and sudo aura -Au --noconfirm; end

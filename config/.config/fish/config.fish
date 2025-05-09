@@ -4,6 +4,7 @@
 
 ## Path
 set -gx PATH /opt/homebrew/bin $PATH
+set -gx PATH (brew --prefix rustup)/bin $PATH
 set -gx PATH $HOME/.cargo/bin/ $PATH
 set -gx PATH $HOME/.npm-global/bin/ $PATH
 set -gx PATH $HOME/.ghcup/bin/ $PATH
