@@ -6,7 +6,6 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     'saghen/blink.cmp',
-    'lvimuser/lsp-inlayhints.nvim',
     {
       "folke/lazydev.nvim",
       ft = "lua",
@@ -95,12 +94,11 @@ return {
         attach_keymaps()
 
         -- Inlay hints
-        if args.data and client then
-          local inlay_hints = require('lsp-inlayhints')
+        lsp.inlay_hint.enable()
 
-          require("lsp-inlayhints").on_attach(client, args.buf, false)
-          map('n', '<leader>lh', inlay_hints.toggle, 'Toggle LSP inlay hints')
-        end
+        map('n', '<leader>lh', function()
+          lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled())
+        end, 'Toggle LSP inlay hints')
       end
     })
   end

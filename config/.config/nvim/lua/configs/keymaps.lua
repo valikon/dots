@@ -22,7 +22,7 @@ map('i', "<C-l>", "<ESC>la")
 map('s', '<C-h>', '<BS>i')
 
 -- dev
-map("n", "<leader><leader>x", "<cmd>source %<CR>", "Source current file")
+map("n", "<leader>X", "<cmd>source %<CR>", "Source current file")
 map("n", "<leader>x", ":.lua<CR>", "Execute lua")
 map("v", "<leader>x", ":lua<CR>", "Execute lua")
 
@@ -87,6 +87,8 @@ end, { silent = true, desc = "Dismiss all notifications on screen" })
 
 
 -- Files & Directories
+map('n', '<leader><leader>', '<cmd>NvimTreeToggle<CR>', 'NvimTree')
+map('n', '<leader>ft', '<cmd>NvimTreeFocus<CR>', 'Focus Nvim Tree')
 map('n', '-', '<cmd>Oil<CR>', "Edit directory") -- open file/directory editor
 
 -- quickfix lists
