@@ -21,6 +21,10 @@ if test -d ~/.local/bin
     end
 end
 
+## SSH
+ssh-add ~/.ssh/github_id
+ssh-add ~/.ssh/gitlab_id
+
 ## System stuff
 set -gx EDITOR nvim
 set -gx KUBE_EDITOR nvim
