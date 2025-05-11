@@ -6,25 +6,173 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = {
     'saghen/blink.cmp',
-    {
-      "folke/lazydev.nvim",
-      ft = "lua",
-      opts = {
-        library = {
-          { path = "${3rd}/lub/library", words = { "vim%.uv" } },
-        },
-      },
-    }
+    'williamboman/mason.nvim',           -- For installing LSP servers
+    'williamboman/mason-lspconfig.nvim', -- Integration with nvim-lspconfig
+    'b0o/schemastore.nvim',              -- YAML/JSON schemas
   },
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
     require("lspconfig").lua_ls.setup { capabilities = capabilities }
     require('lspconfig').terraformls.setup { capabilities = capabilities }
 
-    local telescope = require('telescope.builtin')
     local api, lsp = vim.api, vim.lsp
+    local lspconfig = require('lspconfig')
     local utils = require('utils')
     local map = utils.local_map(0)
+
+    ---------------------------
+    -- Server configurations --
+    ---------------------------
+    local server_configs = {
+      -- Lua --
+      lua_ls = {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
+              autoRequire = true,
+            },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = 'space',
+                indent_size = '2',
+                max_line_length = '100',
+                trailing_table_separator = 'smart',
+              },
+            },
+            diagnostics = {
+              globals = { 'vim', 'it', 'describe', 'before_each', 'are' },
+            },
+            hint = {
+              enable = true,
+              arrayIndex = 'Disable',
+            },
+            workspace = {
+              checkThirdParty = false,
+            },
+            telemetry = {
+              enable = false,
+            },
+          }
+        },
+        on_attach = function()
+          map('n', '<leader>lt', '<Plug>PlenaryTestFile', "Run file's plenary tests")
+        end
+      },
+      -- YAML --
+      yamlls = {
+        -- Lazy-load schemastore when needed
+        on_new_config = function(config)
+          config.settings.yaml.schemas = vim.tbl_deep_extend(
+            'force',
+            config.settings.yaml.schemas or {},
+            require('schemastore').yaml.schemas()
+          )
+        end,
+        settings = {
+          redhat = {
+            telemetry = { enabled = false },
+          },
+          yaml = {
+            schemaStore = {
+              -- Disable built-in schemaStore to use schemas from SchemaStore.nvim
+              enable = false,
+              url = '',
+            },
+            customTags = {
+              -- AWS CloudFormation tags
+              '!Equals sequence', '!FindInMap sequence', '!GetAtt', '!GetAZs',
+              '!ImportValue', '!Join sequence', '!Ref', '!Select sequence',
+              '!Split sequence', '!Sub', '!Or sequence'
+            },
+          }
+        },
+      },
+      -- Eslint --
+      eslint = {
+        on_attach = function(_, bufnr)
+          api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            command = 'EslintFixAll',
+          })
+        end,
+      },
+      -- Bash/Zsh --
+      bashls = {
+        settings = {
+          bashIde = {
+            shfmt = {
+              spaceRedirects = true, -- Allow space after `>` symbols
+            },
+          },
+        },
+      },
+      -- Json --
+      jsonls = {
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      },
+      -- Python --
+      pylsp = {
+        settings = {
+          pylsp = {
+            plugins = {
+              -- Disable formatting diagnostics (that's what formatters are for)
+              pylint = { enabled = false },
+              pycodestyle = { enabled = false },
+            }
+          }
+        },
+      },
+    }
+
+    local disable = function() end
+
+    -- Special server configurations
+    local special_server_configs = {
+      ts_ls = disable,         -- Setup in typescript.lua
+      rust_analyzer = disable, -- Setup in rustaceanvim.lua
+      -- gopls = disable,         -- Setup in go.lua
+      -- elixirls = disable,      -- Setup in elixir.lua
+    }
+
+    --------------------
+    -- Set up servers --
+    --------------------
+    local function setup(server_name)
+      local special_server_setup = special_server_configs[server_name]
+      if special_server_setup then
+        special_server_setup()
+        return
+      end
+
+      -- Enable folding (required by ufo.nvim)
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
+
+      local opts = server_configs[server_name] or {}
+      lspconfig[server_name].setup(opts)
+    end
+
+    -- Ensure that servers mentioned above get installed
+    local ensure_installed = vim.list_extend(
+      vim.tbl_keys(server_configs),
+      vim.tbl_keys(special_server_configs)
+    )
+
+    ---@diagnostic disable-next-line: missing-fields
+    require('mason-lspconfig').setup({
+      handlers = { setup },
+      ensure_installed = ensure_installed
+    })
 
     ---------------------
     -- Handler configs --
@@ -52,11 +200,12 @@ return {
     -------------
     local function map_vsplit(lhs, fn, description)
       vim.keymap.set('n', lhs, function()
-        telescope[fn]({ jump_type = 'vsplit' })
+        require('telescope.builtin')[fn]({ jump_type = 'vsplit' })
       end, { desc = description })
     end
 
     local function attach_keymaps()
+      local telescope = require('telescope.builtin')
       local nx = { 'n', 'x' }
 
       map('n', 'gd', telescope.lsp_definitions, 'LSP definitions')
@@ -81,7 +230,7 @@ return {
     ---------------------------
     -- Default LSP on_attach --
     ---------------------------
-    local augroup = api.nvim_create_augroup('lsp', { clear = true })
+    local augroup = api.nvim_create_augroup('LSP', { clear = true })
 
     api.nvim_create_autocmd("LspAttach", {
       group = augroup,
