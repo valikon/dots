@@ -146,7 +146,11 @@ function gstd -w "git stash drop" -d "Git - drop stash"                        ;
 function gstp -w "git stash pop" -d "Git - pop stash"                          ; git stash pop          $argv; end
 function gstl -w "git stash list" -d "Git - list stash"                        ; git stash list         $argv; end
 function gsts -w "git stash show --text" -d "Git - show stash"                 ; git stash show --text  $argv; end
-function grebranch -d "Git - delete branch and create a new one"    ; g branch -D $argv; gcb $argv; end
+function grebranch -d "Git - delete branch and create a new one"               ; git branch -D          $argv; gcb $argv; end
+function gw -w "git worktree" -d "Git - worktree"                              ; git worktree           $argv; end 
+function gwa -w "git worktree add" -d "Git - worktree add"                     ; git worktree add $argv; end
+function gwl -w "git worktree list" -d "Git - worktree list"                   ; git worktree list                      ; end
+function gwr -w "git worktree remove" -d "Git - worktree remove"               ; git worktree remove               $argv; end
 function gwip -d "Git - add & commit WIP"                           ; gaa; gls --deleted -z | xargs -0 g rm; gcmsg "wip" ; end
 function gunwip -d "Git - reset from the last WIP commit"           ; g log -n 1 | grep -q -c wip; and grst HEAD~1; end
 function glog; g log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative; end
