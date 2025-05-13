@@ -27,7 +27,7 @@ local plugins = {
   use 'telescope',
   use 'onedark', -- use 'tokyonight',
   use 'treesitter',
-  -- use 'trouble',
+  use 'trouble',
   use 'typescript',
   { 'folke/which-key.nvim', opts = {} },
 }
