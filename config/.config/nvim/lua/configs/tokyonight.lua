@@ -16,7 +16,7 @@ return {
       floats = "dark",
     },
     sidebars = { "help", "terminal" },
-    hide_inactive_statusline = false, 
+    hide_inactive_statusline = false,
     dim_inactive = false,
     lualine_bold = false,
   },
