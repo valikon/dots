@@ -207,6 +207,7 @@ return {
     local function attach_keymaps()
       local telescope = require('telescope.builtin')
       local nx = { 'n', 'x' }
+      local is = { 'i', 's' }
 
       map('n', 'gd', telescope.lsp_definitions, 'LSP definitions')
       map('n', 'gD', telescope.lsp_type_definitions, 'LSP type definitions')
@@ -218,8 +219,10 @@ return {
 
       map('n', 'gh', lsp.buf.hover, 'LSP hover')
       map('n', 'gs', lsp.buf.signature_help, 'LSP signature help')
-      map({ 'i', 's' }, '<M-s>', lsp.buf.signature_help, 'LSP signature help')
+      map(is, '<M-s>', lsp.buf.signature_help, 'LSP signature help')
       map(nx, '<leader>r', lsp.buf.rename, 'LSP rename')
+
+      map('n', '<leader>e', function() vim.diagnostic.open_float({ border = 'single' }) end, 'Diagnostic open float')
 
       map_vsplit('<C-w>gd', 'lsp_definitions')
       map_vsplit('<C-w>gi', 'lsp_implementations')
@@ -248,6 +251,18 @@ return {
         map('n', '<leader>lh', function()
           lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled())
         end, 'Toggle LSP inlay hints')
+
+        -- This has to be called from LspAttach event for some reason, not sure why
+        vim.diagnostic.config({
+          signs = false,
+          virtual_text = {
+            spacing = 4,
+            prefix = function(diagnostic, _, _)
+              local icon = require('configs.diagnostics').get_icon(diagnostic.severity)
+              return ' ' .. icon
+            end,
+          }
+        })
       end
     })
   end

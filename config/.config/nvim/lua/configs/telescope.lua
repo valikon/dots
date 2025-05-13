@@ -25,8 +25,8 @@ return {
   keys = {
     { '<leader>ff', "<cmd>Telescope find_files<CR>", desc = 'Find files' },
     { '<leader>fh', "<cmd>Telescope help_tags<CR>",  desc = 'Help tags' },
-    { '<leader>ep', telescope_plugins,               desc = "Search all plugin files" },
-    { '<leader>en', telescope_config,                desc = 'Filter Neovim config' },
+    { '<leader>fp', telescope_plugins,               desc = "Search all plugin files" },
+    { '<leader>fn', telescope_config,                desc = 'Filter Neovim config' },
   },
   config = function()
     local telescope = require('telescope')

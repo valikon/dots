@@ -1,5 +1,6 @@
 local use = require('utils').use
 
+require('configs.diagnostics')
 require('configs.options')
 require('configs.keymaps')
 require('configs.autocmds')
@@ -26,6 +27,7 @@ local plugins = {
   use 'telescope',
   use 'onedark', -- use 'tokyonight',
   use 'treesitter',
+  -- use 'trouble',
   use 'typescript',
   { 'folke/which-key.nvim', opts = {} },
 }
