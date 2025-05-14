@@ -81,6 +81,19 @@ return {
       view = {
         width = 40,
       },
+      -- disable window_picker for
+      -- explorer to work well with
+      -- window splits
+      actions = {
+        open_file = {
+          window_picker = {
+            enable = false,
+          },
+        },
+      },
+      filters = {
+        custom = { ".DS_Store" },
+      },
       on_attach = function(bufnr)
         local map = function(lhs, rhs, desc)
           require('utils').map('n', lhs, rhs, { buffer = bufnr, desc = desc })

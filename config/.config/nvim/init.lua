@@ -25,10 +25,11 @@ local plugins = {
   use 'oil',
   use 'rustaceanvim',
   use 'telescope',
-  use 'onedark', -- use 'tokyonight',
+  use 'tokyonight', -- use 'onedark',
   use 'treesitter',
   use 'trouble',
   use 'typescript',
+  -- { "christoomey/vim-tmux-navigator" }, -- tmux & split window navigation
   { 'folke/which-key.nvim', opts = {} },
 }
 

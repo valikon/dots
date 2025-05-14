@@ -23,10 +23,11 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   keys = {
-    { '<leader>ff', "<cmd>Telescope find_files<CR>", desc = 'Find files' },
-    { '<leader>fh', "<cmd>Telescope help_tags<CR>",  desc = 'Help tags' },
-    { '<leader>fp', telescope_plugins,               desc = "Search all plugin files" },
-    { '<leader>fn', telescope_config,                desc = 'Filter Neovim config' },
+    { '<leader>ff', "<cmd>Telescope find_files<CR>",  desc = 'Find files' },
+    { '<leader>fh', "<cmd>Telescope help_tags<CR>",   desc = 'Help tags' },
+    { '<leader>fc', "<cmd>Telescope grep_string<CR>", desc = 'Find string under cursor' },
+    { '<leader>fp', telescope_plugins,                desc = "Search all plugin files" },
+    { '<leader>fn', telescope_config,                 desc = 'Filter Neovim config' },
   },
   config = function()
     local telescope = require('telescope')
@@ -43,8 +44,8 @@ return {
             ['<C-b>']  = 'preview_scrolling_up',
             ['<C-f>']  = 'preview_scrolling_down',
             -- ['<C-q>']  = 'close',
-            -- ['<M-q>']  = 'smart_send_to_qflist',
-            -- ['<M-Q>']  = 'smart_add_to_qflist',
+            ['<M-q>']  = 'smart_send_to_qflist',
+            ['<M-Q>']  = 'smart_add_to_qflist',
             ['<C-s>']  = 'select_horizontal',
             ['<C-CR>'] = 'to_fuzzy_refine',
             ['<C-u>']  = false,

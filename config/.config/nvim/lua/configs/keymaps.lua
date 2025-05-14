@@ -84,7 +84,11 @@ map('n', '<C-l>', function()
   feedkeys('<C-l>')
 end, { silent = true, desc = "Dismiss all notifications on screen" })
 
-
+-- window management
+map('n', '<leader>sv', '<C-w>v', 'Split window vertically')
+map('n', '<leader>sh', '<C-w>s', 'Split window horizontally')
+map('n', '<leader>se', '<C-w>=', 'Make splits equal size')
+map('n', '<leader>sx', '<cmd>close<CR>', 'Close current split')
 
 -- Files & Directories
 map('n', '-', '<cmd>Oil<CR>', "Edit directory") -- open file/directory editor

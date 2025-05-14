@@ -5,12 +5,12 @@ local opt, o = vim.opt, vim.o
 
 -- General --
 -- o.mouse              = ''    -- No mouse
-o.showmode   = false         -- Don't write out `--INSERT--`, etc.
-o.linebreak  = true          -- Don't break lines in the middle of a word
-opt.shortmess:append('A')    -- Ignores swapfiles when opening file
-opt.shortmess:append('s')    -- Disable 'Search hit BOTTOM, continuing at TOP'
-opt.shortmess:append('cS')   -- Disable "[1/5]", "Pattern not found", etc.
-opt.shortmess:append('FW')   -- Disable message after editing/writing file
+o.showmode   = false       -- Don't write out `--INSERT--`, etc.
+o.linebreak  = true        -- Don't break lines in the middle of a word
+opt.shortmess:append('A')  -- Ignores swapfiles when opening file
+opt.shortmess:append('s')  -- Disable 'Search hit BOTTOM, continuing at TOP'
+opt.shortmess:append('cS') -- Disable "[1/5]", "Pattern not found", etc.
+opt.shortmess:append('FW') -- Disable message after editing/writing file
 opt.spelllang = { 'en', 'sv' }
 opt.spelloptions:append('camel')
 opt.sessionoptions:append('globals') -- Store global variables in sessions
@@ -26,6 +26,9 @@ o.splitbelow     = true
 o.updatetime     = 250
 o.timeoutlen     = 300
 opt.viewoptions  = { 'cursor', 'folds', 'slash', 'unix' }
+
+-- backspace
+opt.backspace    = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 
 -- File options --
 o.undofile       = true
