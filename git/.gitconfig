@@ -4,7 +4,7 @@
 [includeIf "gitdir:~/work/"]
   path = ~/work/.gitconfig.work
 [core]
-  excludesfile = /Users/spacemonkey/.gitignore
+	excludesfile = ~/.gitignore
   editor = nvim
 [push]
   default = simple
