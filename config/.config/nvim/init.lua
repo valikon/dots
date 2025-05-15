@@ -25,6 +25,7 @@ local plugins = {
   use 'nvim-tree',
   use 'oil',
   use 'rustaceanvim',
+  use 'snacks',
   use 'telescope',
   use 'tokyonight', -- use 'onedark',
   use 'todos',
