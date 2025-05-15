@@ -30,6 +30,7 @@ local plugins = {
   use 'treesitter',
   use 'trouble',
   use 'typescript',
+  use 'vim-maximizer',
   -- "christoomey/vim-tmux-navigator", -- tmux & split window navigation
   { 'folke/which-key.nvim', opts = {} },
 }
