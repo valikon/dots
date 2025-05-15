@@ -119,8 +119,8 @@ function gcl -w "git clone" -d "Git - clone"                                   ;
 function gclean -d "Git - clean up merged branches"                            ; git-clean-branches          ; end
 function gcb -w "git checkout -b" -d "Git - checkout branch "                  ; git checkout -b        $argv; end
 function gco -w "git checkout" -d "Git - checkout"                             ; git checkout           $argv; end
-function gcm -d "Git - checkout main"                                          ; git checkout main           ; end
-function gcmsg -w "git commit -m" -d "Git - commit with message"               ; g commit -m            $argv; end
+function gcm -w "git commit -m" -d "Git - commit with message"                 ; g commit -m            $argv; end
+function gcmain -d "Git - checkout main"                                       ; git checkout main           ; end
 function gcp -w "git cherry-pick" -d "Git - cherrypick"                        ; git cherry-pick        $argv; end
 function gd -w "batdiff" -d "Git - diff"                                       ; git diff               $argv; end
 function gds -w "git diff --staged" -d "Git - diff staged"                     ; git diff --staged      $argv; end
