@@ -10,6 +10,7 @@ require('utils.lazy')
 
 local plugins = {
   'folke/lazy.nvim',
+  use 'auto-session',
   use 'barbar',
   use 'blink',
   use 'comment',
@@ -29,7 +30,7 @@ local plugins = {
   use 'treesitter',
   use 'trouble',
   use 'typescript',
-  -- { "christoomey/vim-tmux-navigator" }, -- tmux & split window navigation
+  -- "christoomey/vim-tmux-navigator", -- tmux & split window navigation
   { 'folke/which-key.nvim', opts = {} },
 }
 
