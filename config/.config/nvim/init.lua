@@ -27,6 +27,7 @@ local plugins = {
   use 'rustaceanvim',
   use 'telescope',
   use 'tokyonight', -- use 'onedark',
+  use 'todos',
   use 'treesitter',
   use 'trouble',
   use 'typescript',

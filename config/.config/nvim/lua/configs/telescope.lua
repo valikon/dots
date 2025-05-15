@@ -20,12 +20,14 @@ return {
   -- branch = '0.1.8',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'folke/todo-comments.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   keys = {
     { '<leader>ff', "<cmd>Telescope find_files<CR>",  desc = 'Find files' },
     { '<leader>fh', "<cmd>Telescope help_tags<CR>",   desc = 'Help tags' },
     { '<leader>fc', "<cmd>Telescope grep_string<CR>", desc = 'Find string under cursor' },
+    { '<leader>ft', "<cmd>TodoTelescope<cr>",         desc = "Find todos" },
     { '<leader>fp', telescope_plugins,                desc = "Search all plugin files" },
     { '<leader>fn', telescope_config,                 desc = 'Filter Neovim config' },
   },

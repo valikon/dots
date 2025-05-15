@@ -15,7 +15,7 @@ return {
   lazy = vim.fn.argc() == 0,
   keys = {
     { '<leader><leader>', toggle,    mode = 'n', desc = 'Toggle file tree' },
-    { '<leader>ft',       find_file, mode = 'n', desc = 'Show current file in file tree', },
+    { '<leader>fl',       find_file, mode = 'n', desc = 'Show current file in file tree', },
   },
   config = function()
     local nvim_tree, api = require('nvim-tree'), require('nvim-tree.api')
