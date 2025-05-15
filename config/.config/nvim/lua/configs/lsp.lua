@@ -228,6 +228,7 @@ return {
       map_vsplit('<C-w>gi', 'lsp_implementations')
       map_vsplit('<C-w>gD', 'lsp_type_definitions')
       map('n', '<leader>lq', '<cmd>LspStop<CR>', { desc = 'Stop LSP server' })
+      map('n', '<leader>lr', ':LspRestart<CR>', { desc = 'Restart LSP server' })
     end
 
     ---------------------------
