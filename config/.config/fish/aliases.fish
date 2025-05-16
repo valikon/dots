@@ -8,12 +8,15 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 function cx -w "cd" -d "change directory"; cd $argv && la; end
 
-alias l="eza -a | egrep '^\.'"                                     # show only dotfiles
-alias ls='eza -la --color=always --group-directories-first --icons' # preferred listing
-alias la='eza -a --color=always --group-directories-first --icons'  # all files and dirs
+function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
+alias la="l -a"
+alias ls='l -la'
 alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
 alias lt2='ls-tree-level 2'
 alias lt3='ls-tree-level 3'
+function ls-tree-level -d "Eza --tree to $arg level ignoring .git/ and .gitignore files"
+    l -aT --ignore-glob=".git" --git-ignore --level $argv
+end
 
 alias D="cd ~/Downloads"
 alias d="cd ~/dots"
@@ -33,16 +36,7 @@ alias top=bpytop
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
 function reload                ; source ~/.config/fish/config.fish                      ; end # reload config
-function sconf                 ; bat ~/.config/fish/aliases.fish | rg $argv             ; end # search aliases.config
-function emc -d "Emacs client" ; emacsclient -a "" -c $argv &                           ; end
-function ls-tree-level -d "Exa --tree to $arg level ignoring .git/ and .gitignore files"
-    exa -aT --icons --color=always --group-directories-first --ignore-glob=".git" --git-ignore --level $argv
-end
 function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
-
-function screen1 -d "Screen - Only the one screen"    ; bash ~/.screenlayout/my-layout.sh    ; end
-function screen2 -d "Screen - Home screen"            ; bash ~/.screenlayout/my-layout2.sh   ; end
-function screen3 -d "Screen - Office screen"          ; bash ~/.screenlayout/my-layout3.sh   ; end
 
 ################################
 ### Cloud

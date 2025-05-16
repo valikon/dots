@@ -54,6 +54,6 @@ function gw -w "git worktree" -d "Git - worktree"                              ;
 function gwa -w "git worktree add" -d "Git - worktree add"                     ; git worktree add $argv; end
 function gwl -w "git worktree list" -d "Git - worktree list"                   ; git worktree list                      ; end
 function gwr -w "git worktree remove" -d "Git - worktree remove"               ; git worktree remove               $argv; end
-function gwip -d "Git - add & commit WIP"                           ; gaa; gls --deleted -z | xargs -0 g rm; gcmsg "wip" ; end
+function gwip -d "Git - add & commit WIP"                           ; gaa; gls --deleted -z | xargs -0 g rm; gcm "wip" ; end
 function gunwip -d "Git - reset from the last WIP commit"           ; g log -n 1 | grep -q -c wip; and grst HEAD~1; end
 function glog; g log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative; end
