@@ -6,7 +6,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-function cx -w "cd" -d "change directory"; cd $argv && la; end
+function cx -w "cd" -d "change directory"; cd $argv && ls; end
 
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
 alias la="l -a"
