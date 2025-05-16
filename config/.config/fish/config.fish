@@ -32,6 +32,7 @@ set -gx VIMDATA $HOME/.local/share/vim
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 source ~/.config/fish/functions/my-functions.fish
+source ~/.config/fish/functions/git-functions.fish
 source ~/.config/fish/nmap_aliases.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/key_bindings.fish

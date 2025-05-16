@@ -1,8 +1,4 @@
 # -- System utils -- #
-
-function login_github; ssh-add $HOME/.ssh/github_rsa_id; end
-function login_rsa; ssh-add $HOME/.ssh/id_rsa; end
-
 function su; command su --shell=/usr/bin/fish $argv; end
 
 ## -- General utility --##
@@ -142,11 +138,3 @@ function pdfmerge -d "Merge two or more pdf files in order to a new file"
         echo "e.g. FILE_1 FILE_2 OUTPUT_FILE"
     end
 end
-
-#function reload_emacs_config
-#    rm ~/.emacs.d/init.el
-#    if test -e ~/.emacs.d/init.elc
-#        rm ~/.emacs.d/init.elc
-#    end
-#    cp ~/dot-files/emacs/init.el ~/.emacs.d/
-#end
