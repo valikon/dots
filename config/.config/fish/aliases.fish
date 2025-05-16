@@ -11,10 +11,8 @@ function cx -w "cd" -d "change directory"; cd $argv && ls; end
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
 alias la="l -a"
 alias ls='l -la'
-alias lt='eza -aT --color=always --group-directories-first --icons' # tree listing
-alias lt2='ls-tree-level 2'
-alias lt3='ls-tree-level 3'
-function ls-tree-level -d "Eza --tree to $arg level ignoring .git/ and .gitignore files"
+alias lt='ltl 2' 
+function ltl -d "Eza - list tree to $arg level ignoring .git/ and .gitignore files"
     l -aT --ignore-glob=".git" --git-ignore --level $argv
 end
 
