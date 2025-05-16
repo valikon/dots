@@ -6,6 +6,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+function cx -w "cd" -d "change directory"; cd $argv && la; end
 
 alias l="eza -a | egrep '^\.'"                                     # show only dotfiles
 alias ls='eza -la --color=always --group-directories-first --icons' # preferred listing
