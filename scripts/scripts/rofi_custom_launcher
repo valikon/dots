@@ -1,2 +1,0 @@
-#!/bin/sh
-rofi -show drun -sidebar-mode - columns 3 -padding 18 -lines 12 -width 60 -location 0

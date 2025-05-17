@@ -1,7 +1,0 @@
-#!/bin/sh
-
-selection=$(ls $PROJECT_PATHS | rofi -dmenu -p "Project" -no-custom)
-
-[[ ! -z "${selection}" ]] && code ${PROJECT_PATHS}/${selection}
-
-exit 0
