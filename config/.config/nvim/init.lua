@@ -33,7 +33,7 @@ local plugins = {
   use 'trouble',
   use 'typescript',
   use 'vim-maximizer',
-  -- "christoomey/vim-tmux-navigator", -- tmux & split window navigation
+  use 'vim-tmux-navigator',
   { 'folke/which-key.nvim', opts = {} },
 }
 
