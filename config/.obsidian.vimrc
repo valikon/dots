@@ -22,12 +22,6 @@ vnoremap K 6k
 " dj = delete 2 lines, dJ = delete 3 lines
 onoremap J 2j
 
-" :bnext/bprev
-exmap goBack obcommand app:go-back
-exmap goForward obcommand app:go-forward
-nnoremap <BS> :goBack
-nnoremap <S-BS> :goForward
-
 " sentence navigation
 noremap [ (
 noremap ] )
@@ -52,22 +46,10 @@ nmap gt :nextTab
 nmap gT :prevTab
 
 " <Esc> clears highlights
-nnoremap <Esc> :nohl
+" nnoremap <Esc> :nohl
 
 exmap wq obcommand workspace:close
 exmap q obcommand workspace:close
-
-exmap focusRight obcommand editor:focus-right
-nmap <C-w>l :focusRight
-
-exmap focusLeft obcommand editor:focus-left
-nmap <C-w>h :focusLeft
-
-exmap focusTop obcommand editor:focus-top
-nmap <C-w>k :focusTop
-
-exmap focusBottom obcommand editor:focus-bottom
-nmap <C-w>j :focusBottom
 
 exmap vsplit obcommand workspace:split-vertical
 nmap <C-w>v :vsplit
