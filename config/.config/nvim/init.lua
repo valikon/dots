@@ -19,6 +19,7 @@ local plugins = {
   use 'feline',
   use 'gitsigns',
   use 'lazygit',
+  use 'leap',
   use 'lsp',
   use 'mason',
   use 'mini',
@@ -32,9 +33,11 @@ local plugins = {
   use 'todos',
   use 'treesitter',
   use 'trouble',
+  use 'twilight',
   use 'typescript',
   use 'vim-maximizer',
   use 'vim-tmux-navigator',
+  use 'zen-mode',
   { 'folke/which-key.nvim', opts = {} },
 }
 
