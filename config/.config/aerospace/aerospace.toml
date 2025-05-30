@@ -50,6 +50,10 @@ run = 'layout floating'
 if.app-name-regex-substring = 'trello'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-name-regex-substring = 'spotify'
+run = 'layout floating'
+
 # Possible values: (qwerty|dvorak|colemak)
 [key-mapping]
     preset = 'qwerty'
