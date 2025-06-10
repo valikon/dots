@@ -31,10 +31,13 @@ alias i=pac-install
 alias py=python
 alias weather=wttr
 alias top=bpytop
+alias df=duf
+alias dig=doggo
+alias ai=fabric-ai
 
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
-function reload                ; source ~/.config/fish/config.fish                      ; end # reload config
+function fish                  ; source ~/.config/fish/config.fish                      ; end # reload config
 function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
 
 ################################
@@ -63,6 +66,7 @@ alias kl='k logs'
 alias kd='k describe'
 alias kdel='k delete'
 alias kt='k top'
+alias kaf='k apply -f'
 
 # context
 alias kcx='kubectx'
@@ -72,6 +76,7 @@ alias kcgc='k config get-contexts'
 # pods
 alias kgp='kg pod'
 alias kdp='kd pod'
+alias kgpa='kg pod -A'
 alias kgpl='kgp -l' # get pods by label
 alias kgpn='kgp -n' # get pods by namespace
 alias kgpw='kgp --watch' # after listing, watch for changes

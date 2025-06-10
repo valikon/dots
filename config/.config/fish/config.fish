@@ -31,8 +31,10 @@ set -gx VIMCONFIG $HOME/.config/nvim
 set -gx VIMDATA $HOME/.local/share/vim
 set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
+# TODO: do a loop for all function collections to source, maybe create a collection directory 
 source ~/.config/fish/functions/my-functions.fish
 source ~/.config/fish/functions/git-functions.fish
+source ~/.config/fish/functions/worktrees.fish
 source ~/.config/fish/nmap_aliases.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/key_bindings.fish
@@ -48,6 +50,20 @@ starship init fish | source
 
 set -g fish_greeting
 
-zoxide init fish | source
+if type -q zoxide
+  zoxide init fish | source
+end
 
-fnm env --use-on-cd | source
+if type -q pyenv
+  fnm env --use-on-cd | source
+end
+
+# Pyenv setup
+# Requires `brew install pyenv`
+if type -q pyenv
+  status --is-interactive; and source (pyenv init -|psub)
+end
+
+if type -q pyenv-virtualenv
+    source (pyenv virtualenv-init -|psub)
+end

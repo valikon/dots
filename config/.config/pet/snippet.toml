@@ -22,3 +22,15 @@
   Output = ""
   Tag = []
   command = "fc-list | grep -i \"<font-name>\""
+
+[[Snippets]]
+  Description = "Git - delete remote branch"
+  Output = ""
+  Tag = []
+  command = "git push origin -d <branch>"
+
+[[Snippets]]
+  Description = "TF - unlock terraform project state lock"
+  Output = ""
+  Tag = ["terraform"]
+  command = "tg run force-unlock <lock-id>"
