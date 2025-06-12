@@ -36,7 +36,7 @@ function gls -w "git ls-files" -d "Git - list files"                           ;
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
 function gp -w "git push" -d "Git - push"                                      ; git push               $argv; end
 function gprune -d "Prune remote-tracking branches no longer on remote"        ; g fetch --prune        $argv; end
-function gr -w "git restore" -d "Git - restore"                                ; git restore            $argv; end
+function gr -d "Git - go to project root"                                      ; cd (g rev-parse --show-toplevel); end
 function grb -w "git rebase" -d "Git - rebase"                                 ; git rebase             $argv; end
 function grbc -w "git rebase --continue" -d "Git - continue rebase"            ; git rebase --continue  $argv; end
 function grebranch -d "Git - delete branch and create a new one"               ; git branch -D          $argv; gcb $argv; end

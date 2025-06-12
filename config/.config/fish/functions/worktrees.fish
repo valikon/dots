@@ -1,9 +1,9 @@
 # TODO: create a wtb function to automatically create a branch if one doesn't exist
 # TODO: autocomplete for the wta function
 
-function gw -w "git worktree" -d "Git - worktree"                              ; git worktree           $argv; end 
+function gw -w "git worktree" -d "Git - worktree"                              ; git worktree                      $argv; end 
 function wtl -w "git worktree list" -d "Git - worktree list"                   ; git worktree list                      ; end
-function wtr -w "git worktree remove" -d "Git - worktree remove"               ; git worktree remove               $argv; end
+function wtd -w "git worktree remove" -d "Git - delete worktree"               ; git worktree remove               $argv; end
 
 ##
 # Switch between git root and worktree
