@@ -36,6 +36,8 @@ alias dig=doggo
 alias ai=fabric-ai
 
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
+function vi                    ; e $argv                                                ; end
+function vim                   ; e $argv                                                ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
 function fish                  ; source ~/.config/fish/config.fish                      ; end # reload config
 function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
