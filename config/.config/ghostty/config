@@ -3,8 +3,12 @@ font-size = 14
 font-thicken = true
 
 theme = catppuccin-frappe
-
+macos-titlebar-style = hidden
 cursor-style = block
 cursor-style-blink = false
 
 keybind = control+I=ignore
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+quick-terminal-position = right
+
+background-opacity = 0.92
