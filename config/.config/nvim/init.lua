@@ -18,6 +18,7 @@ local plugins = {
   use 'conform',
   use 'feline',
   use 'gitsigns',
+  use 'hardtime',
   use 'lazygit',
   use 'leap',
   use 'lsp',
