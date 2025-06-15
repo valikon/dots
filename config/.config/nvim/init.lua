@@ -39,7 +39,8 @@ local plugins = {
   use 'vim-maximizer',
   use 'vim-tmux-navigator',
   use 'zen-mode',
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
+  { 'karb94/neoscroll.nvim', opts = {} },
 }
 
 require('lazy').setup({
