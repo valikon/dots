@@ -26,12 +26,6 @@ onoremap J 2j
 noremap [ (
 noremap ] )
 
-" INFO doesn't work in reading mode: https://github.com/timhor/obsidian-editor-shortcuts/issues/20
-exmap nextHeading obcommand obsidian-editor-shortcuts:goToNextHeading
-exmap prevHeading obcommand obsidian-editor-shortcuts:goToPrevHeading
-nnoremap <C-j> :nextHeading
-nnoremap <C-k> :prevHeading
-
 " [m]atch parenthesis
 nnoremap m %
 
@@ -72,39 +66,39 @@ imap jj <Esc>
 
 " quicker access to [m]assive word, [q]uote, [z]ingle quote, inline cod[e],
 " [r]ectangular bracket, and [c]urly braces
-onoremap am aW
-onoremap im iW
-onoremap aq a"
-onoremap iq i"
-onoremap k i"
-onoremap az a'
-onoremap iz i'
-onoremap ae a`
-onoremap ie i`
-onoremap ir i[
-onoremap ar a[
-onoremap ac a{
-onoremap ic i{
+" onoremap am aW
+" onoremap im iW
+" onoremap aq a"
+" onoremap iq i"
+" onoremap k i"
+" onoremap az a'
+" onoremap iz i'
+" onoremap ae a`
+" onoremap ie i`
+" onoremap ir i[
+" onoremap ar a[
+" onoremap ac a{
+" onoremap ic i{
 
-vnoremap am aW
-vnoremap im iW
-vnoremap aq a"
-vnoremap iq i"
-vnoremap ay a'
-vnoremap iy i'
-vnoremap ae a`
-vnoremap ie i`
-vnoremap ir i[
-vnoremap ar a[
-vnoremap ac a{
-vnoremap ic i{
+" vnoremap am aW
+" vnoremap im iW
+" vnoremap aq a"
+" vnoremap iq i"
+" vnoremap ay a'
+" vnoremap iy i'
+" vnoremap ae a`
+" vnoremap ie i`
+" vnoremap ir i[
+" vnoremap ar a[
+" vnoremap ac a{
+" vnoremap ic i{
 
-" emulate some text objects from nvim-various-textobjs
-onoremap rg G
-vnoremap rg G
-onoremap rp }
-vnoremap rp }
-onoremap m t]
-vnoremap m t]
-onoremap w t"
-vnoremap w t"
+" " emulate some text objects from nvim-various-textobjs
+" onoremap rg G
+" vnoremap rg G
+" onoremap rp }
+" vnoremap rp }
+" onoremap m t]
+" vnoremap m t]
+" onoremap w t"
+" vnoremap w t"
