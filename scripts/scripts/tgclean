@@ -10,7 +10,8 @@ from pathlib import Path
 
 
 def main():
-    target_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path.cwd()
+    target_dir = Path(sys.argv[1]).resolve() if len(
+        sys.argv) > 1 else Path.cwd()
 
     if not target_dir.is_dir():
         print(f"\033[91mError: Directory '{
