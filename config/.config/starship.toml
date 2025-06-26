@@ -1,9 +1,66 @@
+format = """
+$username\
+$kubernetes\
+$directory\
+${custom.worktree}\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$c\
+$cmake\
+$daml\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nodejs\
+$pulumi\
+$python\
+$rust\
+$scala\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$mise\
+$sudo\
+$line_break\
+$jobs\
+$time\
+$status\
+$character"""
+
 [username]
-#format = '[$user]($style) '
+format = '[$user]($style) '
 # format = '[]($style) '
-format = '' 
 show_always = true
-disabled = false
+disabled = true
 style_root = "red bold"
 style_user = "bold 99"
 
@@ -171,9 +228,35 @@ disabled = false
 detect_files = [".sacalaenv", ".sbtenv", "build.sbt", ".scala", ".sc"]
 detect_folders = [".metals"]
 
+[custom.worktree]
+command = """
+if [[ "$PWD" == *"/.worktree/"* ]]; then
+  # Inside a worktree - show repo/worktree format with worktree emoji
+  repo_path="${PWD%/.worktree/*}"
+  repo_name="${repo_path##*/}"
+
+  worktree_path="${PWD#*/.worktree/}"
+  worktree_name="${worktree_path%%/*}"
+
+  echo "🌿 ${repo_name}/${worktree_name}"
+else
+  # In a regular git repo - show repo name with different emoji
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [[ -n "$repo_root" ]]; then
+      echo "📦 ${repo_root##*/}"
+    fi
+  fi
+fi
+"""
+when = 'git rev-parse --git-dir > /dev/null 2>&1'
+shell = ["bash"]
+style = "fg:bright_green bold"
+format = "[$output]($style) "
 
 #[env_var.AWS_PROFILE]
 #variable = "AWS_PROFILE"
 #format = "with profile #[$env_value]($style) "
 #disabled = false
 #style = "white bold dimmed"
+
