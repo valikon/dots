@@ -1,13 +1,14 @@
 ################################
 ###  Navigation/Editing
 ################################
+alias b="cd -"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias home='cd ~'
-function cx -w "cd" -d "change directory"; cd $argv && ls; end
+function cdl -w "cd" -d "cd + ls"; cd $argv && ls; end
 
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
 alias la="l -a"
@@ -20,10 +21,9 @@ end
 alias D="cd ~/Downloads"
 alias d="cd ~/dots"
 alias p="cd ~/projects"
-alias tmp="cd /tmp"
 
 ################################
-###  System & config
+###  General
 ################################
 alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
@@ -34,6 +34,8 @@ alias top=bpytop
 alias df=duf
 alias dig=doggo
 alias ai=fabric-ai
+alias wcl="wc -l"
+alias cat='bat --style header --style rule --style snip --style changes --theme 1337'
 
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
 function vi                    ; e $argv                                                ; end
@@ -42,19 +44,20 @@ function psgrep                ; ps aux | rg $argv                              
 function fish                  ; source ~/.config/fish/config.fish                      ; end # reload config
 function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
 
+function rgc -w "rg" -d "rg - count matches"; rg $argv | wc -l ; end
+function rgb -w "batgrep" ; batgrep -i --color --hidden $argv; end
+
 ################################
 ### Cloud
 ################################
 alias assume="source (brew --prefix)/bin/assume.fish"
-alias tf=terraform
-alias tg=terragrunt
-function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
-
 alias sp='steampipe'
 alias pipe='powerpipe'
 
-alias cantrill-prod="assume cantrill-prod"
-alias cantrill-dev="assume cantrill-dev"
+alias tf=terraform
+alias tg=terragrunt
+alias tgp='terragrunt run --all plan'
+function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
 
 ################################
 ### K8s
@@ -162,11 +165,6 @@ function npmt -d "NPM - test"               ; npm run-script test      $argv ; e
 ################################
 alias thm-vpn-connect='sudo openvpn /etc/openvpn/valikon.ovpn &'
 
-################################
-###  BAT with extras
-################################
-alias cat='bat --style header --style rule --style snip --style changes --theme 1337'
-function rgb -w "batgrep" ; batgrep -i --color --hidden $argv; end
 
 ################################
 ###  OTHER

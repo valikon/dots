@@ -13,6 +13,7 @@ set -gx PATH $HOME/scripts $PATH
 set -gx PATH ./bin $PATH
 set -gx GOPATH $HOME/go
 set -gx GOROOT (brew --prefix go)/libexec
+set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
 # Add ~/.local/bin to PATH
 if test -d ~/.local/bin
