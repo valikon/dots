@@ -17,9 +17,14 @@ map('i', 'jk', "<ESC>")
 map('i', "<C-E>", "<ESC>A") -- mimic shell movements
 map('i', "<C-A>", "<ESC>I") -- mimic shell movements
 map('i', "<C-j>", "<ESC>ja")
-map('i', "<C-k>", "<ESC>ka")
-map('i', "<C-l>", "<ESC>la")
+map('i', '<C-h>', '<Left>', { desc = 'Move cursor left in insert mode' })
+map('i', '<C-l>', '<Right>', { desc = 'Move cursor right in insert mode' })
+-- map('i', '<C-H>', '<Esc>g0i', { desc = 'Move cursor to the beginning of the line' })
+-- map('i', '<C-L>', '<Esc>g$i', { desc = 'Move cursor to the end of the line' })
 map('s', '<C-h>', '<BS>i')
+map('n', "H", "g0")
+map('n', 'L', 'g$')
+
 
 -- dev
 map("n", "<leader>X", "<cmd>source %<CR>", "Source current file")

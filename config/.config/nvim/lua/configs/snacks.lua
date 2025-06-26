@@ -1,7 +1,8 @@
 -----------------
 -- snacks.nvim --
 -----------------
-
+---
+--- TODO: create a shortcut for grepping a pattern, like that used in "<leader>fg"
 return {
   'folke/snacks.nvim',
   priority = 999,
