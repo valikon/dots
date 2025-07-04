@@ -54,17 +54,3 @@ set -g fish_greeting
 if type -q zoxide
   zoxide init fish | source
 end
-
-if type -q pyenv
-  fnm env --use-on-cd | source
-end
-
-# Pyenv setup
-# Requires `brew install pyenv`
-if type -q pyenv
-  status --is-interactive; and source (pyenv init -|psub)
-end
-
-if type -q pyenv-virtualenv
-    source (pyenv virtualenv-init -|psub)
-end

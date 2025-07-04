@@ -7,7 +7,6 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
-alias home='cd ~'
 function cdl -w "cd" -d "cd + ls"; cd $argv && ls; end
 
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
@@ -21,6 +20,7 @@ end
 alias D="cd ~/Downloads"
 alias d="cd ~/dots"
 alias p="cd ~/projects"
+alias docs="cd ~/Documents"
 
 ################################
 ###  General
