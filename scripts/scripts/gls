@@ -1,0 +1,145 @@
+#!/usr/bin/env fish
+# GitLab Repository Content Search Script
+# Usage: gls <regex_pattern> [group_id]
+# Returns: List of repository names that contain content matching the regex
+
+function show_help
+    echo "GitLab Repository Content Search (fish script)"
+    echo ""
+    echo "Usage: gls <regex_pattern> [group_id]"
+    echo ""
+    echo "Arguments:"
+    echo "  regex_pattern  Required. The regex pattern to search for in file content"
+    echo "  group_id       Optional. GitLab group ID to search in (fallback: GITLAB_GROUP_ID env var)"
+    echo ""
+    echo "Files:"
+    echo "  repos.txt      Auto-generated file containing repository names (one per line)"
+    echo "  matching_repos.txt    Output file with matching repositories"
+    echo ""
+    echo "Examples:"
+    echo "  gls \"dockerfile\" 123"
+    echo "  gls \"kubernetes|k8s\""
+    echo "  set GITLAB_GROUP_ID 123; gls \"\.tf\$\""
+    echo ""
+    echo "Output: Repository names (one per line) that contain matching content"
+end
+
+# Check arguments
+if test (count $argv) -lt 1 
+  or test "$argv[1]" = "-h" 
+  or test "$argv[1]" = "--help"
+    show_help
+    exit 0
+end
+
+set regex_pattern $argv[1]
+
+# Determine group ID from parameter or environment variable
+if test (count $argv) -ge 2
+    set group_id $argv[2]
+else if test -n "$GITLAB_GROUP_ID"
+    set group_id $GITLAB_GROUP_ID
+else
+    echo "Error: Group ID not provided. Use parameter or set GITLAB_GROUP_ID environment variable." >&2
+    show_help
+    exit 1
+end
+
+# is glab installed
+if not command -v glab > /dev/null 2>&1
+    echo "Error: glab CLI is not installed" >&2
+    exit 1
+end
+
+# is glab authenticated
+if not glab auth status > /dev/null 2>&1
+    echo "Error: glab is not authenticated. Run: glab auth login" >&2
+    exit 1
+end
+
+# Check or create repository file
+set repo_file "repos.txt"
+
+function fetch_repositories
+    echo "Fetching repositories for group ID: $group_id..." >&2
+    
+    # Fetch all projects in the group
+    set projects (glab api "groups/$GITLAB_GROUP_ID/projects?include_subgroups=true&per_page=100" --paginate 2>/dev/null | jq -r '.[].path_with_namespace')
+    set api_status $status
+    
+    if test $api_status -ne 0
+        echo "Error: Failed to fetch repositories from group $group_id" >&2
+        echo "Make sure the group ID is correct and you have access to it." >&2
+        exit 1
+    end
+    
+    if test -z "$projects"
+        echo "Error: No repositories found in group $group_id" >&2
+        exit 1
+    end
+    
+    # Write repositories to file
+    printf '%s\n' $projects > $repo_file
+    echo "Created $repo_file with "(count $projects)" repositories" >&2
+end
+
+if not test -f $repo_file
+    echo "Repository file '$repo_file' not found. Creating it..." >&2
+    fetch_repositories
+else
+    echo "Using existing repository file: $repo_file" >&2
+    echo "To refresh the repository list, delete $repo_file and run the script again" >&2
+end
+
+# Load repositories from file
+set repos (cat $repo_file | string trim)
+
+echo "Loaded "(count $repos)" repositories from $repo_file" >&2
+echo "---------------------------------"
+
+# Search each repository for the pattern
+set matched_repos
+
+for repo in $repos
+    echo "Searching repository: $repo" >&2
+    
+    # URL encode the repository path and search pattern
+    set repo_id (echo $repo | string replace --all '/' '%2F')
+    set encoded_pattern (printf '%s' $regex_pattern | string replace --all ' ' '%20' | string replace --all '&' '%26' | string replace --all '=' '%3D')
+    
+    # Debug output
+    # echo "Encoded repo: $repo_id" >&2
+    # echo "Encoded pattern: $encoded_pattern" >&2
+    # echo "Full URL: projects/$repo_id/search?scope=blobs&search=$encoded_pattern" >&2
+    
+    # Make API call and capture both stdout and return code
+    set api_response (glab api "projects/$repo_id/search?scope=blobs&search=$encoded_pattern" 2>/dev/null)
+    set api_status $status
+    
+    if test $api_status -eq 0
+        # API call succeeded, check if we have valid JSON and count results
+        set search_count (echo $api_response | jq -r 'if type == "array" then length else 0 end' 2>/dev/null)
+        
+        if test "$search_count" -gt 0
+            set matched_repos $matched_repos $repo
+        end
+    else
+        # API call failed (404, 403, etc.)
+        echo "Unable to search repository: $repo (access denied or not found)" >&2
+    end
+end
+
+# Output matched repositories to file and stdout
+set results_file "matching_repos.txt"
+
+if test (count $matched_repos) -gt 0
+    # Clear previous results
+    echo "" > $results_file
+    
+    for repo in $matched_repos
+        echo $repo | tee -a $results_file
+    end
+    echo "Results saved to $results_file" >&2
+else
+    echo "No matching repositories found." >&2
+end

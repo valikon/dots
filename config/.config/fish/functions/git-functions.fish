@@ -32,7 +32,6 @@ function gdm -d "Git - diff against main"                                      ;
 function gds -w "git diff --staged" -d "Git - diff staged"                     ; git diff --staged      $argv; end
 function gl -w "git pull" -d "Git - pull"                                      ; git pull --rebase      $argv; end
 function glg -d "Git - grep from listed files"                                 ; git ls-files | rg      $argv; end
-function gls -w "git ls-files" -d "Git - list files"                           ; git ls-files           $argv; end
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
 function gp -w "git push" -d "Git - push"                                      ; git push               $argv; end
 function gprune -d "Prune remote-tracking branches no longer on remote"        ; g fetch --prune        $argv; end
