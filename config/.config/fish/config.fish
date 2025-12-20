@@ -40,6 +40,9 @@ source ~/.config/fish/nmap_aliases.fish
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/key_bindings.fish
 
+# private stuff
+source ~/Dropbox/configs/variables.fish
+
 set VIRTUAL_ENV_DISABLE_PROMPT "1"
 
 # hooks for direnv utility for autoloading env variables in a directory context
