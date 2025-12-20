@@ -5,20 +5,22 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    'saghen/blink.cmp',
+    -- 'saghen/blink.cmp',
     'williamboman/mason.nvim',           -- For installing LSP servers
     'williamboman/mason-lspconfig.nvim', -- Integration with nvim-lspconfig
     'b0o/schemastore.nvim',              -- YAML/JSON schemas
   },
   config = function()
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
-    require("lspconfig").lua_ls.setup { capabilities = capabilities }
-    require('lspconfig').terraformls.setup { capabilities = capabilities }
+    -- local capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- require("lspconfig").lua_ls.setup { capabilities = capabilities }
+    -- require('lspconfig').terraformls.setup { capabilities = capabilities }
 
     local api, lsp = vim.api, vim.lsp
-    local lspconfig = require('lspconfig')
+    -- local lspconfig = require('lspconfig')
     local utils = require('utils')
     local map = utils.local_map(0)
+
+    local eslint_on_attach = vim.lsp.config.eslint.on_attach
 
     ---------------------------
     -- Server configurations --
@@ -91,14 +93,18 @@ return {
       },
       -- Eslint --
       eslint = {
-        on_attach = function(_, bufnr)
+        on_attach = function(client, bufnr)
+          if not eslint_on_attach then return end
+
+          eslint_on_attach(client, bufnr)
+
           api.nvim_create_autocmd('BufWritePre', {
             buffer = bufnr,
             command = 'EslintFixAll',
           })
         end,
       },
-      -- Bash/Zsh --
+      -- Bash --
       bashls = {
         settings = {
           bashIde = {
@@ -131,35 +137,26 @@ return {
       },
     }
 
-    local disable = function() end
-
-    -- Special server configurations
-    local special_server_configs = {
-      ts_ls = disable,         -- Setup in typescript.lua
-      rust_analyzer = disable, -- Setup in rustaceanvim.lua
-      -- gopls = disable,         -- Setup in go.lua
-      -- elixirls = disable,      -- Setup in elixir.lua
-    }
+    -- These have their own plugins that enable them
+    local special_server_configs = { 'ts_ls', 'rust_analyzer' }
 
     --------------------
-    -- Set up servers --
+    -- Configure servers --
     --------------------
-    local function setup(server_name)
-      local special_server_setup = special_server_configs[server_name]
-      if special_server_setup then
-        special_server_setup()
-        return
-      end
-
+    for server_name, config in pairs(server_configs) do
       -- Enable folding (required by ufo.nvim)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
         lineFoldingOnly = true
       }
+      config.capabilities = vim.tbl_deep_extend(
+        'keep',
+        config.capabilities or {},
+        capabilities
+      )
 
-      local opts = server_configs[server_name] or {}
-      lspconfig[server_name].setup(opts)
+      vim.lsp.config(server_name, config)
     end
 
     -- Ensure that servers mentioned above get installed
@@ -168,36 +165,27 @@ return {
       vim.tbl_keys(special_server_configs)
     )
 
-    ---@diagnostic disable-next-line: missing-fields
     require('mason-lspconfig').setup({
-      handlers = { setup },
-      ensure_installed = ensure_installed
+      ensure_installed = not ensure_installed or {},
+      automatic_enable = {
+        exclude = special_server_configs,
+      }
     })
-
-    ---------------------
-    -- Handler configs --
-    ---------------------
-    if not utils.noice_is_loaded() then
-      -- Add borders to hover/signature windows (noice.nvim has its own)
-      lsp.handlers['textDocument/hover'] = lsp.with(
-        lsp.handlers.hover,
-        {
-          border = 'single',
-          -- Disable "no information available" popup which is really annoying
-          -- when using multiple servers
-          silent = true,
-        }
-      )
-
-      lsp.handlers['textDocument/signatureHelp'] = lsp.with(
-        lsp.handlers.signature_help,
-        { border = 'single' }
-      )
-    end
 
     -------------
     -- Keymaps --
     -------------
+    local function lsp_references()
+      utils.clear_lsp_references()
+
+      local method = 'textDocument/documentHighlight'
+      if #vim.lsp.get_clients({ method = method }) > 0 then
+        lsp.buf.document_hightlight()
+      end
+
+      require('telescope.builtin').lsp_references({ include_declaration = false })
+    end
+
     local function map_vsplit(lhs, fn, description)
       vim.keymap.set('n', lhs, function()
         require('telescope.builtin')[fn]({ jump_type = 'vsplit' })
@@ -215,7 +203,7 @@ return {
       map('n', '<leader>ts', telescope.lsp_document_symbols, 'LSP document symbols')
       map('n', '<leader>tS', telescope.lsp_workspace_symbols, 'LSP workspace symbols')
       map('n', '<leader>tw', telescope.lsp_dynamic_workspace_symbols, 'LSP dynamic workspace symbols')
-      map('n', 'gr', telescope.lsp_references, 'LSP references')
+      map('n', 'gr', lsp_references, 'LSP references')
 
       map('n', 'gh', lsp.buf.hover, 'LSP hover')
       map('n', 'gs', lsp.buf.signature_help, 'LSP signature help')
@@ -239,8 +227,8 @@ return {
     api.nvim_create_autocmd("LspAttach", {
       group = augroup,
       desc = 'Default LSP on_attach',
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
+      callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
         if not client then return end
 
         -- Keymaps
