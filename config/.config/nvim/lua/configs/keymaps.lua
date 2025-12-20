@@ -6,19 +6,24 @@ local utils = require('utils')
 local map = utils.map
 local feedkeys = utils.feedkeys
 
+map('n', 'gp', ':grep <cword> %<CR>:copen<CR>', "Grep word under cursor in current file")
+
 -- Leader --
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 map('n', '<S-Space>', '<Space>')
+map('n', 'j', "gj", 'Move down visual line')
+map('n', 'k', "gk", 'Move up visual line')
 
 map('i', 'kk', "<ESC>")
 map('i', 'jj', "<ESC>")
 map('i', 'jk', "<ESC>")
-map('i', "<C-E>", "<ESC>A") -- mimic shell movements
-map('i', "<C-A>", "<ESC>I") -- mimic shell movements
+map('i', "<C-E>", "<ESC>A")                                  -- mimic shell movements
+map('i', "<C-A>", "<ESC>I")                                  -- mimic shell movements
 map('i', "<C-j>", "<ESC>ja")
-map('i', '<C-h>', '<Left>', { desc = 'Move cursor left in insert mode' })
-map('i', '<C-l>', '<Right>', { desc = 'Move cursor right in insert mode' })
+map('i', "<C-k>", "<Up>", { noremap = true, silent = true }) -- not working properly, still goes to the digraph funciton in nvim
+map('i', '<C-h>', '<Left>', 'Move cursor left in insert mode')
+map('i', '<C-l>', '<Right>', 'Move cursor right in insert mode')
 -- map('i', '<C-H>', '<Esc>g0i', { desc = 'Move cursor to the beginning of the line' })
 -- map('i', '<C-L>', '<Esc>g$i', { desc = 'Move cursor to the end of the line' })
 map('s', '<C-h>', '<BS>i')

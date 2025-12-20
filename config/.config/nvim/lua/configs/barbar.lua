@@ -20,8 +20,8 @@ return {
       icons = { button = false },
     })
 
-    map('n', '<M-w>', '<cmd>BufferClose<CR>')
-    map('n', '<M-W>', '<cmd>BufferClose<CR><cmd>wincmd c<CR>')
+    map('n', '<C-w>', '<cmd>BufferClose<CR>')
+    map('n', '<C-W>', '<cmd>BufferClose<CR><cmd>wincmd c<CR>')
     map('n', '<leader>bC', '<cmd>BufferClose<CR><cmd>wincmd c<CR>')
     map('n', '<leader><M-w>', '<cmd>BufferClose!<CR>')
     -- Buffer-picking mode
