@@ -1,7 +1,7 @@
 ################################
 ###  Navigation/Editing
 ################################
-alias b="cd -"
+alias ba="cd -"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -20,6 +20,7 @@ end
 alias D="cd ~/Downloads"
 alias d="cd ~/dots"
 alias p="cd ~/projects"
+alias w="cd ~/work"
 alias docs="cd ~/Documents"
 
 ################################
@@ -29,17 +30,17 @@ alias mkdir='mkdir -p'
 alias sudo='sudo -E ' # -E tells sudo to respect the environment it's being started in
 alias i=pac-install
 alias py=python
-alias weather=wttr
 alias top=bpytop
 alias df=duf
 alias dig=doggo
 alias ai=fabric-ai
+alias cdiff=colordiff
 alias wcl="wc -l"
 alias cat='bat --style header --style rule --style snip --style changes --theme 1337'
 
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
+function ediff                 ; e -d $argv                                             ; end
 function vi                    ; e $argv                                                ; end
-function vim                   ; e $argv                                                ; end
 function psgrep                ; ps aux | rg $argv                                      ; end
 function fish                  ; source ~/.config/fish/config.fish                      ; end # reload config
 function jpg_convert           ; magick $arg -quality 100% $arg.jpg                     ; end
@@ -54,10 +55,21 @@ alias assume="source (brew --prefix)/bin/assume.fish"
 alias sp='steampipe'
 alias pipe='powerpipe'
 
+################################
+### terraform
+################################
 alias tf=terraform
 alias tg=terragrunt
-alias tgp='terragrunt run --all plan'
-function tga -d "Terragrunt run-all" ; terragrunt run-all $argv    ; end
+alias tfmt='tf fmt --recursive'
+alias tgp='terragrunt run plan --all'
+function tga -d "Terragrunt run-all" ; terragrunt run $argv --all; end
+
+################################
+### brew
+################################
+function b; brew $argv; end
+function bs; brew search $argv; end
+function bi; brew install $argv; end
 
 ################################
 ### K8s
