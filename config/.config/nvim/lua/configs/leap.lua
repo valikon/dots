@@ -13,7 +13,7 @@ return {
     leap.setup(opts)
 
     -- Bidirectional search
-    vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)")
+    vim.keymap.set({ "n", "x", "o" }, ",", "<Plug>(leap)")
 
     -- Remote operations at a distance
     vim.keymap.set({ "n", "o" }, "r", function()
