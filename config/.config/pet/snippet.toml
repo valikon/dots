@@ -44,6 +44,10 @@
   Description = "Fish - exec <cmd> for $line[0] in <file>"
   Output = ""
   Tag = []
-  command = "while read -la line; <command>; end < <file>"
   command = "while read -la line; <command> (string split -m1 ' ' $line)[1]; end < <file>"
 
+[[Snippets]]
+  Description = "aws - export credentials in a ENV format"
+  Output = ""
+  Tag = []
+  command = "aws configure export-credentials --format env"
