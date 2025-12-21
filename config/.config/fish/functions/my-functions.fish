@@ -118,15 +118,6 @@ function aur-install -d "Search and install package from AUR" --argument pkg
 end
 
 ## -- Random -- ##
-function wttr -a city -d "Weather forecast"
-    set query
-    if test -z $city
-        set -a query "stockholm"
-    else
-        set -a query $city
-    end
-    curl "wttr.in/"(string join '' $query "?M")
-end
 
 ### -- PDF UTILS -- ##
 function pdfmerge -d "Merge two or more pdf files in order to a new file"

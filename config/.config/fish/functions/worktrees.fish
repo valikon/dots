@@ -1,13 +1,14 @@
 # TODO: create a wtb function to automatically create a branch if one doesn't exist
 # TODO: autocomplete for the wta function
 
-function gw -w "git worktree" -d "Git - worktree"                              ; git worktree                      $argv; end 
+function gwt -w "git worktree" -d "Git - worktree"                              ; git worktree                      $argv; end 
 function wtl -w "git worktree list" -d "Git - worktree list"                   ; git worktree list                      ; end
 function wtd -w "git worktree remove" -d "Git - delete worktree"               ; git worktree remove               $argv; end
 
-##
-# Switch between git root and worktree
-##
+
+#############################################
+### Switch between git root and worktree
+#############################################
 function wt -d "Switch between git root and worktree" 
   # Check if inside a worktree directory
   set current_path (pwd)
@@ -63,9 +64,10 @@ function wt -d "Switch between git root and worktree"
   end
 end
 
-#
-# Create a git worktree
-#
+
+###########################
+### Create a git worktree
+###########################
 function wta -d "Create a git worktree"
   if test (count $argv) -ne 2
     set_color brcyan
