@@ -24,8 +24,9 @@ local plugins = {
   use 'lsp',          -- Built-in LSP
   use 'mason',        -- LSP/DAP/etc. package manager
   use 'mini',
-  use 'noice',
-  use 'nvim-tree',
+  use 'noice',        -- Nicer UI features
+  use 'notify',       -- Floating notifications popups
+  use 'nvim-tree',    -- File explorer
   use 'obsidian',
   use 'oil',          -- Single directory file browser
   use 'rustaceanvim', -- rust-analyzer client
@@ -39,8 +40,9 @@ local plugins = {
   use 'vim-maximizer',
   use 'vim-tmux-navigator',
   use 'zen-mode',
-  { 'folke/which-key.nvim',  opts = {} },
-  { 'karb94/neoscroll.nvim', opts = {} }, -- Smooth scrolling animations
+  { 'brenoprata10/nvim-highlight-colors', opts = {} },
+  { 'folke/which-key.nvim',               opts = {} },
+  { 'karb94/neoscroll.nvim',              opts = {} }, -- Smooth scrolling animations
 }
 
 require('lazy').setup({
