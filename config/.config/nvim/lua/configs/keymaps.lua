@@ -63,10 +63,10 @@ map('s', '<C-r>', '<C-g>c<C-r>', 'Insert content of a register')
 map({ 'n', 'x' }, '<C-y>', '5<C-y>')
 map({ 'n', 'x' }, '<C-e>', '5<C-e>')
 
-map('n', '<leader><C-t>', function()
-  bo.bufhidden = 'delete'
-  feedkeys('<C-t>')
-end, 'Delete buffer and pop jump stack')
+-- map('n', '<leader><C-t>', function()
+--   bo.bufhidden = 'delete'
+--   feedkeys('<C-t>')
+-- end, 'Delete buffer and pop jump stack')
 
 map('n', '<leader>N', function()
   o.relativenumber = not o.relativenumber
@@ -89,10 +89,13 @@ end, 'Toggle line wrap')
 --   vim.cmd.fclose({ bang = true })
 -- end, 'Close window if not modifiable, otherwise clear LSP references')
 
-map('n', '<C-l>', function()
-  require('notify').dismiss({ silent = true, pending = true }) -- Dismiss all notifcatcions on screen
-  feedkeys('<C-l>')
-end, { silent = true, desc = "Dismiss all notifications on screen" })
+local function clear_screen()
+  -- Dismiss all notifications on screen
+  require('notify').dismiss({ pending = true, silent = true })
+  feedkeys('<C-S-l>')
+end
+
+map('n', '<C-S-l>', clear_screen, { silent = true })
 
 -- window management
 map('n', '<leader>sv', '<C-w>v', 'Split window vertically')
@@ -104,8 +107,8 @@ map('n', '<leader>sx', '<cmd>close<CR>', 'Close current split')
 map('n', '-', '<cmd>Oil<CR>', "Edit directory") -- open file/directory editor
 
 -- quickfix lists
-map('n', '<M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
-map('n', '<M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
+-- map('n', '<M-j>', '<cmd>cnext<CR>')     -- open next quickfix entry
+-- map('n', '<M-k>', '<cmd>cprevious<CR>') -- open previous quickfix entry
 
 --terminal
 map('t', '<esc>', '<c-\\><c-n>')
