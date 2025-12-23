@@ -1,6 +1,3 @@
-------------
--- Feline --
-------------
 local colors = require 'utils.colors'
 local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
@@ -261,23 +258,12 @@ local components = {
   },
 }
 
-return {
-  'second2050/feline.nvim',
-  event = 'VeryLazy',
-  dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-lua/lsp-status.nvim',
-    'nvim-tree/nvim-web-devicons',
-  },
-  config = function()
-    require("feline").setup {
-      default_bg = colors.bg,
-      default_fg = colors.fg,
-      components = components,
-      properties = properties,
-      vi_mode_colors = vi_mode_colors,
-    }
+-- LuaFormatter on
 
-    vim.opt.laststatus = 3 -- Global statusline
-  end,
+require 'feline'.setup {
+  default_bg = colors.bg,
+  default_fg = colors.fg,
+  components = components,
+  properties = properties,
+  vi_mode_colors = vi_mode_colors,
 }
