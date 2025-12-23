@@ -11,14 +11,14 @@ require('utils.lazy')
 local plugins = {
   'folke/lazy.nvim',
   use 'auto-session',
-  use 'barbar',     -- Sexiest buffer tabline
-  use 'blink',      -- Autocompletion
-  use 'catppuccin', -- use 'tokyonight', -- use 'onedark',
-  use 'comment',    -- Adds `comment` verb
-  use 'conform',    -- Autoformatting
-  use 'feline',     -- Statusline framework
-  use 'gitsigns',   -- Git status in sign column
-  -- use 'hardtime',
+  use 'barbar',       -- Sexiest buffer tabline
+  use 'blink',        -- Autocompletion
+  use 'catppuccin',   -- use 'tokyonight', -- use 'onedark',
+  use 'comment',      -- Adds `comment` verb
+  use 'conform',      -- Autoformatting
+  use 'feline',       -- Statusline framework
+  use 'gitsigns',     -- Git status in sign column
+  use 'highlighturl', -- Automatic URL highlighting
   use 'lazygit',
   use 'leap',         -- Move cursor anywhere
   use 'lsp',          -- Built-in LSP
@@ -40,6 +40,7 @@ local plugins = {
   use 'vim-maximizer',
   use 'vim-tmux-navigator',
   use 'zen-mode',
+  -- use 'hardtime',
   { 'brenoprata10/nvim-highlight-colors', opts = {} },
   { 'folke/which-key.nvim',               opts = {} },
   { 'karb94/neoscroll.nvim',              opts = {} }, -- Smooth scrolling animations
