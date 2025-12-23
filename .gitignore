@@ -15,3 +15,4 @@ config/.config/fish/conf.d/*
 config/.config/fish/completions/
 config/.config/nvim/plugin/packer_compiled.lua
 **/__*cache__/
+config/.config/fish/functions/__sdkman-noexport-init.sh

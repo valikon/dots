@@ -17,6 +17,7 @@ local plugins = {
   use 'comment',      -- Adds `comment` verb
   use 'conform',      -- Autoformatting
   use 'feline',       -- Statusline framework
+  use 'fugitive',     -- :Git commands
   use 'gitsigns',     -- Git status in sign column
   use 'highlighturl', -- Automatic URL highlighting
   use 'lazygit',
