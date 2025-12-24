@@ -25,6 +25,7 @@ local plugins = {
   use 'lsp',          -- Built-in LSP
   use 'mason',        -- LSP/DAP/etc. package manager
   use 'mini',
+  use 'neogit',       -- Git wrapper
   use 'noice',        -- Nicer UI features
   use 'notify',       -- Floating notifications popups
   use 'nvim-tree',    -- File explorer
@@ -44,6 +45,7 @@ local plugins = {
   -- use 'hardtime',
   { 'brenoprata10/nvim-highlight-colors', opts = {} },
   { 'folke/which-key.nvim',               opts = {} },
+  { 'sindrets/diffview.nvim',             opts = {} },
   { 'karb94/neoscroll.nvim',              opts = {} }, -- Smooth scrolling animations
 }
 
