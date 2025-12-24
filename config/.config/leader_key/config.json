@@ -1,0 +1,122 @@
+{
+  "actions" : [
+    {
+      "key" : "b",
+      "label" : "Browser",
+      "type" : "application",
+      "value" : "/Applications/Arc.app"
+    },
+    {
+      "key" : "c",
+      "type" : "application",
+      "value" : "/Applications/Fantastical.app"
+    },
+    {
+      "key" : "d",
+      "type" : "application",
+      "value" : "/Applications/Discord.app"
+    },
+    {
+      "key" : "e",
+      "type" : "application",
+      "value" : "/Applications/Microsoft Excel.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "a",
+          "type" : "folder",
+          "value" : "/Users/valle/Documents"
+        },
+        {
+          "key" : "i",
+          "type" : "folder",
+          "value" : "/Users/valle/Documents/0-Inbox"
+        },
+        {
+          "iconPath" : "folder",
+          "key" : "d",
+          "type" : "folder",
+          "value" : "/Users/valle/Downloads"
+        },
+        {
+          "iconPath" : "folder",
+          "key" : "n",
+          "type" : "folder",
+          "value" : "/Users/valle/Documents/4-Archive/NemiTech - Archive"
+        }
+      ],
+      "iconPath" : "bookmark",
+      "key" : "g",
+      "label" : "Folders",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "a",
+          "label" : "Claude",
+          "type" : "application",
+          "value" : "/Applications/Claude.app"
+        },
+        {
+          "key" : "c",
+          "type" : "url",
+          "value" : "https://pay.openai.com/p/session/live_YWNjdF8xUGozNzdLc2xIUmRiYVBnLF9UZjVZa0xZUE9XVlNUemZQOFB2WlBRUG5PbVlKV2M30100uL7sXgSX"
+        },
+        {
+          "key" : "g",
+          "label" : "Gemini",
+          "type" : "url",
+          "value" : "https://gemini.google.com"
+        }
+      ],
+      "iconPath" : "sparkles",
+      "key" : "l",
+      "label" : "LLMs",
+      "type" : "group"
+    },
+    {
+      "key" : "m",
+      "type" : "application",
+      "value" : "/Applications/Spark Desktop.app"
+    },
+    {
+      "key" : "n",
+      "type" : "application",
+      "value" : "/System/Applications/Notes.app"
+    },
+    {
+      "key" : "o",
+      "type" : "application",
+      "value" : "/Applications/Obsidian.app"
+    },
+    {
+      "key" : "p",
+      "type" : "application",
+      "value" : "/Applications/Spotify.app"
+    },
+    {
+      "key" : "r",
+      "type" : "application",
+      "value" : "/Applications/Toggl Track.app"
+    },
+    {
+      "key" : "s",
+      "type" : "application",
+      "value" : "/Applications/Slack.app"
+    },
+    {
+      "key" : "t",
+      "type" : "application",
+      "value" : "/Applications/Microsoft Teams.app"
+    },
+    {
+      "key" : "enter",
+      "label" : "Terminal",
+      "type" : "application",
+      "value" : "/Applications/Ghostty.app"
+    }
+  ],
+  "type" : "group"
+}
