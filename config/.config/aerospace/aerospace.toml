@@ -91,6 +91,7 @@ run = 'layout floating'
     # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
     alt-ctrl-f = 'fullscreen'
+    alt-b = 'balance-sizes'
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
