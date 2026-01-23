@@ -12,11 +12,6 @@
       "value" : "/Applications/Fantastical.app"
     },
     {
-      "key" : "d",
-      "type" : "application",
-      "value" : "/Applications/Discord.app"
-    },
-    {
       "key" : "e",
       "type" : "application",
       "value" : "/Applications/Microsoft Excel.app"
@@ -116,6 +111,11 @@
       "label" : "Terminal",
       "type" : "application",
       "value" : "/Applications/Ghostty.app"
+    },
+    {
+      "key" : ".",
+      "type" : "application",
+      "value" : "/System/Applications/System Settings.app"
     }
   ],
   "type" : "group"
