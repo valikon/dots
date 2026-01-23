@@ -2,7 +2,7 @@
 -- Feline --
 ------------
 local colors = require 'utils.colors'
-local lsp = require 'feline.providers.lsp'
+-- local lsp = require 'feline.providers.lsp'
 local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local vi_mode_colors = {
@@ -32,7 +32,7 @@ local icons = {
   infos = ' ',
   hints = ' ',
 
-  lsp = ' ',
+  -- lsp = ' ',
   git = '',
 }
 
@@ -49,14 +49,14 @@ local function file_osinfo()
   return icon .. os
 end
 
-local function lsp_diagnostics_info()
-  return {
-    errs = lsp.get_diagnostics_count('Error'),
-    warns = lsp.get_diagnostics_count('Warning'),
-    infos = lsp.get_diagnostics_count('Information'),
-    hints = lsp.get_diagnostics_count('Hint'),
-  }
-end
+-- local function lsp_diagnostics_info()
+--   return {
+--     errs = lsp.get_diagnostics_count('Error'),
+--     warns = lsp.get_diagnostics_count('Warning'),
+--     infos = lsp.get_diagnostics_count('Information'),
+--     hints = lsp.get_diagnostics_count('Hint'),
+--   }
+-- end
 
 local function diag_enable(f, s)
   return function()
@@ -138,50 +138,50 @@ local comps = {
       style = 'bold',
     },
   },
-  diagnos = {
-    err = {
-      provider = diag_of(lsp_diagnostics_info, 'errs'),
-      left_sep = ' ',
-      enabled = diag_enable(lsp_diagnostics_info, 'errs'),
-      hl = {
-        fg = colors.red,
-      },
-    },
-    warn = {
-      provider = diag_of(lsp_diagnostics_info, 'warns'),
-      left_sep = ' ',
-      enabled = diag_enable(lsp_diagnostics_info, 'warns'),
-      hl = {
-        fg = colors.yellow,
-      },
-    },
-    info = {
-      provider = diag_of(lsp_diagnostics_info, 'infos'),
-      left_sep = ' ',
-      enabled = diag_enable(lsp_diagnostics_info, 'infos'),
-      hl = {
-        fg = colors.blue,
-      },
-    },
-    hint = {
-      provider = diag_of(lsp_diagnostics_info, 'hints'),
-      left_sep = ' ',
-      enabled = diag_enable(lsp_diagnostics_info, 'hints'),
-      hl = {
-        fg = colors.cyan,
-      },
-    },
-  },
-  lsp = {
-    name = {
-      provider = 'lsp_client_names',
-      left_sep = ' ',
-      icon = icons.lsp,
-      hl = {
-        fg = colors.yellow,
-      },
-    },
-  },
+  -- diagnos = {
+  --   err = {
+  --     provider = diag_of(lsp_diagnostics_info, 'errs'),
+  --     left_sep = ' ',
+  --     enabled = diag_enable(lsp_diagnostics_info, 'errs'),
+  --     hl = {
+  --       fg = colors.red,
+  --     },
+  --   },
+  --   warn = {
+  --     provider = diag_of(lsp_diagnostics_info, 'warns'),
+  --     left_sep = ' ',
+  --     enabled = diag_enable(lsp_diagnostics_info, 'warns'),
+  --     hl = {
+  --       fg = colors.yellow,
+  --     },
+  --   },
+  --   info = {
+  --     provider = diag_of(lsp_diagnostics_info, 'infos'),
+  --     left_sep = ' ',
+  --     enabled = diag_enable(lsp_diagnostics_info, 'infos'),
+  --     hl = {
+  --       fg = colors.blue,
+  --     },
+  --   },
+  --   hint = {
+  --     provider = diag_of(lsp_diagnostics_info, 'hints'),
+  --     left_sep = ' ',
+  --     enabled = diag_enable(lsp_diagnostics_info, 'hints'),
+  --     hl = {
+  --       fg = colors.cyan,
+  --     },
+  --   },
+  -- },
+  -- lsp = {
+  --   name = {
+  --     provider = 'lsp_client_names',
+  --     left_sep = ' ',
+  --     icon = icons.lsp,
+  --     hl = {
+  --       fg = colors.yellow,
+  --     },
+  --   },
+  -- },
   git = {
     branch = {
       provider = 'git_branch',
@@ -231,7 +231,7 @@ local components = {
     active = {
       comps.vi_mode.left,
       comps.file.info,
-      comps.lsp.name,
+      -- comps.lsp.name,
       comps.diagnos.err,
       comps.diagnos.warn,
       comps.diagnos.hint,
