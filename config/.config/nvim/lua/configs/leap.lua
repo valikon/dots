@@ -1,5 +1,5 @@
 return {
-  'ggandor/leap.nvim',
+  url = "https://codeberg.org/andyg/leap.nvim",
   lazy = false,
   opts = {
     safe_labels = {},          -- disable auto-jumping to the first match; doesn't work on one unique target

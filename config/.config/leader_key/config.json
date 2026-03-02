@@ -39,6 +39,16 @@
           "key" : "n",
           "type" : "folder",
           "value" : "/Users/valle/Documents/4-Archive/NemiTech - Archive"
+        },
+        {
+          "key" : "g",
+          "type" : "folder",
+          "value" : "/Users/valle/Documents/3-Resources/guitar"
+        },
+        {
+          "key" : "p",
+          "type" : "application",
+          "value" : "/System/Applications/Photos.app"
         }
       ],
       "iconPath" : "bookmark",
