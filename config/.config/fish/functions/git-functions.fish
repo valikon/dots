@@ -34,6 +34,7 @@ function gl -w "git pull" -d "Git - pull"                                      ;
 function glg -d "Git - grep from listed files"                                 ; git ls-files | rg      $argv; end
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
 function gp -w "git push" -d "Git - push"                                      ; git push               $argv; end
+function gps -w "gp --set-upstream origin" -d "Git - push branch to origin"    ; gp --set-upstream origin $argv; end
 function gprune -d "Prune remote-tracking branches no longer on remote"        ; g fetch --prune        $argv; end
 function gr -d "Git - go to project root"                                      ; cd (g rev-parse --show-toplevel); end
 function grb -w "git rebase" -d "Git - rebase"                                 ; git rebase             $argv; end
