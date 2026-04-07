@@ -12,6 +12,7 @@ function cdl -w "cd" -d "cd + ls"; cd $argv && ls; end
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
 alias la="l -a"
 alias ls='l -la'
+alias sl='l -la'
 alias lt='ltl 2' 
 function ltl -d "Eza - list tree to $arg level ignoring .git/ and .gitignore files"
     l -aT --ignore-glob=".git" --git-ignore --level $argv
