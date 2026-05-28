@@ -1,0 +1,5 @@
+hotKeys:
+  shift-0:
+    shortCut: Shift-0
+    description: Viewing nodes
+    command: no
