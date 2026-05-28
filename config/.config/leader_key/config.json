@@ -12,9 +12,23 @@
       "value" : "/Applications/Fantastical.app"
     },
     {
+      "actions" : [
+        {
+          "key" : "e",
+          "type" : "application",
+          "value" : "/Applications/Microsoft Excel.app"
+        },
+        {
+          "iconPath" : "tablecells.badge.ellipsis",
+          "key" : "b",
+          "label" : "Budget",
+          "type" : "command",
+          "value" : "open $BUDGET"
+        }
+      ],
+      "iconPath" : "/Applications/Microsoft Excel.app",
       "key" : "e",
-      "type" : "application",
-      "value" : "/Applications/Microsoft Excel.app"
+      "type" : "group"
     },
     {
       "actions" : [
@@ -102,11 +116,6 @@
       "value" : "/Applications/Spotify.app"
     },
     {
-      "key" : "r",
-      "type" : "application",
-      "value" : "/Applications/Toggl Track.app"
-    },
-    {
       "key" : "s",
       "type" : "application",
       "value" : "/Applications/Slack.app"
@@ -126,6 +135,12 @@
       "key" : ".",
       "type" : "application",
       "value" : "/System/Applications/System Settings.app"
+    },
+    {
+      "iconPath" : "guitars.fill",
+      "key" : "0",
+      "type" : "command",
+      "value" : "open https://learnpracticeplay.com && aerospace move-node-to-workspace 3 && aerospace workspace 3 && open $GUITAR_WORKBOOK"
     }
   ],
   "type" : "group"
