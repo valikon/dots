@@ -34,6 +34,7 @@ function gl -w "git pull" -d "Git - pull"                                      ;
 function glg -d "Git - grep from listed files"                                 ; git ls-files | rg      $argv; end
 function gm -w "git merge" -d "Git - merge"                                    ; git merge              $argv; end
 function gp -w "git push" -d "Git - push"                                      ; git push               $argv; end
+function gpt -d "Git - push tags"                                              ; gp origin --tags       $argv; end
 function gps -w "gp --set-upstream origin" -d "Git - push branch to origin"    ; gp --set-upstream origin $argv; end
 function gprune -d "Prune remote-tracking branches no longer on remote"        ; g fetch --prune        $argv; end
 function gr -d "Git - go to project root"                                      ; cd (g rev-parse --show-toplevel); end
@@ -44,9 +45,9 @@ function grhard -w "git reset --hard" -d "Git - Hard reset"                    ;
 function grs -w "git restore --staged" -d "Git - Restore staged changes"       ; git restore --staged   $argv; end
 function grsoft -w "git reset --soft" -d "Git - Soft reset"                    ; git reset --soft       $argv; end
 function grst -w "git reset" -d "Git - Reset"                                  ; git reset              $argv; end
-function gs -w "git status -s" -d "Git - short status"                         ; git status -s          $argv; end
-function gsh -w "git show HEAD" -d "Git - show HEAD"                           ; git show HEAD          $argv; end
-function gst -w "git status" -d "Git - full status"                            ; git status             $argv; end
+function gs -d "Git - short status"                                            ; git status -s          $argv; end
+function gsh -d "Git - show HEAD"                                              ; git show HEAD          $argv; end
+function gst -d "Git - full status"                                            ; git status             $argv; end
 function gstash -w "git stash" -d "Git - stash"                                ; git stash              $argv; end
 function gstd -w "git stash drop" -d "Git - drop stash"                        ; git stash drop         $argv; end
 function gstl -w "git stash list" -d "Git - list stash"                        ; git stash list         $argv; end

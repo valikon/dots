@@ -10,7 +10,8 @@ alias ......='cd ../../../../..'
 function cdl -w "cd" -d "cd + ls"; cd $argv && ls; end
 
 function l -w "eza"; eza --color=always --git --group-directories-first --icons $argv ; end
-alias la="l -a"
+alias lss='/bin/ls' # simple ls for iterations on files
+alias la='l -a'
 alias ls='l -la'
 alias sl='l -la'
 alias lt='ltl 2' 
@@ -39,6 +40,7 @@ alias cdiff=colordiff
 alias wcl="wc -l"
 alias cat='bat --style header --style rule --style snip --style changes --theme 1337'
 
+function yt                    ; ai --youtube $argv[1] -p youtube_summary               ; end
 function e                     ; set -gx NVIM_APPNAME nvim; nvim $argv                  ; end
 function ediff                 ; e -d $argv                                             ; end
 function vi                    ; e $argv                                                ; end
