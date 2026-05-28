@@ -1,10 +1,11 @@
 {
   "actions" : [
     {
+      "iconPath" : "tablecells.badge.ellipsis",
       "key" : "b",
-      "label" : "Browser",
-      "type" : "application",
-      "value" : "/Applications/Arc.app"
+      "label" : "Budget",
+      "type" : "command",
+      "value" : "open $BUDGET"
     },
     {
       "key" : "c",
@@ -12,23 +13,9 @@
       "value" : "/Applications/Fantastical.app"
     },
     {
-      "actions" : [
-        {
-          "key" : "e",
-          "type" : "application",
-          "value" : "/Applications/Microsoft Excel.app"
-        },
-        {
-          "iconPath" : "tablecells.badge.ellipsis",
-          "key" : "b",
-          "label" : "Budget",
-          "type" : "command",
-          "value" : "open $BUDGET"
-        }
-      ],
-      "iconPath" : "/Applications/Microsoft Excel.app",
       "key" : "e",
-      "type" : "group"
+      "type" : "application",
+      "value" : "/Applications/Microsoft Excel.app"
     },
     {
       "actions" : [
