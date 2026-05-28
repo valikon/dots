@@ -57,6 +57,8 @@ map('n', '<leader>F', ':edit   ~/.config/fish<CR>')
 map('s', '<BS>', '<BS>i') -- By default <BS> puts you in normal mode
 map({ 'n', 'i', 'v', 's', 'o', 't' }, '<C-m>', '<CR>', { remap = true })
 map({ 'i', 'c' }, '<C-i>', '<Tab>', { remap = true })
+map('c', '<C-j>', '<Down>', 'Next command history')
+map('c', '<C-k>', '<Up>', 'Previous command history')
 map('n', 'g<C-a>', 'v<C-a>', 'Increment number under cursor')
 map('n', 'g<C-x>', 'v<C-x>', 'Decrement number under cursor')
 map('s', '<C-r>', '<C-g>c<C-r>', 'Insert content of a register')
