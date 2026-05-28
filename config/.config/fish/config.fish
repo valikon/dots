@@ -3,14 +3,15 @@
 ################################
 
 ## Path
-set -gx PATH /opt/homebrew/bin $PATH
-set -gx PATH (brew --prefix rustup)/bin $PATH
-set -gx PATH $HOME/.cargo/bin/ $PATH
-set -gx PATH $HOME/.npm-global/bin/ $PATH
-set -gx PATH $HOME/.ghcup/bin/ $PATH
-set -gx PATH $HOME/go/bin $PATH
-set -gx PATH $HOME/scripts $PATH
-set -gx PATH ./bin $PATH
+fish_add_path /opt/homebrew/bin
+fish_add_path /opt/homebrew/sbin
+fish_add_path (brew --prefix rustup)/bin
+fish_add_path $HOME/.cargo/bin/
+fish_add_path $HOME/.npm-global/bin/
+fish_add_path $HOME/.ghcup/bin/
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/scripts
+fish_add_path ./bin
 set -gx GOPATH $HOME/go
 set -gx GOROOT (brew --prefix go)/libexec
 set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
@@ -56,4 +57,8 @@ set -g fish_greeting
 
 if type -q zoxide
   zoxide init fish | source
+end
+
+if type -q mise
+  mise activate fish | source
 end
