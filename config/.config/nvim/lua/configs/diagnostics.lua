@@ -4,11 +4,7 @@
 
 local M = {}
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-  }
-)
+vim.diagnostic.config({ underline = true })
 
 ---@param severity vim.diagnostic.Severity
 ---@return string

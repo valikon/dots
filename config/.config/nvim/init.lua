@@ -29,7 +29,7 @@ local plugins = {
   use 'noice',        -- Nicer UI features
   use 'notify',       -- Floating notifications popups
   use 'nvim-tree',    -- File explorer
-  use 'obsidian',
+  -- use 'obsidian',
   use 'oil',          -- Single directory file browser
   use 'rustaceanvim', -- rust-analyzer client
   use 'snacks',

@@ -2,8 +2,6 @@
 -- Feline --
 ------------
 local colors = require 'utils.colors'
--- local lsp = require 'feline.providers.lsp'
-local vi_mode_utils = require 'feline.providers.vi_mode'
 
 local vi_mode_colors = {
   NORMAL = colors.green,
@@ -74,6 +72,7 @@ local function diag_of(f, s)
 end
 
 local function vimode_hl()
+  local vi_mode_utils = require 'feline.providers.vi_mode'
   return {
     name = vi_mode_utils.get_mode_highlight_name(),
     fg = vi_mode_utils.get_mode_color(),
@@ -231,11 +230,6 @@ local components = {
     active = {
       comps.vi_mode.left,
       comps.file.info,
-      -- comps.lsp.name,
-      comps.diagnos.err,
-      comps.diagnos.warn,
-      comps.diagnos.hint,
-      comps.diagnos.info,
     },
     inactive = {
       comps.vi_mode.left,
