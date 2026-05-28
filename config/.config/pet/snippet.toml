@@ -1,3 +1,4 @@
+
 [[Snippets]]
   Description = "Extract certificate private key from PFX file"
   Output = ""
@@ -51,3 +52,15 @@
   Output = ""
   Tag = []
   command = "aws configure export-credentials --format env"
+
+[[Snippets]]
+  Description = "k8s - get all review namespaces older than 7 days"
+  Output = ""
+  Tag = []
+  command = "kubectl get ns -l env=review -o json | jq -r --arg cutoff \"$(date -u -v-7d +'%Y-%m-%dT%H:%M:%SZ')\" '.items[] | select(.metadata.creationTimestamp < $cutoff) | \"\\(.metadata.name)\\t\\(.metadata.creationTimestamp)\"' | column -t"
+
+[[Snippets]]
+  Description = "Inverse search directory for pattern"
+  Output = ""
+  Tag = ["k8s", "yaml"]
+  command = "for dir in ./*; if not rg -q '<pattern>' $dir -g '*.yaml' -g '*.yml' 2>/dev/null; echo $dir; end; end"
