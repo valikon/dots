@@ -14,7 +14,6 @@ local plugins = {
   use 'barbar',       -- Sexiest buffer tabline
   use 'blink',        -- Autocompletion
   use 'catppuccin',   -- use 'tokyonight', -- use 'onedark',
-  use 'comment',      -- Adds `comment` verb
   use 'conform',      -- Autoformatting
   use 'fugitive',     -- :Git commands
   use 'gitsigns',     -- Git status in sign column

@@ -18,6 +18,15 @@ vim.api.nvim_create_autocmd('FocusGained', {
   group = 'GeneralAutocmds'
 })
 
+-- Custom commentstrings for native `gc`/`gcc` commenting
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'http',
+  group = 'GeneralAutocmds',
+  callback = function()
+    vim.bo.commentstring = '# %s'
+  end,
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking text',
