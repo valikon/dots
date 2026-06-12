@@ -105,12 +105,12 @@
     {
       "key" : "s",
       "type" : "application",
-      "value" : "/Applications/Slack.app"
+      "value" : "/Applications/Microsoft Teams.app"
     },
     {
       "key" : "t",
       "type" : "application",
-      "value" : "/Applications/Microsoft Teams.app"
+      "value" : "/Applications/Things3.app"
     },
     {
       "key" : "enter",
